@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 const express = require('express')
 var cors = require('cors')
 require('dotenv').config();
-const productController = require('./controllers/products')
 
 const server = express()
 server.use(cors())
 server.use(express.static('public'))
 
-server.get("/products", productController.getProductByCategory)
+
+server.use('/products', require('./routes/products'))
+server.use('/', require('./routes/index'))
 
 server.listen(process.env.PORT, () => {
     console.log(`Example app listening on port ${process.env.PORT}`)

@@ -1,0 +1,91 @@
+body {
+    font-family: 'Lora', serif;
+    /* Elegant, classical Italian font */
+    background-color: #f8f8f8;
+    /* Light background for contrast */
+    color: #333;
+}
+
+h2 {
+    font-size: 2em;
+    color: #B22222;
+    /* Italian red for headings */
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.product-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 1em;
+    padding: 1.5em;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.product-item:hover {
+    transform: scale(1.05);
+    border-color: #B22222;
+    /* Italian red border on hover */
+}
+
+.product-item h3 {
+    font-size: 1.5em;
+    color: #B22222;
+    /* Italian red for product names */
+    margin-bottom: 0.5em;
+}
+
+.product-item p {
+    font-size: 1em;
+    margin: 0.3em 0;
+}
+
+.product-item .price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #B22222;
+    /* Price in Italian red */
+}
+
+.stock-btn {
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: background-color 0.3s ease;
+}
+
+.stock-btn:hover {
+    background-color: #444;
+}
+
+.out-of-stock {
+    color: red;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .product-item {
+        width: 100%;
+        margin: 1em 0;
+    }
+}
