@@ -1,0 +1,155 @@
+/* General Body Styling */
+body {
+    font-family: 'Georgia', serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 2px solid #e0e0e0;
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: #d9534f;
+    font-family: 'Georgia', serif;
+}
+
+.navbar-brand:hover {
+    color: #b52b27;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.2rem;
+    color: #333;
+    transition: color 0.3s ease;
+    font-family: 'Georgia', serif;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #d9534f;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.dropdown-menu .dropdown-item {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #d9534f;
+    color: #ffffff;
+}
+
+/* Search Bar Styling */
+.form-control {
+    border-radius: 30px;
+    padding: 0.5rem 1.2rem;
+    border: 2px solid #d9534f;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #b52b27;
+    box-shadow: none;
+}
+
+.btn-outline-success {
+    color: #d9534f;
+    border-color: #d9534f;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-success:hover {
+    background-color: #d9534f;
+    color: #ffffff;
+    border-color: #d9534f;
+}
+
+/* Icon Styling */
+.navbar-nav .nav-item .nav-link i {
+    font-size: 1.4rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link:hover i {
+    color: #d9534f;
+}
+
+.bi-cart-fill {
+    color: #333;
+}
+
+.bi-person {
+    color: #333;
+}
+
+.bi-cart-fill:hover,
+.bi-person:hover {
+    color: #d9534f;
+}
+
+
+
+.background {
+    position: relative;
+    background-image: url('../images/background-main-image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: calc(100vh - 56px);
+}
+
+.background-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-shop-now {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #d9534f;
+    border: none;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-shop-now:hover {
+    background-color: #b52b27;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* background Section Title */
+.background-title {
+    font-size: 3em;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.2em;
+}
