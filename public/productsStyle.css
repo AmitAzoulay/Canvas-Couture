@@ -89,3 +89,24 @@ h2 {
         margin: 1em 0;
     }
 }
+
+
+/* Back Button Styling */
+.btn-back {
+    background-color: #d9534f;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn-back:hover {
+    background-color: #c93d3d;
+}
