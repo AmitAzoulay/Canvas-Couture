@@ -1,0 +1,89 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Clean font */
+    background-color: #ecded7f9; /* Light pink background color */
+    color: #333; /* Dark text */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+}
+
+/* Login container */
+.container {
+    width: 100%; /* Full width */
+    max-width: 400px; /* Increase max width to almost full page */
+    height: 450px;
+    padding: 60px; /* More padding around form */
+    background-color: #f1e7e3;
+    border-radius: 10px; /* Adjusted for square corners */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* Soft shadow */
+    text-align: center; /* Center content */
+}
+
+/* Heading styles */
+h2 {
+    margin-bottom: 10px; /* Space below heading */
+    font-size: 28px; /* Larger font size */
+    color: #2d3748; /* Darker gray for heading */
+}
+
+/* Paragraph styles */
+p {
+    margin-bottom: 30px; /* Space below paragraph */
+    color: #6c757d; /* Lighter gray for text */
+}
+
+/* Input styles */
+.form-control {
+    border: 1px solid #abb1b8; /* Light gray border */
+    border-radius: 0; /* Square corners */
+    padding: 15px; /* Padding inside inputs */
+    margin-bottom: 20px; /* Space between inputs */
+    transition: border-color 0.3s; /* Smooth transition for focus */
+    width: 100%; /* Full-width inputs */
+    font-size: 16px; /* Font size for inputs */
+}
+
+/* Placeholder styles */
+.form-control::placeholder {
+    color: #727070; /* Dark grey color for placeholder */
+}
+
+/* Focus styles */
+.form-control:focus {
+    border-color: #726f6f; /* Change border color on focus */
+    border-width: 1.5px;
+    outline: none; /* Remove default outline */
+    box-shadow: none;
+}
+
+/* Button styles */
+.btn {
+    background-color: #aca6a6; /* Light grey button */
+    color: white; /* White text */
+    padding: 15px; /* Add padding */
+    border: none; /* Remove border */
+    border-radius: 0; /* Square button */
+    cursor: pointer; /* Pointer cursor on hover */
+    width: 100%; /* Full-width button */
+    font-size: 18px; /* Font size for button */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.btn:hover {
+    background-color: #9e9b9b; /* Darker shade on hover */
+}
+
+/* Link styles */
+a {
+    color: #5f666d; /* Link color */
+    text-decoration: none; /* Remove underline */
+    font-weight: 550; /* Medium font weight */
+}
+
+a:hover {
+    color: #5f666d;
+    text-decoration: underline; /* Underline on hover */
+}
