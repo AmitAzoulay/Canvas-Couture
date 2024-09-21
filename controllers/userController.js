@@ -8,7 +8,8 @@ async function loginUser(req, res) {
     try {
         const isLoggedIn = await userService.login(email, password);
         if (isLoggedIn.success) {
-            req.session.email = email; // Store email in session
+            req.session.userId =  isLoggedIn.user._id;; // Store userId in session
+            req.session.isActive = true; //Store isActive in session
             res.redirect("/dashboard"); // Redirect to dashboard on success
         } else {
             res.status(401).render("login", { error: isLoggedIn.message }); // Render login view with error
@@ -31,7 +32,42 @@ async function registerUser(req, res) {
     }
 }
 
+/**
+ * Handle user logout.
+ */
+async function logoutUser(req, res) {
+    try {
+        // Call the logout service
+        await userService.logout(req.session.userId);
+        
+        req.session.destroy(); // Destroy the session
+        res.redirect("/login"); // Redirect to login page
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred during logout.");
+    }
+}
+
+async function changePassword(req, res) {
+    const { email, newPassword, confirmPassword } = req.body;
+
+    if (newPassword !== confirmPassword) {
+        return res.status(400).send("Passwords do not match.");
+    }
+
+    try {
+        const result = await userService.updatePassword(email, newPassword);
+        res.send("Password changed successfully.");
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+}
+
+
 module.exports = {
     loginUser,
     registerUser,
+    logoutUser,
+    changePassword,
 };
+

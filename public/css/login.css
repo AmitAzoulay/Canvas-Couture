@@ -33,6 +33,17 @@ p {
     margin-bottom: 30px; /* Space below paragraph */
     color: #6c757d; /* Lighter gray for text */
 }
+ 
+.change-pass {
+    font-size: 12px;
+    margin-top: -15px;
+    text-align: right;
+}
+
+.change-pass a {
+    text-decoration: underline; /* Always underline the link */
+    font-weight: normal; /* Remove bold */
+}
 
 /* Input styles */
 .form-control {
@@ -87,3 +98,4 @@ a:hover {
     color: #5f666d;
     text-decoration: underline; /* Underline on hover */
 }
+

@@ -24,10 +24,21 @@ router.get("/register", (req, res) => {
 // Route for registering a new user
 router.post("/register", userController.registerUser);
 
-// Protected route that requires the user to be logged in
-router.get("/dashboard", isLoggedIn, (req, res) => {
+// Route for serving the dashboard (accessible to everyone)
+router.get("/dashboard", (req, res) => {
     console.log("Accessing dashboard...");
-    res.render("dashboard"); // Render the dashboard view
+    res.render("dashboard", { isLoggedIn: !!req.session.userId }); // Pass login status to the dashboard
 });
+
+// Protected route for logging out
+router.post("/logout", isLoggedIn, userController.logoutUser);
+
+// Route to display the change password page
+router.get("/change-password", (req, res) => {
+    res.render("change-password"); // Ensure this matches your EJS file name
+});
+
+// Route to handle password change submission
+router.post("/change-password", userController.changePassword);
 
 module.exports = router;
