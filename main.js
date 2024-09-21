@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const express = require('express')
 var cors = require('cors')
 require('dotenv').config();
-const ordersRoute = require('./routes/order');
-const productsRoute = require('./routes/product');
 
 const port = +process.env.PORT
 
@@ -13,8 +11,6 @@ mongoose.connect(process.env.DB_URI)
 
 const app = express()
 app.use(cors())
-app.use('/routes/order', ordersRoute);
-app.use('/routes/product', productsRoute);
 
 /*app.get('/', async (req, res) => {
     try {
