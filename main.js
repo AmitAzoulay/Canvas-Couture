@@ -9,6 +9,7 @@ server.use(express.static('public'))
 
 
 server.use('/products', require('./routes/products'))
+server.use('/order', require('./routes/orders'))
 server.use('/', require('./routes/index'))
 
 server.listen(process.env.PORT, () => {
