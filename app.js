@@ -45,4 +45,4 @@ mongoose.connect(process.env.DB_URI)
 const port = process.env.PORT || process.env.port; // Use whichever is defined
 server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
-});
+});;
