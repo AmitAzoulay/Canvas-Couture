@@ -3,7 +3,7 @@ const orderService = require("../services/order")
 async function getAllOrdersOfUser_controller(req, res) {
 
     uid = req.session.userId
-    orderService.getAllOrdersOfUser(uid)
+    orderService.getCurrentCart(uid)
         .then(orders => {
             res.render("../views/orders.ejs", { orders });
         })
