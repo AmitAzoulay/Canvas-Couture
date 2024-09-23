@@ -10,7 +10,7 @@ async function loginUser(req, res) {
         if (isLoggedIn.success) {
             req.session.userId =  isLoggedIn.user._id;; // Store userId in session
             req.session.isActive = true; //Store isActive in session
-            res.redirect("/dashboard"); // Redirect to dashboard on success
+            res.redirect("/index"); // Redirect to homepage on success
         } else {
             res.status(401).render("login", { error: isLoggedIn.message }); // Render login view with error
         }
@@ -62,7 +62,6 @@ async function changePassword(req, res) {
         res.status(400).send(error.message);
     }
 }
-
 
 module.exports = {
     loginUser,

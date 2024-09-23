@@ -68,6 +68,7 @@ async function updatePassword(email, newPassword) {
     await user.save();
 }
 
+
 module.exports = {
     login,
     register,

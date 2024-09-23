@@ -5,7 +5,7 @@ const { isLoggedIn } = require("../middleware/authMiddleware");
 
 // Route for the root path
 router.get("/", (req, res) => {
-    res.redirect("/login"); // Redirect to the login page
+    res.redirect("/index"); // Redirect to the homepage page
 });
 
 // Route for serving the login page
@@ -24,10 +24,10 @@ router.get("/register", (req, res) => {
 // Route for registering a new user
 router.post("/register", userController.registerUser);
 
-// Route for serving the dashboard (accessible to everyone)
-router.get("/dashboard", (req, res) => {
-    console.log("Accessing dashboard...");
-    res.render("dashboard", { isLoggedIn: !!req.session.userId }); // Pass login status to the dashboard
+// Route for serving the homepage (accessible to everyone)
+router.get("/index", (req, res) => {
+    console.log("Accessing homepage...");
+    res.render("index", { isLoggedIn: !!req.session.userId }); // Pass login status to the homepage
 });
 
 // Protected route for logging out
@@ -40,5 +40,6 @@ router.get("/change-password", (req, res) => {
 
 // Route to handle password change submission
 router.post("/change-password", userController.changePassword);
+
 
 module.exports = router;

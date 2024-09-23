@@ -3,30 +3,32 @@
 <head>
     <title>Register</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/register.css" rel="stylesheet" />
+    <script src="/js/register.js" defer></script>
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center">Register</h2>
+        <h2 class="text-center">Create an account</h2>
         <form action="/register" method="POST">
             <div class="mb-3">
-                <label for="firstName" class="form-label">First Name</label>
-                <input name="firstName" type="text" class="form-control" id="firstName" required />
+                <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName" required />
+                <div class="error" id="firstNameError" style="display: none;"></div> <!-- Error message for first name -->
             </div>
             <div class="mb-3">
-                <label for="lastName" class="form-label">Last Name</label>
-                <input name="lastName" type="text" class="form-control" id="lastName" required />
+                <input name="lastName" type="text" class="form-control" placeholder="Last Name" id="lastName" required />
+                <div class="error" id="lastNameError" style="display: none;"></div> <!-- Error message for last name -->
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input name="email" type="email" class="form-control" id="email" required />
+                <input name="email" type="email" class="form-control" placeholder="Email" id="email" required />
+                <div class="error" id="emailError" style="display: none;"></div> <!-- Error message for email -->
             </div>
             <div class="mb-3">
-                <label for="phoneNumber" class="form-label">Phone Number</label>
-                <input name="phoneNumber" type="text" class="form-control" id="phoneNumber" required />
+                <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number" id="phoneNumber" required />
+                <div class="error" id="phoneError" style="display: none;"></div> <!-- Error message for phone number -->
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" id="password" required autocomplete="new-password" />
+                <input name="password" type="password" class="form-control" placeholder="Password" id="password" required autocomplete="new-password" />
+                <div class="error" id="passwordError" style="display: none;"></div> <!-- Error message for password -->
             </div>
             <button type="submit" class="btn btn-primary">Create Account</button>
         </form>
