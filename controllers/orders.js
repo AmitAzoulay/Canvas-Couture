@@ -2,7 +2,8 @@ const orderService = require("../services/order")
 
 async function getAllOrdersOfUser_controller(req, res) {
 
-    orderService.getAllOrdersOfUser()
+    uid = req.session.userId
+    orderService.getAllOrdersOfUser(uid)
         .then(orders => {
             res.render("../views/orders.ejs", { orders });
         })

@@ -1,10 +1,10 @@
 const Orders = require("../models/orders")
 const mongoose = require('mongoose');
 
-async function getAllOrdersOfUser() {
+async function getAllOrdersOfUser(uid) {
 
     //const orders = await Orders.find({ email }); new mongoose.Types.ObjectId('66df5accc1d6b1eae2660677')
-    const orders = await Orders.find({ userId: new mongoose.Types.ObjectId('66df5accc1d6b1eae2660677') })
+    const orders = await Orders.find({ userId: uid })
 
     if (orders.length === 0) {
         return res.status(404).json({ message: 'No orders found for this user' });
