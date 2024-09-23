@@ -108,16 +108,18 @@ body {
 
 .background {
     position: relative;
-    background-image: url('../images/background-main-image.jpg');
+    background-image: url('/img/feat-old-money-aesthetic.jpg');
+    /* Correct path */
     background-size: cover;
     background-position: center;
-    height: 600px;
+    height: calc(100vh - 56px);
+    /* Adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    height: calc(100vh - 56px);
 }
+
 
 .background-content {
     position: absolute;
