@@ -1,0 +1,38 @@
+<!-- views/products.ejs -->
+<h2>Products in Category: <%= category %>
+</h2>
+
+<ul class="product-list">
+    <% products.forEach(product=> { %>
+        <li class="product-item">
+            <h3>
+                <%= product.name %>
+            </h3>
+            <p>Price: $<%= product.price %>
+            </p>
+            <p>Color: <%= product.color %>
+            </p>
+            <p>Size: <%= product.size %>
+            </p>
+            <p>Gender: <%= product.gender %>
+            </p>
+            <p>Category: <%= product.category %>
+            </p>
+
+            <!-- Display the button only if the stock is greater than 0 -->
+            <% if (product.stock> 0) { %>
+                <button class="stock-btn">
+                    <i class="fa fa-plus"></i> <!-- Font Awesome plus icon -->
+                </button>
+                <% } else { %>
+                    <p class="out-of-stock">Out of stock</p>
+                    <% } %>
+        </li>
+        <% }); %>
+</ul>
+<div class="text-center mt-5">
+    <button class="btn btn-back" onclick="window.history.back()">Back to Shop</button>
+</div>
+<!-- Link to the custom Italian red style -->
+<link rel="stylesheet" href="/css/productsStyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
