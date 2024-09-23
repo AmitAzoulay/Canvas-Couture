@@ -1,0 +1,101 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Clean font */
+    background-color: #ecded7f9; /* Light pink background color */
+    color: #333; /* Dark text */
+    display: flex; /* Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+}
+
+/* Login container */
+.container {
+    width: 100%; /* Full width */
+    max-width: 400px; /* Increase max width to almost full page */
+    height: 450px;
+    padding: 60px; /* More padding around form */
+    background-color: #f1e7e3;
+    border-radius: 10px; /* Adjusted for square corners */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); /* Soft shadow */
+    text-align: center; /* Center content */
+}
+
+/* Heading styles */
+h2 {
+    margin-bottom: 10px; /* Space below heading */
+    font-size: 28px; /* Larger font size */
+    color: #2d3748; /* Darker gray for heading */
+}
+
+/* Paragraph styles */
+p {
+    margin-bottom: 30px; /* Space below paragraph */
+    color: #6c757d; /* Lighter gray for text */
+}
+ 
+.change-pass {
+    font-size: 12px;
+    margin-top: -15px;
+    text-align: right;
+}
+
+.change-pass a {
+    text-decoration: underline; /* Always underline the link */
+    font-weight: normal; /* Remove bold */
+}
+
+/* Input styles */
+.form-control {
+    border: 1px solid #abb1b8;
+    border-radius: 0; 
+    padding: 15px; 
+    margin-bottom: 20px; 
+    transition: border-color 0.3s; 
+    width: 100%;
+    font-size: 16px; 
+}
+
+/* Placeholder styles */
+.form-control::placeholder {
+    color: #727070; 
+}
+
+/* Focus styles */
+.form-control:focus {
+    border-color: #726f6f; 
+    border-width: 1.5px;
+    outline: none; 
+    box-shadow: none;
+}
+
+/* Button styles */
+.btn {
+    background-color: #aca6a6;
+    color: white;
+    padding: 15px;
+    border: none; 
+    border-radius: 0; 
+    cursor: pointer; 
+    width: 100%; 
+    font-size: 18px; 
+    font-weight: bold; 
+    transition: background-color 0.3s; 
+}
+
+.btn:hover {
+    background-color: #9e9b9b; 
+}
+
+/* Link styles */
+a {
+    color: #5f666d;
+    text-decoration: none; 
+    font-weight: 550; 
+}
+
+a:hover {
+    color: #5f666d;
+    text-decoration: underline;
+}
+
