@@ -2,7 +2,7 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
 async function login(email, password) {
-    const user = await(User.findOne({email}));
+    const user = await (User.findOne({ email }));
     if (!user) {
         return { success: false, message: "Invalid email or password." }
     }
@@ -34,7 +34,7 @@ async function register(userData) {
         email: userData.email,
         password: hashedPassword,
         isAdmin: userData.isAdmin || false,
-        isActive: false 
+        isActive: false
     });
 
     try {

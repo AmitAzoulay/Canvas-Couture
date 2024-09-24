@@ -29,11 +29,11 @@ server.use(session({
 }));
 
 // Define routes
-server.use('/products', require('./routes/products'));
-server.use('/order', require('./routes/orders'));
+server.use('/products', require('./routes/productsRoutes'));
+server.use('/order', require('./routes/ordersRoutes'));
 server.use('/', userRoutes); // This route replaces the previous index route
 
-server.use('/payment', require('./routes/paymant'))
+server.use('/payment', require('./routes/paymantRoutes'))
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URI)

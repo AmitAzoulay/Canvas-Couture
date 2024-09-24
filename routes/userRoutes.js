@@ -3,9 +3,9 @@ const router = express.Router();
 const userController = require("../controllers/userController");
 const { isLoggedIn } = require("../middleware/authMiddleware");
 
-// Route for the root path
+// Route for the root path which is the login page
 router.get("/", (req, res) => {
-    res.redirect("/index"); // Redirect to the homepage page
+    res.redirect("/login"); // Redirect to the loin page
 });
 
 // Route for serving the login page
@@ -25,13 +25,15 @@ router.get("/register", (req, res) => {
 router.post("/register", userController.registerUser);
 
 // Route for serving the homepage (accessible to everyone)
-router.get("/index", (req, res) => {
+router.get('/index', isLoggedIn, (req, res) => {
     console.log("Accessing homepage...");
     res.render("index", { isLoggedIn: !!req.session.userId }); // Pass login status to the homepage
 });
 
 // Protected route for logging out
-router.post("/logout", isLoggedIn, userController.logoutUser);
+router.post("/logout", isLoggedIn, userController.logoutUser, (req, res) => {
+    res.redirect("/login"); // Redirect to login page after logout
+});
 
 // Route to display the change password page
 router.get("/change-password", (req, res) => {

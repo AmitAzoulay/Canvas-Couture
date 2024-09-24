@@ -1,4 +1,4 @@
-const orderService = require("../services/order")
+const orderService = require("../services/orderService")
 
 async function getAllOrdersOfUser_controller(req, res) {
 

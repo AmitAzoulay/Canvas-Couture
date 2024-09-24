@@ -1,4 +1,4 @@
-const paymentService = require("../services/payment")
+const paymentService = require("../services/paymentService")
 
 
 function getPaymentPage(req, res) {

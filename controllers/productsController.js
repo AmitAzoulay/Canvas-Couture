@@ -1,4 +1,4 @@
-const productService = require("../services/product")
+const productService = require("../services/productService")
 
 function getProductByCategory(req, res) {
     const category = req.params.category
