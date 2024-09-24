@@ -5,6 +5,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 const userRoutes = require('./routes/userRoutes');
+const indexRoutes = require('./routes/index');
 
 const server = express()
 //server.use(cors())
@@ -32,6 +33,7 @@ mongoose.connect(process.env.DB_URI)
     .catch(err => console.error('Database connection error:', err));
 
 server.use('/', userRoutes); 
+server.use('/', indexRoutes); 
 
 server.listen(process.env.port, () => {
     console.log(`server listening on port ${process.env.port}`)

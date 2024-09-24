@@ -30,6 +30,12 @@ router.get("/dashboard", (req, res) => {
     res.render("dashboard", { isLoggedIn: !!req.session.userId }); // Pass login status to the dashboard
 });
 
+// Route for serving index
+router.get("/index", (req, res) => {
+    console.log("Accessing index...");
+    res.render("index", { isLoggedIn: !!req.session.userId }); // Pass login status to the dashboard
+});
+
 // Protected route for logging out
 router.post("/logout", isLoggedIn, userController.logoutUser);
 
