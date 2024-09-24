@@ -4,7 +4,8 @@ var cors = require('cors');
 const session = require('express-session');
 require('dotenv').config();
 
-const userRoutes = require('./routes/userRoutes'); // From the main branch
+const userRoutes = require('./routes/userRoutes'); 
+const orderRoutes = require("./routes/orderRoutes");
 
 const server = express();
 
@@ -30,8 +31,8 @@ server.use(session({
 
 // Define routes
 server.use('/products', require('./routes/products'));
-server.use('/order', require('./routes/orders'));
 server.use('/', userRoutes); // This route replaces the previous index route
+server.use('/order', orderRoutes); // Adjust the path as necessary
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URI)

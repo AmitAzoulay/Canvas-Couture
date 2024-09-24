@@ -1,0 +1,12 @@
+<h1>Your Shopping Cart</h1>
+<ul>
+    <% if (cartItems && cartItems.length > 0) { %>
+        <% cartItems.forEach(item => { %>
+            <li>
+                <strong><%= item.name %></strong> - Price: <%= item.price %> - Quantity: <%= item.quantity %>
+            </li>
+        <% }); %>
+    <% } else { %>
+        <li>Your cart is empty.</li>
+    <% } %>
+</ul>
