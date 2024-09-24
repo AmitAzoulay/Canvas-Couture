@@ -1,0 +1,140 @@
+/* General body styling */
+body {
+    font-family: 'Lora', serif;
+    background-color: #f8f8f8;
+    color: #333;
+    padding: 2em;
+}
+
+/* Main header styling */
+h1 {
+    font-size: 2.5em;
+    color: #B22222;
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+/* Styling the unordered list for orders */
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+/* Individual order item */
+li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1.5em;
+    margin-bottom: 2em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+/* Order item hover effect */
+li:hover {
+    transform: scale(1.02);
+    border-color: #B22222;
+}
+
+/* Order detail labels */
+strong {
+    font-weight: bold;
+    color: #B22222;
+}
+
+/* Styling for the order date and status */
+.order-date,
+.order-status {
+    margin-top: 0.5em;
+    font-size: 1.1em;
+}
+
+.order-status {
+    font-weight: bold;
+}
+
+.order-status.delivered {
+    color: green;
+}
+
+.order-status.pending {
+    color: #FFA500;
+}
+
+.order-status.cancelled {
+    color: red;
+}
+
+/* Styling for items in the order */
+h4 {
+    margin-top: 1.5em;
+    font-size: 1.3em;
+    color: #333;
+}
+
+ul li ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 1em;
+}
+
+ul li ul li {
+    border-bottom: 1px solid #ddd;
+    padding: 0.5em 0;
+}
+
+ul li ul li:last-child {
+    border-bottom: none;
+}
+
+.product-item-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 0.2em;
+}
+
+.product-item-price {
+    font-size: 1.2em;
+    color: #B22222;
+    font-weight: bold;
+}
+
+.product-item-quantity {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Horizontal rule between orders */
+hr {
+    border: 1px solid #ddd;
+    margin-top: 2em;
+}
+
+/* No orders message */
+p {
+    font-size: 1.2em;
+    color: #B22222;
+    text-align: center;
+    margin-top: 3em;
+}
+
+/* Back Button Styling */
+.btn-back {
+    background-color: #d9534f;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn-back:hover {
+    background-color: #c93d3d;
+}

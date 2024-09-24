@@ -2,38 +2,75 @@
 body {
   font-family: 'Roboto', sans-serif;
   line-height: 1.6;
+  background-color: #F9F9F9; /* Bright light gray */
+  color: #2F2F2F; /* Dark gray for text */
 }
-
+body h2{
+  font-family: "Spicy Rice", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 header {
-  background: #ECE9E1;
-  color: #E43C13;
   padding: 60px 0;
+  background-color: #F9F9F9; /* Light gray */
+  font-family: "Spicy Rice", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-.about-section img {
-  border-radius: 10px;
+header h1 {
+  font-size: 3rem;
+  
+  color: #6A3B3B;
+}
+
+header p.lead {
+  font-size: 1.25rem;
+  color: #2F2F2F; /* Dark gray for tagline */
+ 
+}
+
+/* Alternating Section Colors */
+.about-section {
+  background-color: #eae2e2; /* Warm beige */
+  color: #6A3B3B;
 }
 
 .mission-section {
-  background-color: #FEC9B3;
+  background-color: #F9F9F9; /* Light gray */
+  color: #6A3B3B;
 }
 
-.values-section .icon {
-  color: #007bff;
+.values-section {
+  background-color: #eae2e2; /* Warm beige */
+  color: #6A3B3B;
+}
+
+.team-section {
+  background-color: #F9F9F9; /* Light gray */
+  color: #6A3B3B;
+}
+
+.map-section {
+  background-color: #eae2e2; /* Warm beige */
 }
 
 .cta-section {
-  background-color: #FEC9B3;
+  background-color: #F9F9F9; /* Light gray */
+  color: #6A3B3B;
 }
 
+/* Accent Colors for Buttons and Icons */
 .cta-section .btn {
-  background-color: #FD90A8;
+  background-color: #6A3B3B; /* Deep brown/wine red */
   border: none;
+  color: #F9F9F9; /* Light gray for button text */
 }
 
+/* Footer */
 footer {
-  background-color: #F5F5F5;
-  color: #4A4A4A;
+  background-color: #6A3B3B; 
+  color: #ffffff; /* Dark gray text */
 }
 
 /* Scroll Animation Styles */
@@ -49,10 +86,6 @@ footer {
 }
 
 /* Team Section Styles */
-.team-section {
-  background-color: #FEC9B3;
-}
-
 .team-member img {
   width: 100px;
   height: 100px;
@@ -62,32 +95,33 @@ footer {
 .team-member h3 {
   font-size: 1.25rem;
   margin-top: 15px;
+  color: #6A3B3B;
 }
 
 .team-member p.text-muted {
   font-size: 0.9rem;
   margin: 5px 0;
+  color: #6A3B3B; /* Deep brown for muted text */
 }
 
 .team-member p {
   font-size: 0.85rem;
-  color: #555;
+  color: #2F2F2F; /* Dark gray */
 }
 
 /* Map Section */
 #map {
   height: 400px;
   width: 100%;
-  }
-
-.map-section {
-  background-color: #f1f1f1;
-  padding: 60px 0;
 }
 
 .map-description h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
+  color: #6A3B3B;
+}
+.map-section h2{
+  color: #6A3B3B;
 }
 
 .map-description ul {
@@ -98,4 +132,5 @@ footer {
 .map-description li {
   font-size: 1rem;
   margin-bottom: 10px;
+  color: #6A3B3B;
 }

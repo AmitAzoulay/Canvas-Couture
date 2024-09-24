@@ -1,61 +1,65 @@
 body {
     font-family: 'Lora', serif;
-    /* Elegant, classical Italian font */
     background-color: #f8f8f8;
     /* Light background for contrast */
     color: #333;
+    margin: 0;
+    padding: 20px;
 }
 
-h2 {
-    font-size: 2em;
+h1 {
+    font-size: 2.5em;
     color: #B22222;
-    /* Italian red for headings */
+    /* Italian red for main headings */
     text-align: center;
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
 
-.product-list {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.product-item {
+.product-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    margin: 1em;
-    padding: 1.5em;
+    margin: 1em auto;
+    /* Centered margin */
+    padding: 2em;
     width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    transition: transform 0.3s, border-color 0.3s;
 }
 
-.product-item:hover {
+.product-card:hover {
     transform: scale(1.05);
     border-color: #B22222;
     /* Italian red border on hover */
 }
 
-.product-item h3 {
-    font-size: 1.5em;
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.product-card h2 {
+    font-size: 2em;
     color: #B22222;
-    /* Italian red for product names */
+    /* Italian red for product name */
+    text-align: center;
     margin-bottom: 0.5em;
 }
 
-.product-item p {
+.product-card p {
     font-size: 1em;
     margin: 0.3em 0;
+    text-align: center;
+    /* Center-align text */
 }
 
-.product-item .price {
+.product-card .price {
     font-size: 1.2em;
     font-weight: bold;
     color: #B22222;
     /* Price in Italian red */
+    text-align: center;
 }
 
 .stock-btn {
@@ -72,6 +76,8 @@ h2 {
     width: 40px;
     height: 40px;
     transition: background-color 0.3s ease;
+    margin: 0 auto;
+    /* Center the button */
 }
 
 .stock-btn:hover {
@@ -81,17 +87,9 @@ h2 {
 .out-of-stock {
     color: red;
     font-weight: bold;
+    text-align: center;
 }
 
-@media (max-width: 768px) {
-    .product-item {
-        width: 100%;
-        margin: 1em 0;
-    }
-}
-
-
-/* Back Button Styling */
 .btn-back {
     background-color: #d9534f;
     color: white;
@@ -109,4 +107,13 @@ h2 {
 
 .btn-back:hover {
     background-color: #c93d3d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .product-card {
+        width: 90%;
+        margin: 1em auto;
+        /* Centered margin for smaller screens */
+    }
 }
