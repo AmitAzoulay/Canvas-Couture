@@ -6,7 +6,7 @@
     <% products.forEach(product=> { %>
         <li class="product-item">
             <h3>
-                <%= product.name %>
+                <a href="products/search/product_id/<%= product.product_id %>" class=product-link><%= product.name %></a>
             </h3>
             <p>Price: $<%= product.price %>
             </p>

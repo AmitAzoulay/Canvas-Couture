@@ -24,6 +24,21 @@ function getProductByName(req, res) {
         });
 }
 
+function getProductById(req,res){
+    const product_id = req.params.product_id
+    productService.getProductById(product_id)
+    .then(products => {
+        res.render("../views/product.ejs", { products, product_id });
+    })
+    .catch(error => {
+        console.error('Error fetching product:', error);
+        res.status(500).send('Internal Server Error');
+    });
+}
+
+
+
+//get all products
 module.exports = {
     getProductByCategory,
     getProductByName
