@@ -8,9 +8,9 @@ async function loginUser(req, res) {
     try {
         const isLoggedIn = await userService.login(email, password);
         if (isLoggedIn.success) {
-            req.session.userId =  isLoggedIn.user._id;// Store userId in session
+            req.session.userId = isLoggedIn.user._id;; // Store userId in session
             req.session.isActive = true; //Store isActive in session
-            res.redirect("/index"); // Redirect to dashboard on success // Y: why not redirect to index?
+            res.redirect("/index"); // Redirect to homepage on success
         } else {
             res.status(401).render("login", { error: isLoggedIn.message }); // Render login view with error
         }
@@ -39,7 +39,7 @@ async function logoutUser(req, res) {
     try {
         // Call the logout service
         await userService.logout(req.session.userId);
-        
+
         req.session.destroy(); // Destroy the session
         res.redirect("/login"); // Redirect to login page
     } catch (error) {
@@ -62,7 +62,6 @@ async function changePassword(req, res) {
         res.status(400).send(error.message);
     }
 }
-
 
 module.exports = {
     loginUser,

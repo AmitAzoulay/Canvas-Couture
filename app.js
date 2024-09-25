@@ -13,13 +13,14 @@ server.use(cors({
     origin: 'http://localhost:3000', // Adjust based on your frontend URL
     credentials: true, // Allow credentials (cookies)
 }));
-server.use(express.static('public'))
+
+server.use(express.static('public'));
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
 server.set("view engine", "ejs");
 
-// Set up session
+// Set up session management
 server.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -28,9 +29,11 @@ server.use(session({
 }));
 
 // Define routes
-server.use('/products', require('./routes/products'));
-server.use('/order', require('./routes/orders'));
+server.use('/products', require('./routes/productsRoutes'));
+server.use('/order', require('./routes/ordersRoutes'));
 server.use('/', userRoutes); // This route replaces the previous index route
+
+server.use('/payment', require('./routes/paymantRoutes'))
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URI)
