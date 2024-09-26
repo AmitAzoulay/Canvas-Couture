@@ -33,6 +33,7 @@ server.use('/order', require('./routes/ordersRoutes'));
 server.use('/', require('./routes/userRoutes')); // This route replaces the previous index route
 server.use('/', require('./routes/indexRoutes'));
 server.use('/payment', require('./routes/paymentRoutes'))
+server.use("/", require('./routes/profileRoutes'));
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URI)

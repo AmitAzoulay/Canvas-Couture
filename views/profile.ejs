@@ -1,0 +1,25 @@
+<h1>User Profile</h1>
+<p>Name: <%= user.firstName %> <%= user.lastName %></p>
+<p>Email: <%= user.email %></p>
+
+<h2>Your Orders</h2>
+<% if (orders.length > 0) { %>
+    <ul>
+        <% orders.forEach(order => { %>
+            <li>
+                <strong>Order Date:</strong> <%= order.orderDate.toDateString() %><br>
+                <strong>Status:</strong> <%= order.status %><br>
+                <strong>Items:</strong>
+                <ul>
+                    <% order.items.forEach(item => { %>
+                        <li>
+                            <%= item.name %> - Quantity: <%= item.quantity %> - Price: $<%= item.price %>
+                        </li>
+                    <% }); %>
+                </ul>
+            </li>
+        <% }); %>
+    </ul>
+<% } else { %>
+    <p>You have no orders yet.</p>
+<% } %>
