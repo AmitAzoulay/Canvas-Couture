@@ -1,25 +1,52 @@
-<h1>User Profile</h1>
-<p>Name: <%= user.firstName %> <%= user.lastName %></p>
-<p>Email: <%= user.email %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
 
-<h2>Your Orders</h2>
-<% if (orders.length > 0) { %>
-    <ul>
-        <% orders.forEach(order => { %>
-            <li>
-                <strong>Order Date:</strong> <%= order.orderDate.toDateString() %><br>
-                <strong>Status:</strong> <%= order.status %><br>
-                <strong>Items:</strong>
-                <ul>
-                    <% order.items.forEach(item => { %>
-                        <li>
-                            <%= item.name %> - Quantity: <%= item.quantity %> - Price: $<%= item.price %>
-                        </li>
-                    <% }); %>
-                </ul>
-            </li>
-        <% }); %>
-    </ul>
-<% } else { %>
-    <p>You have no orders yet.</p>
-<% } %>
+<div class="container mt-5">
+    <h1>Welcome, <%= user.firstName %>!</h1>
+
+    <div class="user-details mb-4">
+        <h3>Your Details:</h3>
+        <p>Email: <%= user.email %></p>
+        <p>Phone: <%= user.phoneNumber %></p>
+        <p>Address: <%= address || 'Not provided' %></p>
+        <a href="/change-password" class="btn btn-primary">Change Password</a>
+    </div>
+
+    <div class="order-history">
+        <h3>Order History:</h3>
+        <% if (orders && orders.length > 0) { %>
+            <div class="list-group">
+                <% orders.forEach(order => { %>
+                    <div class="list-group-item mb-3 p-3 border">
+                        <strong>Order ID:</strong> <%= order._id %><br>
+                        <strong>Status:</strong> <%= order.status %><br>
+                        <strong>Date:</strong> <%= new Date(order.orderDate).toDateString() %><br>
+                        <strong>Items:</strong>
+                        <ul>
+                            <% order.items.forEach(item => { %>
+                                <li>
+                                    <%= item.name %> - Price: $<%= item.price.toFixed(2) %> - Quantity: <%= item.quantity %>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <div class="list-group-item">No orders found.</div>
+        <% } %>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
