@@ -104,8 +104,6 @@ body {
     color: #d9534f;
 }
 
-
-
 .background {
     position: relative;
     background-image: url('/img/feat-old-money-aesthetic.jpg');
@@ -118,14 +116,6 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
-}
-
-
-.background-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .btn-shop-now {

@@ -1,5 +1,16 @@
 const productService = require("../services/productService")
 
+function getAllProducts(req, res) {
+    productService.getAllProducts()
+        .then(products => {
+            res.render("../views/products.ejs", { products }); // Render a new view for all products
+        })
+        .catch(error => {
+            console.error('Error fetching all products:', error);
+            res.status(500).send('Internal Server Error');
+        });
+}
+
 function getProductByCategory(req, res) {
     const category = req.params.category
     productService.getProductsByCategory(category)
@@ -28,7 +39,7 @@ function getProductById(req,res){
     const product_id = req.params.product_id
     productService.getProductById(product_id)
     .then(products => {
-        res.render("../views/product.ejs", { products, product_id });
+        res.render("../views/product.ejs", { products, product_id});
     })
     .catch(error => {
         console.error('Error fetching product:', error);
@@ -38,8 +49,9 @@ function getProductById(req,res){
 
 
 
-//get all products
 module.exports = {
+    getAllProducts,
     getProductByCategory,
-    getProductByName
+    getProductByName,
+    getProductById
 }

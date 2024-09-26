@@ -6,82 +6,69 @@ body {
     margin: 0;
     padding: 20px;
 }
-
+.background{
+    background-color: #F9F9F9;
+    background-image: none;
+    padding: 10px 0; /* Padding to give space above and below products */
+    height: auto;
+}
 h1 {
     font-size: 2.5em;
-    color: #B22222;
+    color: #6A3B3B;
     /* Italian red for main headings */
     text-align: center;
     margin-bottom: 1.5em;
 }
+/* Custom Styles for Product Container */
 
-.product-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin: 1em auto;
-    /* Centered margin */
-    padding: 2em;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, border-color 0.3s;
+/* Overall container style */
+.container {
+    max-width: 1200px; /* Limit the width of the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add some padding */
 }
 
-.product-card:hover {
-    transform: scale(1.05);
-    border-color: #B22222;
-    /* Italian red border on hover */
+/* Product title style */
+.product-title {
+    font-size: 2rem; /* Larger font size for title */
+    font-weight: bold; /* Make title bold */
+    color: #6A3B3B; /* Dark gray color for title */
 }
 
-.product-card img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
+/* Short description style */
+.short-description {
+    font-size: 1.1rem; /* Slightly larger than normal text */
+    color: #6A3B3B; /* Medium gray for description */
+    margin-top: 10px; /* Space above the description */
 }
 
-.product-card h2 {
-    font-size: 2em;
-    color: #B22222;
-    /* Italian red for product name */
-    text-align: center;
-    margin-bottom: 0.5em;
+
+/* Quantity select dropdown */
+.form-select {
+    width: auto; /* Auto width to fit text */
 }
 
-.product-card p {
-    font-size: 1em;
-    margin: 0.3em 0;
-    text-align: center;
-    /* Center-align text */
+/* Additional product details */
+h5 {
+    margin-top: 20px; /* Space above product details */
+    font-weight: bold; /* Make headings bold */
+    color: #6A3B3B; /* Dark gray for headings */
 }
 
-.product-card .price {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #B22222;
-    /* Price in Italian red */
-    text-align: center;
+ul {
+    list-style-type: none; /* Remove default list style */
+    padding-left: 0; /* Remove padding */
 }
 
-.stock-btn {
-    background-color: black;
-    color: white;
-    border-radius: 50%;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    transition: background-color 0.3s ease;
-    margin: 0 auto;
-    /* Center the button */
+ul li {
+    margin: 5px 0; /* Space between list items */
+    color: #6A3B3B; /* Medium gray for list items */
 }
 
-.stock-btn:hover {
-    background-color: #444;
+/* Responsive image */
+.img-fluid {
+    max-width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
 }
 
 .out-of-stock {
@@ -91,7 +78,8 @@ h1 {
 }
 
 .btn-back {
-    background-color: #d9534f;
+    display: none; /* Initially hide the button */
+    background-color: #6A3B3B;
     color: white;
     padding: 10px 20px;
     font-size: 1.2rem;
@@ -103,17 +91,157 @@ h1 {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+    transition: opacity 0.3s ease-in-out; /* Smooth fade-in/out effect */
+    opacity: 0; /* Start with invisible */
+}
+
+.btn-back.show {
+    display: block; /* Show the button when class 'show' is added */
+    opacity: 1; /* Fully visible when scrolled to bottom */
+}
+
+/* Scroll animation */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px); /* Initial state before visible */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0); /* Visible and in-place after scrolling */
 }
 
 .btn-back:hover {
-    background-color: #c93d3d;
+    background-color: rgb(121, 37, 37);
+    color: white;
+}
+
+/* Ensure the product image scales well in the modal */
+.modal img {
+    width: 100%;
+    height: auto;
+}
+
+/* Center the product title and make it stand out */
+.product-title {
+    font-size: 2rem; /* Increase font size */
+    font-weight: bold;
+    color: #6A3B3B;
+}
+
+/* Style the short description */
+.short-description {
+    font-style: italic; /* Italicize for emphasis */
+    color: #6A3B3B; /* Slightly darker gray */
+}
+
+/* Customize the button for adding to cart */
+.btn-primary {
+    background-color: #6A3B3B; /* Bootstrap primary color */
+    border: none; /* Remove default border */
+}
+
+/* Add hover effects for the buttons */
+.btn-primary:hover {
+    background-color: #3e2323; /* Darker shade on hover */
+}
+
+/* Adjust the return policy link */
+.text-primary {
+    cursor: pointer; /* Pointer cursor to indicate clickability */
+}
+
+/* Styling for the collapse card */
+.card {
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 0.25rem; /* Rounded corners */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .product-card {
-        width: 90%;
-        margin: 1em auto;
-        /* Centered margin for smaller screens */
+    .product-container {
+        padding: 1rem; /* Padding for mobile */
     }
+
+    .product-title {
+        font-size: 1.5rem; /* Adjust title size for mobile */
+    }
+}
+/* Style for product image with hover zoom effect */
+.product-image {
+    transition: transform 0.3s ease; /* Smooth transition for zoom */
+    max-width: 500px;
+    max-height: 600px;
+}
+
+.product-image:hover {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+/* Style the short description */
+.short-description {
+    font-style: italic; /* Italicize for emphasis */
+    color: #555; /* Slightly darker gray */
+}
+.quantity-selector {
+    display: flex;
+    align-items: center;
+}
+
+.collapse {
+    margin-top: 10px; /* Adds space above the expandable section */
+}
+
+.card {
+    border: 1px solid #007bff; /* Change border color to match Bootstrap theme */
+    border-radius: 5px;
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+}
+
+.text-primary {
+    font-weight: bold; /* Makes the text bolder for better visibility */
+}
+/* Accordion Styling */
+.accordion-button {
+    background-color: #eae2e2;
+    color: #6A3B3B;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #6A3B3B;
+    color: white;
+}
+
+.accordion-item {
+    border: 1px solid #6A3B3B;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.accordion-body {
+    background-color: #f1f1f1;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+}
+.input-group {
+    width: 140px;  /* Increased the width to allow more space */
+}
+
+.input-group button {
+    width: 40px;  /* Slightly increased the button width */
+}
+
+.input-group input {
+    width: 60px;  /* Increased the width to accommodate two digits */
+    text-align: center;
 }

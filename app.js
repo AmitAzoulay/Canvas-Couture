@@ -4,8 +4,7 @@ var cors = require('cors')
 const session = require('express-session');
 require('dotenv').config();
 
-const userRoutes = require('./routes/userRoutes');
-const indexRoutes = require('./routes/index');
+
 
 const server = express()
 //server.use(cors())
@@ -31,17 +30,15 @@ server.use(session({
 // Define routes
 server.use('/products', require('./routes/productsRoutes'));
 server.use('/order', require('./routes/ordersRoutes'));
-server.use('/', userRoutes); // This route replaces the previous index route
-
-server.use('/payment', require('./routes/paymantRoutes'))
+server.use('/', require('./routes/userRoutes')); // This route replaces the previous index route
+server.use('/', require('./routes/indexRoutes'));
+server.use('/payment', require('./routes/paymentRoutes'))
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URI)
     .then(() => console.log('Connected to MongoDB!'))
     .catch(err => console.error('Database connection error:', err));
 
-server.use('/', userRoutes); 
-server.use('/', indexRoutes); 
 
 server.listen(process.env.port, () => {
     console.log(`server listening on port ${process.env.port}`)
