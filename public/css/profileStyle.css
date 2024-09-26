@@ -1,0 +1,122 @@
+/* Include Google Fonts in your HTML <head> */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
+
+body {
+    font-family: 'Lora', serif; /* Elegant, classical Italian font */
+    background-color: #F9F9F9; /* Light gray */
+    color: #333;
+}
+
+.container{
+    max-width: 1200px; /* Set a max-width for the container */
+    margin: 20px auto; /* Center the container */
+    padding: 0 15px; /* Padding for small screens */
+}
+
+h1 {
+    /*font-family: 'Roboto', sans-serif;*/
+    font-family:'Lucida Sans', sans-serif;
+    font-size: 2.5em; /* Larger size for main heading */
+    color: #6A3B3B; /* Italian red for main heading */
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.user-details {
+    border: 1px solid #ddd; /* Light border for definition */
+    background-color: #fff; /* Warm beige */
+    color: #6A3B3B;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+}
+
+.user-details h3 {
+    font-size: 1.8em;
+    color: #935757; /* Italian red for subheadings */
+    margin-bottom: 0.5em;
+}
+
+.user-details p {
+    font-size: 1.1em;
+    margin: 0.3em 0;
+}
+
+.order-history {
+    background-color: #fff; /* White background for order history */
+    border: 1px solid #ddd; /* Light border for definition */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.order-history h3 {
+    font-size: 1.8em;
+    color: #B22222; /* Italian red for subheadings */
+    margin-bottom: 0.5em;
+}
+
+.list-group-item {
+    border: none; /* Remove borders from list items */
+    margin-bottom: 1em; /* Space between items */
+    padding: 15px;
+    background-color: #f9f9f9; /* Light gray background */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item strong {
+    color: #B22222; /* Italian red for strong text */
+}
+
+.btn-primary {
+    background-color: #B22222; /* Italian red for buttons */
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #a61b1b; /* Darker red on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px; /* Reduce padding on small screens */
+    }
+
+    h1 {
+        font-size: 2em; /* Smaller font size for mobile */
+    }
+
+    .user-details, .order-history {
+        padding: 15px; /* Adjust padding for mobile */
+    }
+
+    .btn-primary {
+        width: 100%; /* Full-width buttons on mobile */
+    }
+}
+
+/* Back Button Styling */
+.btn-back {
+    background-color: #d9534f;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn-back:hover {
+    background-color: #c93d3d;
+}
