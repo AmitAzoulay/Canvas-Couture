@@ -14,7 +14,6 @@ async function getCurrentCart(req, res) {
 }
 
 async function removeCartItem(req, res) {
-
     const { orderId, productId } = req.params;
     try {
         const result = await orderService.removeCartItem(orderId, productId);
@@ -24,7 +23,19 @@ async function removeCartItem(req, res) {
     }
 }
 
+async function addToCartById(req, res) {
+    const productId = req.params.productId;
+    const uid = req.session.userId
+    try {
+        const result = await orderService.addToCartById(uid, productId);
+        res.status(200).json(result); // Respond with a success message
+    } catch (error) {
+        res.status(500).json({ message: error.message }); // Handle errors
+    }
+}
+
 module.exports = {
     getCurrentCart,
-    removeCartItem
+    removeCartItem,
+    addToCartById
 }

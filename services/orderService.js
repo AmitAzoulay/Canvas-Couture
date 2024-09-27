@@ -1,12 +1,12 @@
 const Orders = require("../models/orders")
+const Products = require("../models/product")
 const mongoose = require('mongoose');
 
 async function getAllOrdersOfUser(uid) {
 
     const uid_as_object = new mongoose.Types.ObjectId(uid);
-    //const orders = await Orders.find({ email }); new mongoose.Types.ObjectId('66df5accc1d6b1eae2660677')
+    //const orders = await Orders.find({ email }); new mongoose.Types.ObjectId('66df5accc1d6b1eae2660677')//eeee
     const orders = await Orders.find({ userId: uid_as_object })
-
     // Format the data to include product details from each order
     const formattedOrders = orders.map(order => ({
         orderId: order._id,
@@ -26,8 +26,21 @@ async function getCurrentCart(uid) {
 
     const uid_as_object = new mongoose.Types.ObjectId(uid);
     //const orders = await Orders.find({ email }); new mongoose.Types.ObjectId('66df5accc1d6b1eae2660677')
-    const orders = await Orders.find({ userId: uid_as_object, ordered: false })
+    orders = await Orders.find({ userId: uid_as_object, ordered: false })
 
+    if (!orders || orders.length === 0) {
+        // If no cart exists, create a new one
+        orders = new Orders({
+            _id: new mongoose.Types.ObjectId(),
+            userId: new mongoose.Types.ObjectId(uid),
+            items: [],
+            orderDate: new Date(), //placeholder
+            status: 'Pending',
+            ordered: false,
+        });
+        await orders.save();
+    }
+    orders = await Orders.find({ userId: uid_as_object, ordered: false })
     // Format the data to include product details from each order
     const formattedOrders = orders.map(order => ({
         orderId: order._id,
@@ -48,7 +61,6 @@ async function removeCartItem(orderId, productId) {
         // Find the order first
         const order = await Orders.findById(orderId);
         if (!order) {
-            console.log("Order not found")
             throw new Error('Order not found');
         }
 
@@ -57,8 +69,6 @@ async function removeCartItem(orderId, productId) {
         if (!item) {
             throw new Error('Item not found in the cart');
         }
-
-        console.log("quantity:", item.quantity)
 
         // Check the quantity
         if (item.quantity > 1) {
@@ -81,8 +91,47 @@ async function removeCartItem(orderId, productId) {
     }
 }
 
+async function addToCartById(uid, productId) {
+
+    const product = await Products.findById(productId);
+    if (!product) {
+        throw new Error('Product not found');
+    }
+    let order = await Orders.findOne({ userId: new mongoose.Types.ObjectId(uid), ordered: false });
+
+    if (!order) {
+        // If no cart exists, create a new one
+        order = new Orders({
+            _id: new mongoose.Types.ObjectId(),
+            userId: new mongoose.Types.ObjectId(uid),
+            items: [],
+            orderDate: new Date(), //placeholder
+            status: 'Pending',
+            ordered: false,
+        });
+    }
+    const existingItem = order.items.find(item => item.productId.toString() === productId); // Check if the product already exists in the cart items
+
+    if (existingItem) {
+        existingItem.quantity += 1; // If the item exists, increase the quantity
+    } else {
+        // If the item does not exist, add it to the items array
+        order.items.push({
+            productId: product._id,
+            name: product.name, // Use the product name from the fetched product
+            price: product.price, // Use the product price from the fetched product
+            quantity: 1
+        });
+    }
+
+    await order.save();
+    return order;
+
+}
+
 module.exports = {
     getAllOrdersOfUser,
     getCurrentCart,
-    removeCartItem
+    removeCartItem,
+    addToCartById
 };
