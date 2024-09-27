@@ -45,11 +45,8 @@ function savePayment(address, cardName, cardNumber, expiryDate, cvv, uid) {
 
 async function getTotalPrice(uid) {
 
-    console.log(uid); // Log the user ID for debugging
-
     // Fetch orders where ordered is false
     const orders = await Orders.find({ userId: uid, ordered: false });
-    console.log(orders); // Log the orders retrieved for debugging
 
     // If no orders found, return 0
     if (!orders || orders.length === 0) {
@@ -67,7 +64,6 @@ async function getTotalPrice(uid) {
         }
     });
 
-    console.log(totalPrice.toFixed(2)); // Log the total price for debugging
     return totalPrice.toFixed(2); // Returns the total price formatted to two decimal places
 }
 module.exports = {
