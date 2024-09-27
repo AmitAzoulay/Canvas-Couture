@@ -141,3 +141,36 @@ p {
     font-size: 1.8em;
     color: #B22222;
 }
+
+.btn-payment {
+    background-color: #c0392b;
+    /* Deep red - a luxurious color */
+    color: #fff;
+    /* White text for contrast */
+    padding: 12px 24px;
+    border: 2px solid #e74c3c;
+    /* Slightly lighter red for the border */
+    font-size: 18px;
+    font-family: 'Garamond', serif;
+    /* Elegant, classic font */
+    border-radius: 30px;
+    /* Smooth, rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for a premium feel */
+}
+
+.btn-payment:hover {
+    background-color: #e74c3c;
+    /* Lighter red on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    /* Increase shadow on hover for depth */
+}
+
+.btn-payment:active {
+    background-color: #a93226;
+    /* Even darker red when clicked */
+    box-shadow: none;
+    /* Remove shadow when active */
+}
