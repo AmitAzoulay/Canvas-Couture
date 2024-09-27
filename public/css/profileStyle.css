@@ -1,13 +1,20 @@
 /* Include Google Fonts in your HTML <head> */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
 
-body {
-    font-family: 'Lora', serif; /* Elegant, classical Italian font */
-    background-color: #F9F9F9; /* Light gray */
-    color: #333;
+:root {
+    --main-color: #935757;
+    --hover-color: #754444;
+    --text-color: #333;
+    --background-color: #F9F9F9;
 }
 
-.container{
+body {
+    font-family: 'Lora', serif; /* Elegant, classical Italian font */
+    background-color: var(--background-color); /* Light gray */
+    color: var(--text-color);
+}
+
+.container {
     max-width: 1200px; /* Set a max-width for the container */
     margin: 20px auto; /* Center the container */
     padding: 0 15px; /* Padding for small screens */
@@ -35,14 +42,14 @@ h1 {
 
 h3 {
     font-size: 1.8em;
-    color: #935757; 
+    color: var(--main-color);
     font-weight: 700;
     margin-bottom: 0.5em;
 }
 
-.user-details p {
+p {
     font-size: 1.1em;
-    color: #333;
+    color: var(--text-color);
     margin: 0.3em 0;
     font-weight: 500;
 }
@@ -52,7 +59,33 @@ h3 {
     text-decoration: underline; /* Always underline the link */
     font-weight: 700; /* Remove bold */
 }
-a:hover{
+
+.newsletter-section {
+    background-color: #fff; /* White background */
+    border: 1px solid #ddd; /* Light border for definition */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Padding inside the div */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    color: var(--text-color); /* Text color */
+    margin-bottom: 2em; /* Space below the section */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Align checkbox with label */
+}
+
+.newsletter-checkbox {
+    margin-right: 10px; /* Space between checkbox and label */
+    width: 20px; /* Adjust size as needed */
+    height: 20px; /* Adjust size as needed */
+}
+
+a {
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+a:hover {
     color: #6a3e3e;
 }
 
@@ -64,17 +97,14 @@ a:hover{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-.list-group-item {
-    border: none; /* Remove borders from list items */
+.border {
+    border: 5px solid; /* Remove borders from list items */
     margin-bottom: 1.5em; /* Space between items */
     padding: 20px;
     background-color: #f9f9f9; /* Light gray background */
-    border-radius: 10px;
+    border-radius: 0px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-
 
 /* Responsive styles */
 @media (max-width: 768px) {
@@ -95,10 +125,9 @@ a:hover{
     }
 }
 
-
 /* Style for the accordion button */
 .accordion-button {
-    background-color: #935757; /* Change to your preferred background color */
+    background-color: var(--main-color); /* Change to your preferred background color */
     color: white; /* Change text color */
     font-weight: bold; /* Make the text bold */
     padding: 10px 10px;
@@ -107,7 +136,7 @@ a:hover{
 }
 
 .accordion-button:hover {
-    background-color: #754444; /* Darker shade on hover */
+    background-color: var(--hover-color); /* Darker shade on hover */
 }
 
 .accordion-button:focus {
@@ -116,7 +145,7 @@ a:hover{
 
 /* Style for the expanded accordion button */
 .accordion-button:not(.collapsed) {
-    background-color: #935757; /* Background color when expanded */
+    background-color: var(--main-color); /* Background color when expanded */
     color: white; /* Keep text color white */
 }
 
