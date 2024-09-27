@@ -14,11 +14,12 @@ body {
 }
 
 h1 {
-    /*font-family: 'Roboto', sans-serif;*/
-    font-family:'Lucida Sans', sans-serif;
-    font-size: 2.5em; /* Larger size for main heading */
-    color: #6A3B3B; /* Italian red for main heading */
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em; /* Larger size for main heading */
+    color: #7a4444; /* Italian red for main heading */
+    font-weight: 700;
     text-align: center;
+    margin-top: 1.5em;
     margin-bottom: 1em;
 }
 
@@ -32,15 +33,27 @@ h1 {
     margin-bottom: 2em;
 }
 
-.user-details h3 {
+h3 {
     font-size: 1.8em;
-    color: #935757; /* Italian red for subheadings */
+    color: #935757; 
+    font-weight: 700;
     margin-bottom: 0.5em;
 }
 
 .user-details p {
     font-size: 1.1em;
+    color: #333;
     margin: 0.3em 0;
+    font-weight: 500;
+}
+
+.change-pass a {
+    color: #915454;
+    text-decoration: underline; /* Always underline the link */
+    font-weight: 700; /* Remove bold */
+}
+a:hover{
+    color: #6a3e3e;
 }
 
 .order-history {
@@ -51,36 +64,17 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.order-history h3 {
-    font-size: 1.8em;
-    color: #B22222; /* Italian red for subheadings */
-    margin-bottom: 0.5em;
-}
 
 .list-group-item {
     border: none; /* Remove borders from list items */
-    margin-bottom: 1em; /* Space between items */
-    padding: 15px;
+    margin-bottom: 1.5em; /* Space between items */
+    padding: 20px;
     background-color: #f9f9f9; /* Light gray background */
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.list-group-item strong {
-    color: #B22222; /* Italian red for strong text */
-}
 
-.btn-primary {
-    background-color: #B22222; /* Italian red for buttons */
-    border: none;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-}
-
-.btn-primary:hover {
-    background-color: #a61b1b; /* Darker red on hover */
-}
 
 /* Responsive styles */
 @media (max-width: 768px) {
@@ -101,22 +95,35 @@ h1 {
     }
 }
 
-/* Back Button Styling */
-.btn-back {
-    background-color: #d9534f;
-    color: white;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+
+/* Style for the accordion button */
+.accordion-button {
+    background-color: #935757; /* Change to your preferred background color */
+    color: white; /* Change text color */
+    font-weight: bold; /* Make the text bold */
+    padding: 10px 10px;
+    border: none; /* Remove default border */
+    transition: background-color 0.3s; /* Smooth transition for background color */
 }
 
-.btn-back:hover {
-    background-color: #c93d3d;
+.accordion-button:hover {
+    background-color: #754444; /* Darker shade on hover */
+}
+
+.accordion-button:focus {
+    box-shadow: #683c3c; /* Add focus ring */
+}
+
+/* Style for the expanded accordion button */
+.accordion-button:not(.collapsed) {
+    background-color: #935757; /* Background color when expanded */
+    color: white; /* Keep text color white */
+}
+
+/* Accordion body styles */
+.accordion-body {
+    background-color: #f8f9fa; /* Light background for the body */
+    color: #343a40; /* Darker text color */
+    border-top: 1px solid #e9ecef; /* Border at the top of the body */
+    padding: 1rem; /* Add padding for better spacing */
 }
