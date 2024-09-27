@@ -1,11 +1,11 @@
 const orderService = require("../services/orderService")
 
-async function getAllOrdersOfUser_controller(req, res) {
+async function getCurrentCart(req, res) {
 
     uid = req.session.userId
     orderService.getCurrentCart(uid)
-        .then(orders => {
-            res.render("../views/orders.ejs", { orders });
+        .then(cart => {
+            res.render("../views/cart.ejs", { cart });
         })
         .catch(error => {
             console.error('Error fetching products:', error);
@@ -14,5 +14,5 @@ async function getAllOrdersOfUser_controller(req, res) {
 }
 
 module.exports = {
-    getAllOrdersOfUser_controller
+    getCurrentCart
 }
