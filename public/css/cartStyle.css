@@ -1,0 +1,176 @@
+/* General body styling */
+body {
+    font-family: 'Lora', serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/* Cart container */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Main heading */
+h1 {
+    font-size: 2.5em;
+    color: #B22222;
+    /* Italian red */
+    text-align: center;
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th,
+table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f2f2f2;
+    color: #B22222;
+    /* Italian red for headers */
+    font-size: 1.2em;
+}
+
+table td {
+    font-size: 1.1em;
+}
+
+/* Styling for product name and price */
+td .price {
+    font-weight: bold;
+    color: #B22222;
+    /* Price in Italian red */
+}
+
+/* Minus button (black circle with minus sign) */
+.minus-btn {
+    background-color: black;
+    /* Black background */
+    color: white;
+    /* White text/icon */
+    border-radius: 50%;
+    /* Make the button circular */
+    border: none;
+    /* Remove default border */
+    padding: 10px;
+    /* Space inside the button */
+    font-size: 16px;
+    /* Font size for icon or text */
+    cursor: pointer;
+    /* Pointer on hover */
+    width: 40px;
+    /* Set width to make it a circle */
+    height: 40px;
+    /* Set height to make it a circle */
+    display: flex;
+    /* Flexbox to center content */
+    align-items: center;
+    /* Vertically center content */
+    justify-content: center;
+    /* Horizontally center content */
+    transition: background-color 0.3s ease;
+    /* Smooth hover effect */
+}
+
+.minus-btn:hover {
+    background-color: #444;
+    /* Slightly lighter on hover */
+}
+
+/* Total amount styling */
+.total {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.total h2 {
+    font-size: 1.8em;
+    color: #B22222;
+}
+
+/* Empty cart message */
+p {
+    font-size: 1.2em;
+    color: #666;
+    text-align: center;
+}
+
+/* Back button */
+.btn-back {
+    background-color: #d9534f;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn-back:hover {
+    background-color: #c93d3d;
+}
+
+.total {
+    text-align: left;
+    /* Align to the left */
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.total h2 {
+    font-size: 1.8em;
+    color: #B22222;
+}
+
+.btn-payment {
+    background-color: #c0392b;
+    /* Deep red - a luxurious color */
+    color: #fff;
+    /* White text for contrast */
+    padding: 12px 24px;
+    border: 2px solid #e74c3c;
+    /* Slightly lighter red for the border */
+    font-size: 18px;
+    font-family: 'Garamond', serif;
+    /* Elegant, classic font */
+    border-radius: 30px;
+    /* Smooth, rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for a premium feel */
+}
+
+.btn-payment:hover {
+    background-color: #e74c3c;
+    /* Lighter red on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    /* Increase shadow on hover for depth */
+}
+
+.btn-payment:active {
+    background-color: #a93226;
+    /* Even darker red when clicked */
+    box-shadow: none;
+    /* Remove shadow when active */
+}

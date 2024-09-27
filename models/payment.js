@@ -29,6 +29,10 @@ const paymentsSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    paymentPrice: {
+        type: Number,
+        required: true
     }
 });
 
