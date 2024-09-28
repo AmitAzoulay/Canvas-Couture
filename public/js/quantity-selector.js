@@ -1,9 +1,11 @@
 
 // Quantity selector logic
+// Get the maxStock value from the data attribute
+const productInfo = document.getElementById('productInfo');
+const maxStock = parseInt(productInfo.getAttribute('data-max-stock'));
 const decreaseButton = document.getElementById('decreaseQuantity');
 const increaseButton = document.getElementById('increaseQuantity');
 const quantityInput = document.getElementById('quantity');
-let maxStock = 15;  // Set this dynamically based on your product stock
 
 decreaseButton.addEventListener('click', () => {
     let currentQuantity = parseInt(quantityInput.value);

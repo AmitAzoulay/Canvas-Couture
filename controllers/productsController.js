@@ -39,7 +39,8 @@ function getProductById(req,res){
     const product_id = req.params.product_id
     productService.getProductById(product_id)
     .then(products => {
-        res.render("../views/product.ejs", { products, product_id});
+        const product = products[0]; // Access the first product in the array
+        res.render("../views/product.ejs", { product, product_id });
     })
     .catch(error => {
         console.error('Error fetching product:', error);

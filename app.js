@@ -27,6 +27,7 @@ server.use(session({
     cookie: { secure: false }
 }));
 
+
 // Define routes
 server.use('/products', require('./routes/productsRoutes'));
 server.use('/order', require('./routes/ordersRoutes'));

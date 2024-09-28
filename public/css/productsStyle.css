@@ -66,6 +66,9 @@ h2 {
     color: #6A3B3B;
    
 }
+.card-product-img{
+    width: 250px;
+}
 
 .product-item .price {
     font-size: 1.2em;

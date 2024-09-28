@@ -93,6 +93,7 @@ ul li {
     transform: translateX(-50%);
     transition: opacity 0.3s ease-in-out; /* Smooth fade-in/out effect */
     opacity: 0; /* Start with invisible */
+    
 }
 
 .btn-back.show {

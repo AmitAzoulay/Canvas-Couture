@@ -38,6 +38,22 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    address: {
+      type: {
+        street: { type: String, required: true, trim: true },
+        number: { type: String, required: true, trim: true },
+        apartment: { type: String, trim: true }, // Optional field
+        city: { type: String, required: true, trim: true },
+        country: { type: String, required: true, trim: true },
+      },
+      validate: {
+        validator: function (v) {
+          // Only validate address if it is provided (not null or undefined)
+          return v == null || (v.street && v.house_number && v.city && v.country);
+        },
+        message: "All address fields (street, house_number, city, and country) are required if address is provided.",
+      },
+    },
   },
   {
     versionKey: false // Disable the version key

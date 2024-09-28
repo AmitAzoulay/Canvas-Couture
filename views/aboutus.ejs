@@ -146,7 +146,7 @@
     <div class="container">
       <h2>Want to Learn More?</h2>
       <p class="lead">Discover how we can bring value to your life. Explore our collection today!</p>
-      <a href="#" class="btn btn-primary">Shop Now</a>
+      <a href="/products/search/all" class="btn btn-primary">Shop Now</a>
     </div>
   </section>
 
@@ -167,28 +167,6 @@
 
   <!-- Google Maps API -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4OvS9ScQ5grp7CQ4qa4mDrW3ngTV9lgY&callback=initMap" async defer></script>
-  <script>
-    function initMap() {
-      const locations = [
-        { lat: 35.2271, lng: -80.8431 }, // Charlotte
-        { lat: 35.7796, lng: -78.6382 }, // Raleigh
-        { lat: 36.0726, lng: -79.7910 }, // Greensboro
-        { lat: 36.0014, lng: -78.9382 }, // Durham
-        { lat: 35.5961, lng: -82.5515 }  // Asheville
-      ];
-      
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 7,
-        center: locations[0]
-      });
-
-      locations.forEach(location => {
-        new google.maps.Marker({
-          position: location,
-          map: map
-        });
-      });
-    }
-  </script>
+  <script src="/js/branches-map.js"></script>
 </body>
 </html>
