@@ -3,6 +3,7 @@ const express = require('express')
 var cors = require('cors')
 const session = require('express-session');
 require('dotenv').config();
+const { TwitterApi } = require('twitter-api-v2');
 
 
 
@@ -26,6 +27,7 @@ server.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }));
+
 
 // Define routes
 server.use('/products', require('./routes/productsRoutes'));
