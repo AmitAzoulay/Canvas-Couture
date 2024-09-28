@@ -3,7 +3,6 @@ const express = require('express')
 var cors = require('cors')
 const session = require('express-session');
 require('dotenv').config();
-const { TwitterApi } = require('twitter-api-v2');
 
 
 
