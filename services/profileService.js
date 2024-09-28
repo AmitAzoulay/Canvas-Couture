@@ -17,10 +17,11 @@ class ProfileService {
 
     async getUserOrders(userId) {
         try {
-            const orders = await Order.find({ userId }).populate('items.productId').exec();
-            console.log("Orders fetched of service:", orders); // This logs the fetched orders
+            // Fetch only orders that are marked as ordered: true
+            const orders = await Order.find({ userId, ordered: true }).populate('items.productId').exec();
+            console.log("Orders fetched of service:", orders);
             orders.forEach(order => {
-                console.log("Order items:", order.items); // This logs the items of each order
+                console.log("Order items:", order.items);
             });
             return orders;
         } catch (error) {
