@@ -30,13 +30,10 @@ class ProfileService {
     }
     
 
-    async getUserAddress(userId) { 
+    async getUserAddress(userId) {
         try {
             const paymentDetails = await Payments.findOne({ userId }).exec();
-            if (!paymentDetails) {
-                throw new Error('Payment details not found');
-            }
-            return paymentDetails.address;
+            return paymentDetails ? paymentDetails.address : null; // Return null if not found
         } catch (error) {
             throw error;
         }
