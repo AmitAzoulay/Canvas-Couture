@@ -13,7 +13,7 @@ async function getUserProfile(req, res) {
         const orders = await profileService.getUserOrders(userId); // Fetch user orders
         const address = await profileService.getUserAddress(userId); // Fetch the address
 
-        console.log("Orders fetched of controller:", orders);
+        console.log("Orders fetched of controller:", orders,userId);
 
         res.render("profile", { user, orders, address }); // Render the profile page with user data
     } catch (error) {
