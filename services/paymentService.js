@@ -6,6 +6,12 @@ function savePayment(address, cardName, cardNumber, expiryDate, cvv, uid) {
     // Get total price as a promise
     return getTotalPrice(uid) // Assuming this is an async function returning a promise
         .then(totalPrice => {
+
+            // Check if the total price is 0
+            if (totalPrice === 0) {
+                // Return a suitable message or handle accordingly
+                return Promise.reject(new Error("Payment not committed: No items in the cart or total price is zero."));
+            }
             const newPayment = new Payments({
                 userId: uid,
                 address,
