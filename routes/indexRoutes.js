@@ -14,5 +14,6 @@ router.get('/index', isLoggedIn, (req, res) => {
     res.render('index', { user: req.session.user });
 });
 
+
 // Export the router
 module.exports = router;

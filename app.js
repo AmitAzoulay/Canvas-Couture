@@ -34,6 +34,7 @@ server.use('/', require('./routes/userRoutes')); // This route replaces the prev
 server.use('/', require('./routes/indexRoutes'));
 server.use('/payment', require('./routes/paymentRoutes'))
 server.use("/", require('./routes/profileRoutes'));
+server.use("/admin", require('./routes/adminRoutes'));
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URI)

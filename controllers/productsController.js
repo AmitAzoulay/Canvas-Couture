@@ -27,7 +27,8 @@ function getProductByName(req, res) {
     const name = req.params.name
     productService.getProductsByName(name)
         .then(products => {
-            res.render("../views/product.ejs", { products, name });
+            const product = products[0]; // Access the first product in the array
+            res.render("../views/product.ejs", { product, name });
         })
         .catch(error => {
             console.error('Error fetching products:', error);
