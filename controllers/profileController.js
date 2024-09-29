@@ -14,16 +14,20 @@ async function getUserProfile(req, res) {
         const address = await profileService.getUserAddress(userId); // Fetch the address
 
         console.log("Orders fetched of controller:", orders);
-
-        res.render("profile", { user, orders, address }); // Render the profile page with user data
+        console.log(address);
+        // Render the profile page with user data, regardless of orders or address
+        res.render("profile", {
+            user,
+            orders: orders || [], // Pass an empty array if no orders
+            
+            address: address || "No address found" // Default message if no address
+        });
     } catch (error) {
         console.error(error);
-        if (error.message === 'User not found' || error.message === 'Payment details not found') {
-            return res.status(404).send("User or payment details not found");
-        }
         res.status(500).send("Internal Server Error");
     }
 }
+
 
 module.exports = {
     getUserProfile,
