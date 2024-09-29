@@ -110,7 +110,7 @@ body {
     /* Correct path */
     background-size: cover;
     background-position: center;
-    height: calc(100vh - 56px);
+    height: calc(100vh - 130px);
     /* Adjust as needed */
     display: flex;
     justify-content: center;
