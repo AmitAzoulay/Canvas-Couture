@@ -9,7 +9,7 @@ function getProductsByCategory(category) {
 }
 
 function getProductsByName(name) {
-    return Products.find({ name }); // Assuming your product schema has a 'category' field
+    return Products.find({ name }); 
 }
 
 function getProductById(product_id){

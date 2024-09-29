@@ -12,57 +12,8 @@
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Canvas Couture</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="shopNowDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Shop Now
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="shopNowDropdown">
-                            <li><a class="dropdown-item" href="/products/search/all">All Products</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Shirts">Shirts</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Outerwear">Outerwear</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Dresses">Dresses</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Bottoms">Bottoms</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Tops">Tops</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Footwear">Footwear</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Info</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/aboutus">About Us</a>
-                    </li>
-                </ul>
-
-                <!-- Add the correct IDs here -->
-                <form class="d-flex" id="searchForm">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                        id="searchInput">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav ms-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="order">
-                            <i class="bi bi-cart-fill"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/profile">
-                            <i class="bi bi-person"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    <%- include('./navbar.ejs') %>
+    
     <section class="background"> <!-- Background section with CSS class -->
         <div class="background-content text-center">
             <h1 class="background-title">Turn Every Street Into a Gallery.</h1>

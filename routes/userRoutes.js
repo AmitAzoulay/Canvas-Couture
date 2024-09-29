@@ -33,7 +33,9 @@ router.get('/index', isLoggedIn, (req, res) => {
 // Route for serving index
 router.get("/index", (req, res) => {
     console.log("Accessing index...");
-    res.render("index", { isLoggedIn: !!req.session.userId }); // Pass login status to the dashboard
+    res.render("index", { isLoggedIn: !!req.session.userId,
+                        isAdmin: !!req.session.isAdmin
+                        }); // Pass login status, isadmin to the index
 });
 
 // Protected route for logging out

@@ -12,54 +12,7 @@
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Canvas Couture</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="shopNowDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Shop Now
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="shopNowDropdown">
-                            <li><a class="dropdown-item" href="/products/search/all">All Products</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Shirts">Shirts</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Outerwear">Outerwear</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Dresses">Dresses</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Bottoms">Bottoms</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Tops">Tops</a></li>
-                            <li><a class="dropdown-item" href="/products/search/category/Footwear">Footwear</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Info</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/aboutus">About Us</a>
-                    </li>
-                </ul>
-
-                <form class="d-flex" id="searchForm">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav ms-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/cart">
-                            <i class="bi bi-cart-fill"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/profile">
-                            <i class="bi bi-person"></i> 
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <%- include('./navbar.ejs') %>
 
     <div class="container">
         <h1>Welcome, <%= user.firstName %>!</h1>
@@ -68,7 +21,7 @@
             <h3>Your Details:</h3>
             <p><strong>Email:</strong> <%= user.email %></p>
             <p><strong>Phone:</strong> <%= user.phoneNumber %></p>
-            <p><strong>Address:</strong> <%= address.street %></p> <!-- Displaying the user's address -->
+            <p><strong>Address:</strong> <%= address %></p> <!-- Displaying the user's address -->
             <p class="change-pass"><a href="/change-password">Change password</a></p>
         </div>
 

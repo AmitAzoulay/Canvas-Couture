@@ -11,6 +11,7 @@ async function loginUser(req, res) {
             const user = isLoggedIn.user;
             req.session.userId = isLoggedIn.user._id;; // Store userId in session
             req.session.isActive = true; //Store isActive in session
+            req.session.isAdmin = isLoggedIn.user.isAdmin; //store is admin in session
             req.user = user;
             res.redirect("/index"); // Redirect to homepage on success
         } else {
