@@ -12,45 +12,65 @@
     <link rel="stylesheet" href="/css/adminStyle.css">
 </head>
 <body>
-    <%- include('./navbar.ejs') %>
     <!-- Navbar -->
+    <%- include('./navbar.ejs') %>
     
-
-    <!-- Main Content -->
+    <!-- Main Content with Sidebar -->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3">
-                <!-- Sidebar (optional) -->
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4" id="sidebar">
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">Dashboard</a>
-                    <a href="#" class="list-group-item list-group-item-action">Manage Products</a>
-                    <a href="#" class="list-group-item list-group-item-action">Manage Users</a>
-                    <a href="#" class="list-group-item list-group-item-action">Manage Orders</a>
+                    <a href="#" class="list-group-item list-group-item-action active" data-target="dashboard">Dashboard</a>
+                    <a href="#" class="list-group-item list-group-item-action" data-target="products">Manage Products</a>
+                    <a href="#" class="list-group-item list-group-item-action" data-target="users">Manage Users</a>
+                    <a href="#" class="list-group-item list-group-item-action" data-target="orders">Manage Orders</a>
                 </div>
             </div>
-            <div class="col-lg-9">
-                <!-- Admin Actions -->
-                <div class="card">
-                    <div class="card-header">Manage Products</div>
-                    <div class="card-body">
-                        <p>As an admin, you can add, update, or delete products in the store.</p>
-                        <a href="#" class="btn btn-primary">Add New Product</a>
+
+            <!-- Content Section -->
+            <div class="col-lg-9 col-md-8">
+                <!-- Dashboard Section -->
+                <div class="content-section" id="dashboard-section">
+                    <div class="card">
+                        <div class="card-header">Dashboard</div>
+                        <div class="card-body">
+                            <p>Welcome to the admin dashboard!</p>
+                        </div>
+                    </div>
+                </div>
+            
+
+                <!-- Manage Products Section -->
+                <div class="content-section d-none" id="products-section">
+                    <div class="card">
+                        <div class="card-header">Manage Products</div>
+                        <div class="card-body">
+                            <p>As an admin, you can add, update, or delete products in the store.</p>
+                            <a href="#" class="btn btn-primary">Add New Product</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">Manage Users</div>
-                    <div class="card-body">
-                        <p>View and manage users who have registered on Canvas Couture.</p>
-                        <a href="#" class="btn btn-primary">View Users</a>
+                <!-- Manage Users Section -->
+                <div class="content-section d-none" id="users-section">
+                    <div class="card">
+                        <div class="card-header">Manage Users</div>
+                        <div class="card-body">
+                            <p>View and manage users who have registered on Canvas Couture.</p>
+                            <a href="#" class="btn btn-primary">View Users</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <div class="card-header">Manage Orders</div>
-                    <div class="card-body">
-                        <p>Review and process customer orders from the store.</p>
-                        <a href="#" class="btn btn-primary">View Orders</a>
+                <!-- Manage Orders Section -->
+                <div class="content-section d-none" id="orders-section">
+                    <div class="card">
+                        <div class="card-header">Manage Orders</div>
+                        <div class="card-body">
+                            <p>Review and process customer orders from the store.</p>
+                            <a href="#" class="btn btn-primary">View Orders</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,7 +78,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="footer">
+    <div class="footer text-center mt-5">
         <p>&copy; 2024 Canvas Couture - Admin Dashboard</p>
     </div>
 
@@ -70,5 +90,33 @@
     <script src="/js/quantity-selector.js"></script>
     <script src="/js/scroll-animation.js"></script>
     <script src="/js/search.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // JavaScript to handle sidebar navigation and content switching
+        document.querySelectorAll('#sidebar .list-group-item').forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove 'active' class from all sidebar items
+                document.querySelectorAll('#sidebar .list-group-item').forEach(function(el) {
+                    el.classList.remove('active');
+                });
+                
+                // Add 'active' class to the clicked sidebar item
+                this.classList.add('active');
+
+                // Hide all content sections
+                document.querySelectorAll('.content-section').forEach(function(section) {
+                    section.classList.add('d-none');
+                });
+                
+                // Show the corresponding section based on the data-target attribute
+                const target = this.getAttribute('data-target');
+                document.getElementById(`${target}-section`).classList.remove('d-none');
+            });
+        });
+    </script>
+    
 </body>
 </html>
