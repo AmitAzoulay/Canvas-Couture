@@ -7,7 +7,7 @@ const postContact = async (req, res) => {
     try {
         // Use the service to store the contact information
         await contactService.storeContact(email, message);
-        res.redirect('/contact-success');
+        res.redirect('/index');
     } catch (error) {
         console.error(error);
         res.status(500).send('Something went wrong. Please try again later.');

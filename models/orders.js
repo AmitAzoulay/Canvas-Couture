@@ -15,6 +15,7 @@ const orderSchema = new mongoose.Schema({
     ],
     "orderDate": Date,
     "status": String,
+    "ordered": Boolean
 });
 
 // Create the Order model based on the schema

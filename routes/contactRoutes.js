@@ -8,6 +8,6 @@ router.get('/', (req, res) => {
 });
 
 // POST request to handle form submission
-router.post('/Contact', contactController.postContact);
+router.post('/send', contactController.postContact);
 
 module.exports = router;

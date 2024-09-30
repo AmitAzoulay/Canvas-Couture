@@ -1,5 +1,16 @@
 const productService = require("../services/productService")
 
+function getAllProducts(req, res) {
+    productService.getAllProducts()
+        .then(products => {
+            res.render("../views/products.ejs", { products }); // Render a new view for all products
+        })
+        .catch(error => {
+            console.error('Error fetching all products:', error);
+            res.status(500).send('Internal Server Error');
+        });
+}
+
 function getProductByCategory(req, res) {
     const category = req.params.category
     productService.getProductsByCategory(category)
@@ -16,7 +27,8 @@ function getProductByName(req, res) {
     const name = req.params.name
     productService.getProductsByName(name)
         .then(products => {
-            res.render("../views/product.ejs", { products, name });
+            const product = products[0]; // Access the first product in the array
+            res.render("../views/product.ejs", { product, name });
         })
         .catch(error => {
             console.error('Error fetching products:', error);
@@ -24,7 +36,24 @@ function getProductByName(req, res) {
         });
 }
 
+function getProductById(req,res){
+    const product_id = req.params.product_id
+    productService.getProductById(product_id)
+    .then(products => {
+        const product = products[0]; // Access the first product in the array
+        res.render("../views/product.ejs", { product, product_id });
+    })
+    .catch(error => {
+        console.error('Error fetching product:', error);
+        res.status(500).send('Internal Server Error');
+    });
+}
+
+
+
 module.exports = {
+    getAllProducts,
     getProductByCategory,
-    getProductByName
+    getProductByName,
+    getProductById
 }

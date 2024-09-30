@@ -5,6 +5,12 @@ body {
     /* Light background for contrast */
     color: #333;
 }
+.background{
+    background-color: #F9F9F9;
+    background-image: none;
+    padding: 10px 0; /* Padding to give space above and below products */
+    height: auto;
+}
 
 h2 {
     font-size: 2em;
@@ -13,7 +19,12 @@ h2 {
     text-align: center;
     margin-bottom: 1em;
 }
-
+.product-container {
+    margin-top: 60px;
+    max-width: 1800px; /* Set a max-width to contain the products */
+    margin: 20px auto; /* Center the container */
+    padding: 0 15px; /* Padding for small screens */
+}
 .product-list {
     list-style-type: none;
     padding: 0;
@@ -49,6 +60,14 @@ h2 {
 .product-item p {
     font-size: 1em;
     margin: 0.3em 0;
+}
+.product-item a {
+    text-decoration: none;
+    color: #6A3B3B;
+   
+}
+.card-product-img{
+    width: 250px;
 }
 
 .product-item .price {

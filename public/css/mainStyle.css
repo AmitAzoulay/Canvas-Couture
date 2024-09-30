@@ -3,7 +3,7 @@ body {
     font-family: 'Georgia', serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     color: #333;
 }
 
@@ -104,28 +104,18 @@ body {
     color: #d9534f;
 }
 
-
-
 .background {
     position: relative;
-    background-image: url('/img/feat-old-money-aesthetic.jpg');
+    background-image: url('/img/main-page-cover4.jpeg');
     /* Correct path */
     background-size: cover;
     background-position: center;
-    height: calc(100vh - 56px);
+    height: calc(100vh - 130px);
     /* Adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-}
-
-
-.background-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .btn-shop-now {

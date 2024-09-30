@@ -1,0 +1,57 @@
+:root {
+    --main-bg-color: #31231E; /* Dark Brownish */
+    --secondary-bg-color: #EBF3FE; /* Light Blue */
+    --text-color: #586F7C; /* Muted Blue-Grey */
+    --card-bg-color: #FBFAEE; /* Off-White */
+    --button-color: #710000; /* Bold Red */
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+}
+
+.navbar {
+    background-color: var(--button-color);
+}
+
+.navbar-brand, .nav-link {
+    color: #fff !important;
+}
+
+.container-fluid {
+    padding: 20px;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    margin-bottom: 20px;
+    border: none;
+}
+
+.card-header {
+    background-color: var(--secondary-bg-color);
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: var(--button-color);
+    border-color: var(--button-color);
+}
+
+.btn-primary:hover {
+    background-color: #9e0000; /* Slightly lighter red for hover */
+}
+
+.footer {
+    background-color: var(--secondary-bg-color);
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 40px;
+}
+
+.footer p {
+    color: var(--text-color);
+    margin: 0;
+}

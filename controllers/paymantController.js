@@ -15,7 +15,7 @@ function savePayment(req, res) {
 
     try {
         paymentService.savePayment(address, cardName, cardNumber, expiryDate, cvv, userId);
-        res.redirect("/");
+        res.redirect("/index");
     } catch (error) {
         console.error('Error saving payment:', error);
         res.status(500).send('Internal Server Error');

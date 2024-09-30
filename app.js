@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
-const express = require('express');
-var cors = require('cors');
+const express = require('express')
+var cors = require('cors')
 const session = require('express-session');
 require('dotenv').config();
 
-const userRoutes = require('./routes/userRoutes'); // From the main branch
 
-const server = express();
 
-// Use CORS with specific options
+const server = express()
+//server.use(cors())
 server.use(cors({
     origin: 'http://localhost:3000', // Adjust based on your frontend URL
     credentials: true, // Allow credentials (cookies)
@@ -28,20 +27,23 @@ server.use(session({
     cookie: { secure: false }
 }));
 
+
 // Define routes
 server.use('/products', require('./routes/productsRoutes'));
 server.use('/order', require('./routes/ordersRoutes'));
-server.use('/', userRoutes); // This route replaces the previous index route
+server.use('/', require('./routes/userRoutes')); // This route replaces the previous index route
+server.use('/', require('./routes/indexRoutes'));
+server.use('/payment', require('./routes/paymentRoutes'));
+server.use("/", require('./routes/profileRoutes'));
+server.use("/admin", require('./routes/adminRoutes'));
 server.use('/contact', require('./routes/contactRoutes'))
-server.use('/payment', require('./routes/paymantRoutes'))
 
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URI)
     .then(() => console.log('Connected to MongoDB!'))
     .catch(err => console.error('Database connection error:', err));
 
-// Listen on the specified port
-const port = process.env.PORT || process.env.port; // Use whichever is defined
-server.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-});
+
+server.listen(process.env.port, () => {
+    console.log(`server listening on port ${process.env.port}`)
+})
