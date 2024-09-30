@@ -32,7 +32,7 @@ server.use(session({
 server.use('/products', require('./routes/productsRoutes'));
 server.use('/order', require('./routes/ordersRoutes'));
 server.use('/', userRoutes); // This route replaces the previous index route
-
+server.use('/contact', require('./routes/contactRoutes'))
 server.use('/payment', require('./routes/paymantRoutes'))
 
 // Connect to MongoDB
