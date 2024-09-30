@@ -23,15 +23,17 @@ body {
 
 /* Heading styles */
 h2 {
+    font-family: "Spicy Rice", serif; 
     margin-bottom: 10px; /* Space below heading */
-    font-size: 28px; /* Larger font size */
-    color: #2d3748; /* Darker gray for heading */
+    font-size: 32px; /* Larger font size */
+    color: #6A3B3B;
+    font-weight: 800; 
 }
 
 /* Paragraph styles */
 p {
     margin-bottom: 30px; /* Space below paragraph */
-    color: #6c757d; /* Lighter gray for text */
+    color: #704646; /* Lighter gray for text */
 }
  
 .change-pass {
@@ -47,7 +49,7 @@ p {
 
 /* Input styles */
 .form-control {
-    border: 1px solid #abb1b8;
+    border: 1px solid #b18787;
     border-radius: 0; 
     padding: 15px; 
     margin-bottom: 20px; 
@@ -63,7 +65,7 @@ p {
 
 /* Focus styles */
 .form-control:focus {
-    border-color: #726f6f; 
+    border-color: #633c3c; 
     border-width: 1.5px;
     outline: none; 
     box-shadow: none;
@@ -71,8 +73,8 @@ p {
 
 /* Button styles */
 .btn {
-    background-color: #aca6a6;
-    color: white;
+    background-color: #9b7272;
+    color: whitesmoke;
     padding: 15px;
     border: none; 
     border-radius: 0; 
@@ -84,18 +86,19 @@ p {
 }
 
 .btn:hover {
-    background-color: #9e9b9b; 
+    background-color: #6A3B3B; 
+    color: whitesmoke;
 }
 
 /* Link styles */
 a {
-    color: #5f666d;
+    color: #973939;
     text-decoration: none; 
     font-weight: 550; 
 }
 
 a:hover {
-    color: #5f666d;
-    text-decoration: underline; /* Underline on hover */
+    color: #832626;
+    text-decoration: underline;
 }
 
