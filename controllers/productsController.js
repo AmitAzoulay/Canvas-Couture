@@ -1,5 +1,6 @@
 const productService = require("../services/productService")
 
+
 function getAllProducts(req, res) {
     productService.getAllProducts()
         .then(products => {
@@ -15,6 +16,7 @@ function getProductByCategory(req, res) {
     const category = req.params.category
     productService.getProductsByCategory(category)
         .then(products => {
+            console.log(products)
             res.render("../views/products.ejs", { products, category });
         })
         .catch(error => {

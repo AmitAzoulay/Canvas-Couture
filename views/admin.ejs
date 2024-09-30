@@ -47,7 +47,75 @@
                         <div class="card-header">Manage Products</div>
                         <div class="card-body">
                             <p>As an admin, you can add, update, or delete products in the store.</p>
-                            <a href="#" class="btn btn-primary">Add New Product</a>
+                            <a href="/admin/products" class="btn btn-primary">Add New Product</a>
+                            <form action="/admin/products/add" method="POST">
+                                <div class="form-group">
+                                    <label for="product_id">Product ID</label>
+                                    <input type="number" class="form-control" id="product_id" name="product_id" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Product Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="category">Category</label>
+                                    <input type="text" class="form-control" id="category" name="category" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="color">Color</label>
+                                    <input type="text" class="form-control" id="color" name="color" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="size">Size</label>
+                                    <input type="text" class="form-control" id="size" name="size" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">Price</label>
+                                    <input type="number" class="form-control" id="price" name="price" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="stock">Stock</label>
+                                    <input type="number" class="form-control" id="stock" name="stock" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="short_description">Short Description</label>
+                                    <textarea class="form-control" id="short_description" name="short_description" rows="3" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add Product</button>
+                            </form>
+                            
+                            <!-- Display list of products in a table -->
+                            <% if (typeof products !== 'undefined' && products.length > 0) { %>
+                                <table class="table-admin">
+                                    <thead>
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th>Name</th>
+                                            <th>Category</th>
+                                            <th>Color</th>
+                                            <th>Size</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% products.forEach(product => { %>
+                                        <tr>
+                                            <td><%= product.product_id %></td>
+                                            <td><%= product.name %></td>
+                                            <td><%= product.category %></td>
+                                            <td><%= product.color %></td>
+                                            <td><%= product.size %></td>
+                                            <td><%= product.price %></td>
+                                            <td><%= product.stock %></td>
+                                        </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                                <% } else { %>
+                                    <p>No products available.</p>
+                                <% } %>
+
                         </div>
                     </div>
                 </div>
@@ -84,39 +152,15 @@
 
     <!-- Bootstrap and jQuery Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    
     <!-- Custom JavaScript -->
     <script src="/js/quantity-selector.js"></script>
     <script src="/js/scroll-animation.js"></script>
     <script src="/js/search.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/sidebar.js"></script>
+    
 
-    <script>
-        // JavaScript to handle sidebar navigation and content switching
-        document.querySelectorAll('#sidebar .list-group-item').forEach(function(item) {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remove 'active' class from all sidebar items
-                document.querySelectorAll('#sidebar .list-group-item').forEach(function(el) {
-                    el.classList.remove('active');
-                });
-                
-                // Add 'active' class to the clicked sidebar item
-                this.classList.add('active');
-
-                // Hide all content sections
-                document.querySelectorAll('.content-section').forEach(function(section) {
-                    section.classList.add('d-none');
-                });
-                
-                // Show the corresponding section based on the data-target attribute
-                const target = this.getAttribute('data-target');
-                document.getElementById(`${target}-section`).classList.remove('d-none');
-            });
-        });
-    </script>
     
 </body>
 </html>
