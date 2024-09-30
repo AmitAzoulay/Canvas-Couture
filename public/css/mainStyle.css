@@ -17,12 +17,12 @@ body {
 .navbar-brand {
     font-weight: bold;
     font-size: 1.8rem;
-    color: #d9534f;
+    color: #6A3B3B;
     font-family: 'Georgia', serif;
 }
 
 .navbar-brand:hover {
-    color: #b52b27;
+    color: #442525;
 }
 
 .navbar-nav .nav-link {

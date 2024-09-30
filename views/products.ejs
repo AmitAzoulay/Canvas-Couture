@@ -66,25 +66,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript to handle search -->
-    <script>
-        // Select the form and input elements
-        const searchForm = document.getElementById('searchForm');
-        const searchInput = document.getElementById('searchInput');
-
-        // Add an event listener to handle the form submission
-        searchForm.addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission (page reload)
-
-            // Get the search term from the input field
-            const searchTerm = searchInput.value.trim();
-
-            if (searchTerm) {
-                // Redirect to /products/<searchTerm>
-                window.location.href = `/products/search/name/${encodeURIComponent(searchTerm)}`;
-            }
-        });
-    </script>
+    <!-- Custom JavaScript -->
+    <script src="/js/scroll-animation.js"></script>
+    <script src="/js/search.js"></script>
 </body>
 
 </html>
