@@ -1,57 +1,84 @@
-:root {
-    --main-bg-color: #31231E; /* Dark Brownish */
-    --secondary-bg-color: #EBF3FE; /* Light Blue */
-    --text-color: #586F7C; /* Muted Blue-Grey */
-    --card-bg-color: #FBFAEE; /* Off-White */
-    --button-color: #710000; /* Bold Red */
+
+/* Sidebar Styling */
+#sidebar {
+    background-color: #343a40;
+    min-height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    width: 100%;
 }
 
-body {
-    background-color: var(--main-bg-color);
-    color: var(--text-color);
-}
-
-.navbar {
-    background-color: var(--button-color);
-}
-
-.navbar-brand, .nav-link {
-    color: #fff !important;
-}
-
-.container-fluid {
-    padding: 20px;
-}
-
-.card {
-    background-color: var(--card-bg-color);
-    margin-bottom: 20px;
+#sidebar .list-group-item {
+    background-color: #343a40;
+    color: #fff;
     border: none;
+    padding: 15px 20px;
 }
 
-.card-header {
-    background-color: var(--secondary-bg-color);
-    color: var(--text-color);
+#sidebar .list-group-item:hover {
+    background-color: #17a2b8;
+    color: white;
+}
+
+#sidebar .list-group-item.active {
+    background-color: #17a2b8;
+    color: white;
     font-weight: bold;
 }
 
+/* Sidebar Visibility on Smaller Screens */
+@media (max-width: 768px) {
+    #sidebar {
+        display: none; /* Hidden by default on mobile */
+    }
+}
+
+@media (min-width: 768px) {
+    #sidebar {
+        display: block;
+        width: 250px;
+    }
+    
+    .col-lg-9, .col-md-8 {
+        margin-left: 250px;
+    }
+}
+
+/* Card Styling */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #17a2b8;
+    color: #fff;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+}
+
 .btn-primary {
-    background-color: var(--button-color);
-    border-color: var(--button-color);
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #9e0000; /* Slightly lighter red for hover */
+    background-color: #138496;
+    border-color: #138496;
 }
 
+/* Footer */
 .footer {
-    background-color: var(--secondary-bg-color);
-    text-align: center;
+    background-color: #343a40;
+    color: white;
     padding: 10px 0;
-    margin-top: 40px;
-}
-
-.footer p {
-    color: var(--text-color);
-    margin: 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }

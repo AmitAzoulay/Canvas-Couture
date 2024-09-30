@@ -12,9 +12,7 @@ node_modules/
                 <p>Color: <%= product.color %>
                 </p>
                 <p>Size: <%= product.size %>
-                </p>
-                <p>Gender: <%= product.gender %>
-                </p>
+                
                 <p>Price: $<%= product.price.toFixed(2) %>
                 </p>
                 <% if (product.stock> 0) { %>
