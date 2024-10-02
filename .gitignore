@@ -1,27 +1,2 @@
 node_modules/
 .env
-"../public/img/20231012_124941.jpg"
-    <!--<% products.forEach(product=> { %>
-            <div class="product-card">
-                <img src="<%= product.img %>" alt="<%= product.name %>" />
-                <h2>
-                    <%= product.name %>
-                </h2>
-                <p>Category: <%= product.category %>
-                </p>
-                <p>Color: <%= product.color %>
-                </p>
-                <p>Size: <%= product.size %>
-                
-                <p>Price: $<%= product.price.toFixed(2) %>
-                </p>
-                <% if (product.stock> 0) { %>
-                    <button class="stock-btn">
-                        <i class="fa fa-plus"></i> 
-                    </button>
-                    <% } else { %>
-                        <p class="out-of-stock">Out of stock</p>
-                        <% } %>
-            </div>
-            <% }) %> 
-        -->

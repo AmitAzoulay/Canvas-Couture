@@ -14,5 +14,11 @@ router.get('/products', isAdmin, adminController.getAllProducts);
 
 // POST route to add a new product
 router.post('/products/add', adminController.addProduct); // Add new product
+// Route to edit a product
+router.put('/products/edit', adminController.editProduct);
+
+
+// Route to delete a product
+router.post('/products/delete', adminController.deleteProduct);
 
 module.exports = router;
