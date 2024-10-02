@@ -23,9 +23,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/aboutus">About Us</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/dashboard" id="adminDashboard">Admin Dashboard</a>
-                </li>
+                <!-- Conditionally show the admin dashboard link if the user is an admin -->
+                <% if (session && session.isAdmin) {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard" id="adminDashboard">Admin Dashboard</a>
+                    </li>
+                <% } %>
             </ul>
 
            
