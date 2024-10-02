@@ -1,9 +1,9 @@
-const productService = require("../services/productService")
+const productService = require("../services/productService");
 
 function getAllProducts(req, res) {
     productService.getAllProducts()
         .then(products => {
-            res.render("../views/products.ejs", { products }); // Render a new view for all products
+            res.render("../views/products.ejs", { products });
         })
         .catch(error => {
             console.error('Error fetching all products:', error);
@@ -12,7 +12,7 @@ function getAllProducts(req, res) {
 }
 
 function getProductByCategory(req, res) {
-    const category = req.params.category
+    const category = req.params.category;
     productService.getProductsByCategory(category)
         .then(products => {
             res.render("../views/products.ejs", { products, category });
@@ -24,10 +24,10 @@ function getProductByCategory(req, res) {
 }
 
 function getProductByName(req, res) {
-    const name = req.params.name
+    const name = req.params.name;
     productService.getProductsByName(name)
         .then(products => {
-            const product = products[0]; // Access the first product in the array
+            const product = products[0];
             res.render("../views/product.ejs", { product, name });
         })
         .catch(error => {
@@ -36,24 +36,36 @@ function getProductByName(req, res) {
         });
 }
 
-function getProductById(req,res){
-    const product_id = req.params.product_id
+function getProductById(req, res) {
+    const product_id = req.params.product_id;
     productService.getProductById(product_id)
-    .then(products => {
-        const product = products[0]; // Access the first product in the array
-        res.render("../views/product.ejs", { product, product_id });
-    })
-    .catch(error => {
-        console.error('Error fetching product:', error);
-        res.status(500).send('Internal Server Error');
-    });
+        .then(products => {
+            const product = products[0];
+            res.render("../views/product.ejs", { product, product_id });
+        })
+        .catch(error => {
+            console.error('Error fetching product:', error);
+            res.status(500).send('Internal Server Error');
+        });
 }
 
-
+// New function for live search
+function liveSearch(req, res) {
+    const searchTerm = req.params.searchTerm.toLowerCase();
+    productService.getProductsByNameStartsWith(searchTerm)
+        .then(products => {
+            res.json({ products });
+        })
+        .catch(error => {
+            console.error('Error during live search:', error);
+            res.status(500).send('Internal Server Error');
+        });
+}
 
 module.exports = {
     getAllProducts,
     getProductByCategory,
     getProductByName,
-    getProductById
-}
+    getProductById,
+    liveSearch
+};

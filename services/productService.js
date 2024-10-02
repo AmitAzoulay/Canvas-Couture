@@ -1,23 +1,32 @@
-const Products = require("../models/product")
+const Products = require("../models/product");
 
 function getAllProducts() {
-    return Products.find(); // This fetches all products from the database
+    return Products.find();
 }
 
 function getProductsByCategory(category) {
-    return Products.find({ category }); // Assuming your product schema has a 'category' field
+    return Products.find({ category });
 }
 
 function getProductsByName(name) {
-    return Products.find({ name }); 
+    return Products.find({ name });
 }
 
-function getProductById(product_id){
+function getProductById(product_id) {
     return Products.find({ product_id });
 }
+
+// New function for prefix searches
+function getProductsByNameStartsWith(searchTerm) {
+    return Products.find({
+        name: { $regex: `^${searchTerm}`, $options: 'i' } // Matches names starting with searchTerm
+    });
+}
+
 module.exports = {
     getAllProducts,
     getProductsByCategory,
     getProductsByName,
-    getProductById
+    getProductById,
+    getProductsByNameStartsWith
 };
