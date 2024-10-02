@@ -55,19 +55,23 @@ async function editProduct(req, res) {
     }
 }
 
-
 // Delete product controller
 async function deleteProduct(req, res) {
     const { product_id } = req.body;
 
     try {
+        // Call the service to delete the product
         await adminService.deleteProduct(product_id);
-        res.redirect('/admin/products');
+        // Send a success response
+        res.json({ success: true });  
     } catch (error) {
         console.error("Error deleting product:", error);
-        res.status(500).send('Error deleting product');
+        // Send an error response
+        res.status(500).json({ success: false, message: 'Error deleting product' }); 
     }
 }
+
+
 module.exports = {
     getAllProducts,
     addProduct,

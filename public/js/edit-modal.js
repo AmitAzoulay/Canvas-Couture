@@ -85,9 +85,3 @@ document.getElementById('editProductForm').addEventListener('submit', async func
         alert('Error updating product');
     }
 });
-
-
-// Set Product ID for Delete Modal
-function setDeleteProductId(productId) {
-    document.getElementById('delete_product_id').value = productId;
-}

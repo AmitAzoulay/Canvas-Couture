@@ -37,15 +37,16 @@ async function updateProduct(product_id, updatedFields) {
     }
 }
 
-
-// Delete a product
+// Delete a product service 
 async function deleteProduct(productId) {
     try {
+        // Delete the product from the database using product_id
         await Product.findOneAndDelete({ product_id: productId });
     } catch (error) {
         throw new Error('Error deleting product');
     }
 }
+
 module.exports = {
     getAllProducts,
     addProduct,

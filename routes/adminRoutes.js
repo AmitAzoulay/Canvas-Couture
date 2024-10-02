@@ -19,6 +19,7 @@ router.put('/products/edit', adminController.editProduct);
 
 
 // Route to delete a product
-router.post('/products/delete', adminController.deleteProduct);
+router.delete('/products/delete', adminController.deleteProduct);
+
 
 module.exports = router;
