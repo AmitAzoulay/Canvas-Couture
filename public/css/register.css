@@ -22,19 +22,21 @@ body {
 
 /* Heading styles */
 h2 {
+    font-family: "Spicy Rice", serif;
     margin-bottom: 20px;
     font-size: 28px; 
-    color: #2d3748; 
+    color: #6A3B3B; 
+    font-weight: 800;
 }
 
 p {
     margin-bottom: 30px; 
-    color: #6c757d; 
+    color: #704646; 
 }
 
 /* Input styles */
 .form-control {
-    border: 1px solid #abb1b8; 
+    border: 1px solid #b18787;
     border-radius: 0; 
     padding: 15px; 
     margin-bottom: 20px; 
@@ -53,8 +55,8 @@ p {
 
 /* Button styles */
 .btn-primary {
-    background-color: #aca6a6; 
-    color: white;
+    background-color: #9b7272; 
+    color: whitesmoke;
     padding: 15px;
     border: none; 
     border-radius: 0; 
@@ -66,31 +68,32 @@ p {
 }
 
 .btn-primary:hover {
-    background-color: #aca6a6; 
+    background-color: #6A3B3B; 
+    color: whitesmoke;
 }
 
 /* Keep the same color when active (clicked) */
 .btn-primary:active {
-    background-color: #aca6a6; 
-    border-color: #aca6a6; 
+    background-color: #6A3B3B; 
+    border-color: #6A3B3B; 
 }
 
 /* Prevent focus styles from changing the button color */
 .btn-primary:focus {
-    background-color: #aca6a6;
+    background-color: #6A3B3B;
     outline: none; 
     box-shadow: none; 
 }
 
 /* Link styles */
 a {
-    color: #5f666d; 
+    color: #973939; 
     text-decoration: none; 
     font-weight: 550;
 }
 
 a:hover {
-    color: #5f666d;
+    color: #832626;
     text-decoration: underline; 
 }
 
