@@ -1,0 +1,91 @@
+body {
+    font-family: 'Georgia', serif;
+    /* Elegant font */
+    background-color: #f9f9f9;
+    /* Light background */
+    color: #333;
+    /* Dark text */
+    margin: 20px;
+}
+
+h1 {
+    color: #8B0000;
+    /* Dark red color */
+    text-align: center;
+    /* Centered heading */
+    text-transform: uppercase;
+    /* Uppercase for heading */
+    font-size: 2.5em;
+    /* Large main heading */
+    margin-bottom: 20px;
+    /* Space below heading */
+}
+
+.charts-container {
+    display: flex;
+    /* Use flexbox */
+    justify-content: space-between;
+    /* Space between the items */
+    margin-top: 40px;
+    /* Space above the charts */
+}
+
+.chart-container {
+    width: 48%;
+    /* Each container takes 48% of the width */
+}
+
+.chart {
+    width: 100%;
+    /* Chart takes full width of the container */
+    height: 300px;
+    /* Fixed height for consistency */
+}
+
+.sales-category-legend {
+    margin-top: 10px;
+    /* Space above legend */
+    display: flex;
+    /* Flexbox for legend */
+    flex-wrap: wrap;
+    /* Allow wrapping of legend items */
+    justify-content: center;
+    /* Center the legend */
+}
+
+.legend-item {
+    margin: 0 10px;
+    /* Space between items */
+    display: flex;
+    /* Flexbox for each item */
+    align-items: center;
+    /* Center items vertically */
+}
+
+.legend-color {
+    width: 20px;
+    /* Square for color */
+    height: 20px;
+    /* Square for color */
+    margin-right: 5px;
+    /* Space between square and text */
+}
+
+.label {
+    font-size: 14px;
+    /* Slightly larger label */
+    fill: #000;
+    /* Black labels */
+    font-weight: bold;
+    /* Bold labels */
+}
+
+/* Updated style for the title */
+h1 {
+    font-size: 2.5em;
+    color: #c72c4d;
+    /* Italian wine red */
+    text-align: center;
+    margin-bottom: 40px;
+    /* Increased space below title for separation */
+}
