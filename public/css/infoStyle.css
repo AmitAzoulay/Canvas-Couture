@@ -89,3 +89,75 @@ h1 {
     margin-bottom: 40px;
     /* Increased space below title for separation */
 }
+
+/* Updated style for the title */
+h1 {
+    font-size: 2.5em;
+    color: #c72c4d;
+    /* Italian wine red */
+    text-align: center;
+    margin-bottom: 40px;
+    /* Increased space below title for separation */
+}
+
+h2 {
+    font-size: 2em;
+    color: #333;
+    margin-top: 40px;
+    /* Space above Contact Us title */
+    text-align: center;
+}
+
+/* Styles for the contact form */
+form {
+    max-width: 600px;
+    /* Limit the width of the form */
+    margin: 0 auto;
+    /* Center the form */
+    padding: 20px;
+    background-color: #f9f9f9;
+    /* Light background for form */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    /* Stack labels */
+    margin-bottom: 8px;
+    font-weight: bold;
+    /* Make labels bold */
+    color: #555;
+}
+
+input[type="email"],
+textarea {
+    width: 100%;
+    /* Full width for inputs */
+    padding: 10px;
+    margin-bottom: 20px;
+    /* Space below inputs */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* Rounded corners */
+    box-sizing: border-box;
+    /* Include padding in width */
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #c72c4d;
+    /* Italian wine red */
+    color: white;
+    /* White text */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #a41e38;
+    /* Darker red on hover */
+}

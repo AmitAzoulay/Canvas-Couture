@@ -3,22 +3,11 @@ const express = require('express')
 var cors = require('cors')
 const session = require('express-session');
 require('dotenv').config();
+const { injectSession } = require('./middleware/inject-session-middleware.js'); // Import the session middleware
 
 
 
 const server = express()
-//server.use(cors())
-server.use(cors({
-    origin: 'http://localhost:3000', // Adjust based on your frontend URL
-    credentials: true, // Allow credentials (cookies)
-}));
-
-server.use(express.static('public'));
-server.use(express.json());
-server.use(express.urlencoded({ extended: true }));
-
-server.set("view engine", "ejs");
-
 // Set up session management
 server.use(session({
     secret: process.env.SESSION_SECRET,
@@ -26,6 +15,19 @@ server.use(session({
     saveUninitialized: true,
     cookie: { secure: false }
 }));
+server.use(cors({
+    origin: 'http://localhost:3000', // Adjust based on your frontend URL
+    credentials: true, // Allow credentials (cookies)
+}));
+server.use(injectSession);
+server.use(express.static('public'));
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+// Use the injectSession middleware globally
+
+server.set("view engine", "ejs");
+
+
 
 
 // Define routes

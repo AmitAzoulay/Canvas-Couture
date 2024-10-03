@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1>Store Statistics</h1>
+    <h1>Store Statistics & Contact us</h1>
     <div class="charts-container">
         <div class="chart-container">
             <h2>Top 5 Expensive Orders</h2>
@@ -103,6 +103,17 @@
 
         // Note: Removed the pie chart labels to avoid duplicating category names on the chart.
     </script>
+
+
+    <h2>Contact Us</h2>
+    <form action="/contact/send" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+    <script src="/js/contact.js"></script>
 </body>
 
 </html>

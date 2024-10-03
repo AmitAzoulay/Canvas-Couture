@@ -15,6 +15,8 @@ function getProductsByName(name) {
 function getProductById(product_id){
     return Products.find({ product_id });
 }
+
+
 module.exports = {
     getAllProducts,
     getProductsByCategory,
