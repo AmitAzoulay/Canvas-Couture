@@ -1,95 +1,52 @@
-document.addEventListener('DOMContentLoaded', () => {
+// filter.js
+
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById('searchInput');
+    const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
+    const productList = document.getElementById('productList');
     const applyFiltersButton = document.getElementById('applyFilters');
 
-    if (applyFiltersButton) {
-        applyFiltersButton.addEventListener('click', function() {
-            console.log('Apply Filters button clicked');
+    function applyFilters() {
+        const selectedCategories = Array.from(filterCheckboxes)
+            .filter(checkbox => checkbox.checked && checkbox.dataset.type === 'category')
+            .map(checkbox => checkbox.value);
+        const selectedColors = Array.from(filterCheckboxes)
+            .filter(checkbox => checkbox.checked && checkbox.dataset.type === 'color')
+            .map(checkbox => checkbox.value);
+        const selectedSizes = Array.from(filterCheckboxes)
+            .filter(checkbox => checkbox.checked && checkbox.dataset.type === 'size')
+            .map(checkbox => checkbox.value);
+        const selectedPriceRanges = Array.from(filterCheckboxes)
+            .filter(checkbox => checkbox.checked && checkbox.dataset.type === 'price')
+            .map(checkbox => checkbox.value);
 
-            // Get selected categories
-            const selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(cb => cb.value);
-            console.log('Selected Categories:', selectedCategories);
+        const productItems = productList.children;
 
-            // Get selected sizes
-            const selectedSizes = Array.from(document.querySelectorAll('input[name="size"]:checked')).map(cb => cb.value);
-            console.log('Selected Sizes:', selectedSizes);
+        for (let item of productItems) {
+            const category = item.getAttribute('data-category');
+            const color = item.getAttribute('data-color');
+            const size = item.getAttribute('data-size');
+            const price = parseFloat(item.getAttribute('data-price'));
 
-            // Get price range
-            const minPrice = document.getElementById('minPrice').value;
-            const maxPrice = document.getElementById('maxPrice').value;
-            console.log('Min Price:', minPrice, 'Max Price:', maxPrice);
+            const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(category);
+            const matchesColor = selectedColors.length === 0 || selectedColors.includes(color);
+            const matchesSize = selectedSizes.length === 0 || selectedSizes.includes(size);
+            const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
+                const [min, max] = range.split('-').map(Number);
+                return price >= min && price <= max;
+            });
 
-            // Construct query parameters
-            const queryParams = new URLSearchParams();
-            if (selectedCategories.length > 0) {
-                queryParams.append('categories', selectedCategories.join(','));
-            }
-            if (selectedSizes.length > 0) {
-                queryParams.append('sizes', selectedSizes.join(','));
-            }
-            if (minPrice) {
-                queryParams.append('minPrice', minPrice);
-            }
-            if (maxPrice) {
-                queryParams.append('maxPrice', maxPrice);
-            }
-
-            // Fetch filtered products
-            fetch(`/products/search/filtered?${queryParams}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Network response was not ok: ${response.statusText}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const productList = document.getElementById('productList');
-                    productList.innerHTML = ''; // Clear current products
-
-                    if (data.products.length === 0) {
-                        productList.innerHTML = '<p>No products found.</p>'; // Display message if no products
-                    } else {
-                        data.products.forEach(product => {
-                            const li = document.createElement('li');
-                            li.className = 'product-item';
-                            li.innerHTML = `
-                                <a href="/products/search/product/${product.product_id}" class="product-link">
-                                    <p><img src="/img/${product.name}.png" alt="${product.name}" class="card-product-img" /></p>
-                                    <h3>${product.name}</h3>
-                                </a>
-                                <p>Price: $${product.price}</p>
-                                <p>Color: ${product.color}</p>
-                                <p>Size: ${product.size}</p>
-                                <p>Gender: ${product.gender}</p>
-                                <p>Category: ${product.category}</p>
-                            `;
-                            productList.appendChild(li);
-                        });
-                    }
-
-                    // Close the modal
-                    const modalElement = document.getElementById('filterModal');
-                    const modal = bootstrap.Modal.getInstance(modalElement);
-                    if (modal) {
-                        modal.hide(); // Close the modal
-                        console.log('Modal should be closed now.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching filtered products:', error);
-                    alert('There was an error fetching products. Please try again.');
-                });
-        });
-    } else {
-        console.error('Apply Filters button not found');
+            item.style.display = (matchesCategory && matchesColor && matchesSize && matchesPrice) ? 'block' : 'none';
+        }
     }
 
-    // Reset modal inputs when the modal is closed
-    const modalElement = document.getElementById('filterModal');
-    modalElement.addEventListener('hidden.bs.modal', function () {
-        // Reset your filter inputs
-        document.querySelectorAll('input[name="category"]:checked').forEach(cb => cb.checked = false);
-        document.querySelectorAll('input[name="size"]:checked').forEach(cb => cb.checked = false);
-        document.getElementById('minPrice').value = '';
-        document.getElementById('maxPrice').value = '';
+    searchInput.addEventListener('input', function () {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        Array.from(productList.children).forEach(item => {
+            const title = item.querySelector('.product-title').innerText.toLowerCase();
+            item.style.display = title.includes(searchTerm) ? 'block' : 'none';
+        });
     });
+
+    applyFiltersButton.addEventListener('click', applyFilters);
 });
