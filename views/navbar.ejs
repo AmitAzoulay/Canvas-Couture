@@ -30,7 +30,7 @@
             </ul>
 
             <form class="d-flex" id="searchForm">
-                <button id="filterButton" class="btn btn-secondary me-2" type="button" data-bs-toggle="modal" data-bs-target="#filterModal">Filters</button>
+                <button id="filterButton" class="btn filter-button" type="button" data-bs-toggle="modal" data-bs-target="#filterModal">Filters</button>
                 <input class="form-control me-2" type="text" id="searchInput" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Clear Search</button>
             </form>
@@ -61,35 +61,71 @@
             <div class="modal-body">
                 <form id="filterForm">
                     <h5>Category</h5>
-                    <div>
-                        <input type="checkbox" name="category" value="Tops"> Tops<br>
-                        <input type="checkbox" name="category" value="Bottoms"> Bottoms<br>
-                        <input type="checkbox" name="category" value="Dresses"> Dresses<br>
-                        <input type="checkbox" name="category" value="Outerwear"> Outerwear<br>
-                        <input type="checkbox" name="category" value="Footwear"> Footwear<br>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="category" value="Tops" id="categoryTops">
+                        <label class="form-check-label" for="categoryTops">Tops</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="category" value="Bottoms" id="categoryBottoms">
+                        <label class="form-check-label" for="categoryBottoms">Bottoms</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="category" value="Dresses" id="categoryDresses">
+                        <label class="form-check-label" for="categoryDresses">Dresses</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="category" value="Outerwear" id="categoryOuterwear">
+                        <label class="form-check-label" for="categoryOuterwear">Outerwear</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="category" value="Footwear" id="categoryFootwear">
+                        <label class="form-check-label" for="categoryFootwear">Footwear</label>
                     </div>
 
                     <h5>Color</h5>
-                    <div>
-                        <input type="checkbox" name="color" value="Red"> Red<br>
-                        <input type="checkbox" name="color" value="Blue"> Blue<br>
-                        <!-- Add more colors as needed -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="color" value="Red" id="colorRed">
+                        <label class="form-check-label" for="colorRed">Red</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="color" value="Blue" id="colorBlue">
+                        <label class="form-check-label" for="colorBlue">Blue</label>
                     </div>
 
                     <h5>Size</h5>
-                    <div>
-                        <input type="checkbox" name="size" value="S"> S<br>
-                        <input type="checkbox" name="size" value="M"> M<br>
-                        <input type="checkbox" name="size" value="L"> L<br>
-                        <input type="checkbox" name="size" value="XL"> XL<br>
-                        <input type="checkbox" name="size" value="One Size"> One Size<br>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="size" value="S" id="sizeS">
+                        <label class="form-check-label" for="sizeS">S</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="size" value="M" id="sizeM">
+                        <label class="form-check-label" for="sizeM">M</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="size" value="L" id="sizeL">
+                        <label class="form-check-label" for="sizeL">L</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="size" value="XL" id="sizeXL">
+                        <label class="form-check-label" for="sizeXL">XL</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="size" value="One Size" id="sizeOneSize">
+                        <label class="form-check-label" for="sizeOneSize">One Size</label>
                     </div>
 
                     <h5>Price</h5>
-                    <div>
-                        <input type="checkbox" name="price" value="0-50"> $0 - $50<br>
-                        <input type="checkbox" name="price" value="51-100"> $51 - $100<br>
-                        <input type="checkbox" name="price" value="101-200"> $101 - $200<br>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="price" value="0-50" id="price0-50">
+                        <label class="form-check-label" for="price0-50">$0 - $50</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="price" value="51-100" id="price51-100">
+                        <label class="form-check-label" for="price51-100">$51 - $100</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="price" value="101-200" id="price101-200">
+                        <label class="form-check-label" for="price101-200">$101 - $200</label>
                     </div>
 
                     <button type="button" id="applyFilter" class="btn btn-primary">Apply Filters</button>
