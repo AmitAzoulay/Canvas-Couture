@@ -10,11 +10,10 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="shopNowDropdown">
                         <li><a class="dropdown-item" href="/products/search/all">All Products</a></li>
-                        <li><a class="dropdown-item" href="/products/search/category/Shirts">Shirts</a></li>
-                        <li><a class="dropdown-item" href="/products/search/category/Outerwear">Outerwear</a></li>
-                        <li><a class="dropdown-item" href="/products/search/category/Dresses">Dresses</a></li>
-                        <li><a class="dropdown-item" href="/products/search/category/Bottoms">Bottoms</a></li>
                         <li><a class="dropdown-item" href="/products/search/category/Tops">Tops</a></li>
+                        <li><a class="dropdown-item" href="/products/search/category/Bottoms">Bottoms</a></li>
+                        <li><a class="dropdown-item" href="/products/search/category/Dresses">Dresses</a></li>
+                        <li><a class="dropdown-item" href="/products/search/category/Outerwear">Outerwear</a></li>
                         <li><a class="dropdown-item" href="/products/search/category/Footwear">Footwear</a></li>
                     </ul>
                 </li>
@@ -24,9 +23,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/aboutus">About Us</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/dashboard" id="adminDashboard">Admin Dashboard</a>
-                </li>
+                <!-- Conditionally show the admin dashboard link if the user is an admin -->
+                <% if (session && session.isAdmin) {%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard" id="adminDashboard">Admin Dashboard</a>
+                    </li>
+                <% } %>
             </ul>
 
             <form class="d-flex" id="searchForm">

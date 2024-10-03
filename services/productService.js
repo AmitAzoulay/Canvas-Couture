@@ -20,12 +20,15 @@ function getProductById(product_id) {
     return Products.find({ product_id }).exec(); // Ensures it returns a promise
 }
 
+<<<<<<< HEAD
 // New function for prefix searches
 function getProductsByNameStartsWith(searchTerm) {
     return Products.find({
         name: { $regex: `^${searchTerm}`, $options: 'i' } // Matches names starting with searchTerm
     }).exec(); // Ensures it returns a promise
 }
+=======
+>>>>>>> ea9759d0659af9559774e6fccd7aaa797a0f8169
 
 module.exports = {
     getAllProducts,
