@@ -24,6 +24,7 @@ async function removeCartItem(req, res) {
 }
 
 async function addToCartById(req, res) {
+    console.log(req.params.productId)
     const productId = req.params.productId;
     const uid = req.session.userId
     try {
