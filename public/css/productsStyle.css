@@ -129,3 +129,24 @@ h2 {
 .btn-back:hover {
     background-color: #c93d3d;
 }
+
+.btn-outline-success {
+    padding: 0.25rem 0.5rem; /* Adjust padding */
+    font-size: 0.8rem; /* Adjust font size */
+    height: auto; /* Let the height adjust automatically */
+    min-width: 50px; /* Minimum width */
+}
+
+.btn-outline-success:focus,
+.btn-outline-success:active {
+    background-color: #e0e0e0 !important; /* Desired background color on focus/active */
+    border-color: #c93d3d !important; /* Change border color */
+    color: #000 !important; /* Text color on focus/active */
+    box-shadow: none; /* Remove default box shadow */
+}
+
+/* Override the active state to avoid turning green */
+.btn-outline-success:active {
+    background-color: #c93d3d !important; /* Change this to your desired color */
+    color: white !important; /* Change text color if needed */
+}
