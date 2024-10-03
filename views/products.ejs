@@ -50,7 +50,12 @@
     <script>
         const searchInput = document.getElementById('searchInput');
         const productList = document.getElementById('productList');
-
+        const noProductsMessage = document.createElement('div'); // Create a div for the message
+        noProductsMessage.className = 'no-products-message'; // Add a class for styling
+        noProductsMessage.style.display = 'none'; // Initially hidden
+        noProductsMessage.textContent = 'Product not found'; // Message text
+        productList.parentNode.insertBefore(noProductsMessage, productList); // Insert the message above the product list
+    
         // Function to fetch all products
         function fetchAllProducts() {
             fetch('/products/search/all') // This should return the JSON data
@@ -62,63 +67,77 @@
                 })
                 .then(data => {
                     productList.innerHTML = ''; // Clear the current product list
-                    data.products.forEach(product => {
-                        const li = document.createElement('li');
-                        li.className = 'product-item';
-                        li.innerHTML = `
-                            <a href="/products/search/product/${product.product_id}" class="product-link">
-                                <p><img src="/img/${product.name}.png" alt="${product.name}" class="card-product-img" /></p>
-                                <h3>${product.name}</h3>
-                            </a>
-                            <p>Price: $${product.price}</p>
-                            <p>Color: ${product.color}</p>
-                            <p>Size: ${product.size}</p>
-                            <p>Gender: ${product.gender}</p>
-                            <p>Category: ${product.category}</p>
-                        `;
-                        productList.appendChild(li);
-                    });
+                    noProductsMessage.style.display = 'none'; // Hide the message
+    
+                    if (data.products.length === 0) {
+                        noProductsMessage.style.display = 'block'; // Show message if no products found
+                    } else {
+                        data.products.forEach(product => {
+                            const li = document.createElement('li');
+                            li.className = 'product-item';
+                            li.innerHTML = `
+                                <a href="/products/search/product/${product.product_id}" class="product-link">
+                                    <p><img src="/img/${product.name}.png" alt="${product.name}" class="card-product-img" /></p>
+                                    <h3>${product.name}</h3>
+                                </a>
+                                <p>Price: $${product.price}</p>
+                                <p>Color: ${product.color}</p>
+                                <p>Size: ${product.size}</p>
+                                <p>Gender: ${product.gender}</p>
+                                <p>Category: ${product.category}</p>
+                            `;
+                            productList.appendChild(li);
+                        });
+                    }
                 })
                 .catch(error => console.error('Error fetching products:', error));
         }
-
+    
         // Add event listener for input changes
         searchInput.addEventListener('input', function() {
-    const searchTerm = searchInput.value.trim();
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm) {
+                fetch(`/products/search/live/${encodeURIComponent(searchTerm)}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Network response was not ok: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        productList.innerHTML = ''; // Clear the current product list
+                        noProductsMessage.style.display = 'none'; // Hide the message
     
-    if (searchTerm) {
-        fetch(`/products/search/live/${encodeURIComponent(searchTerm)}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Network response was not ok: ${response.statusText}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                productList.innerHTML = ''; // Clear the current product list
-                data.products.forEach(product => {
-                    const li = document.createElement('li');
-                    li.className = 'product-item';
-                    li.innerHTML = `
-                        <a href="/products/search/product/${product.product_id}" class="product-link">
-                            <p><img src="/img/${product.name}.png" alt="${product.name}" class="card-product-img" /></p>
-                            <h3>${product.name}</h3>
-                        </a>
-                        <p>Price: $${product.price}</p>
-                        <p>Color: ${product.color}</p>
-                        <p>Size: ${product.size}</p>
-                        <p>Gender: ${product.gender}</p>
-                        <p>Category: ${product.category}</p>
-                    `;
-                    productList.appendChild(li);
-                });
-            })
-            .catch(error => console.error('Error during live search:', error));
-    } else {
-        // Fetch all products if input is empty
-        fetchAllProducts();
-    }
-});
+                        if (data.products.length === 0) {
+                            noProductsMessage.style.display = 'block'; // Show message if no products found
+                        } else {
+                            data.products.forEach(product => {
+                                const li = document.createElement('li');
+                                li.className = 'product-item';
+                                li.innerHTML = `
+                                    <a href="/products/search/product/${product.product_id}" class="product-link">
+                                        <p><img src="/img/${product.name}.png" alt="${product.name}" class="card-product-img" /></p>
+                                        <h3>${product.name}</h3>
+                                    </a>
+                                    <p>Price: $${product.price}</p>
+                                    <p>Color: ${product.color}</p>
+                                    <p>Size: ${product.size}</p>
+                                    <p>Gender: ${product.gender}</p>
+                                    <p>Category: ${product.category}</p>
+                                `;
+                                productList.appendChild(li);
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error during live search:', error));
+            } else {
+                // If the input is empty, fetch all products
+                fetchAllProducts(); // This will update the product list with all products
+            }
+        });
+    
+        // Fetch all products on initial load
+        fetchAllProducts(); // Fetch all products on initial load
     </script>
 </body>
 
