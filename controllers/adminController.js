@@ -71,10 +71,68 @@ async function deleteProduct(req, res) {
     }
 }
 
+async function createNewUser(req, res){
+    try {
+        const { firstName, lastName, email, phoneNumber, password, isAdmin } = req.body;
+        await userService.createUser({
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            password,
+            isAdmin: isAdmin === 'on',  // Handle checkbox as boolean
+        });
+        res.redirect('/admin/users');  // Redirect after success
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+};
+// Fetch all users
+async function getAllUsers(req, res) {
+    try {
+        const users = await userService.getAllUsers();
+        res.json(users); // Send users as JSON response
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to retrieve users.' });
+    }
+}
+
+// Update user
+async function updateUser(req, res) {
+    const { userId, firstName, lastName, phoneNumber, email, isAdmin } = req.body;
+    try {
+        const updatedUser = await userService.updateUser({
+            userId,
+            firstName,
+            lastName,
+            phoneNumber,
+            email,
+            isAdmin: isAdmin === 'on' // Checkbox handling
+        });
+        res.json({ success: true, user: updatedUser });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to update user.' });
+    }
+}
+
+// Delete user
+async function deleteUser(req, res) {
+    const { userId } = req.body;
+    try {
+        await userService.deleteUser(userId);
+        res.json({ success: true });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete user.' });
+    }
+}
 
 module.exports = {
     getAllProducts,
     addProduct,
     editProduct,
-    deleteProduct
+    deleteProduct,
+    createNewUser,
+    getAllUsers,
+    updateUser,
+    deleteUser
 };

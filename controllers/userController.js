@@ -29,8 +29,21 @@ async function loginUser(req, res) {
  */
 async function registerUser(req, res) {
     try {
-        await userService.register(req.body);
-        res.redirect("/login"); // Redirect to login page after successful registration
+        // Ensure that the isAdmin checkbox is handled correctly
+        const userData = {
+            ...req.body,
+            // Use the correct checkbox ID to check if it's selected (true/false)
+            isAdmin: req.body.isAdminCheckbox === 'on' // 'on' means the checkbox was checked
+        };
+        await userService.register(userData);
+        // Check if the request came from the admin dashboard
+        if (req.url === '/admin/newUser') {
+            // Stay on the admin page or show a success message
+            res.render('admin', { success: 'User created successfully!' });
+        } else {
+            // Redirect regular users to the login page after registration
+            res.redirect("/login");
+        }
     } catch (error) {
         res.status(400).render("register", { error: error.message }); // Render register view with error
     }

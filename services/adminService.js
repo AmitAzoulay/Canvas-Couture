@@ -1,4 +1,22 @@
 const Product = require("../models/product");
+const User = require('../models/user'); // Assuming you have a User model
+
+async function createUser(userData) {
+    const { firstName, lastName, email, phoneNumber, password, isAdmin } = userData;
+
+    // Hash the password and create the user
+    const hashedPassword = await hashPassword(password); // Assuming you have a hash function
+    const newUser = new User({
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        password: hashedPassword,
+        isAdmin,  // Assign admin status
+    });
+
+    await newUser.save();
+};
 
 // Add a new product
 async function addProduct(productData) {
@@ -46,10 +64,36 @@ async function deleteProduct(productId) {
         throw new Error('Error deleting product');
     }
 }
+async function getAllUsers() {
+    return await User.find(); // Retrieve all users
+}
 
+async function updateUser(userData) {
+    const { userId, firstName, lastName, phoneNumber, email, isAdmin } = userData;
+    const user = await User.findById(userId);
+    if (!user) throw new Error("User not found");
+
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.phoneNumber = phoneNumber;
+    user.email = email;
+    user.isAdmin = isAdmin;
+
+    await user.save();
+    return user;
+}
+
+async function deleteUser(userId) {
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) throw new Error("User not found");
+}
 module.exports = {
     getAllProducts,
     addProduct,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    createUser,
+    getAllUsers,
+    updateUser,
+    deleteUser
 };

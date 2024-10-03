@@ -2,6 +2,8 @@ const express = require('express');
 const { isAdmin } = require('../middleware/isAdminMiddleware');
 const router = express.Router();
 const adminController = require('../controllers/adminController')
+const userController = require('../controllers/userController')
+
 
 //protected route to admin dashboard
 router.get("/dashboard", isAdmin, (req, res) => {
@@ -20,6 +22,15 @@ router.put('/products/edit',isAdmin, adminController.editProduct);
 
 // Route to delete a product
 router.delete('/products/delete', isAdmin,adminController.deleteProduct);
+// Add route for admin user creation
+router.post("/newUser",isAdmin, userController.registerUser);
 
+// Fetch all users
+router.get('/admin/users', adminController.getAllUsers);
 
+// Update user
+router.post('/admin/users/update', adminController.updateUser);
+
+// Delete user
+router.post('/admin/users/delete', adminController.deleteUser);
 module.exports = router;

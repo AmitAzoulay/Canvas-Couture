@@ -45,7 +45,7 @@ document.getElementById('editProductForm').addEventListener('submit', async func
     // Gather form data
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
-
+    
     try {
         // Send PUT request to the backend
         const response = await fetch('/admin/products/edit', {

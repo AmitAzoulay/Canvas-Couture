@@ -1,20 +1,5 @@
-/*document.getElementById("togglePassword").addEventListener("click", function () {
-    const passwordInput = document.getElementById("password");
-    const eyeIcon = document.getElementById("eyeIcon");
-
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text"; // Show password
-        eyeIcon.classList.remove("bi-eye"); // Change icon to eye-slash
-        eyeIcon.classList.add("bi-eye-slash");
-    } else {
-        passwordInput.type = "password"; // Hide password
-        eyeIcon.classList.remove("bi-eye-slash"); // Change icon back to eye
-        eyeIcon.classList.add("bi-eye");
-    }
-});
-*/
-
-document.querySelector('form').addEventListener('submit', function(event) {
+// Function to handle form validation
+function handleFormValidation(event) {
     let isValid = true;
 
     // Clear previous error messages
@@ -58,5 +43,16 @@ document.querySelector('form').addEventListener('submit', function(event) {
     if (!isValid) {
         event.preventDefault(); // Prevent form submission if invalid
     }
-});
+}
 
+// Add event listeners for both forms
+const registerForm = document.getElementById('registerForm');
+const addUserForm = document.getElementById('addUserForm');
+
+if (registerForm) {
+    registerForm.addEventListener('submit', handleFormValidation);
+}
+
+if (addUserForm) {
+    addUserForm.addEventListener('submit', handleFormValidation);
+}
