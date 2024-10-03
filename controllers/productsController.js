@@ -1,14 +1,37 @@
+const Product = require('../models/product');
 const productService = require("../services/productService");
 
-function getAllProducts(req, res) {
-    productService.getAllProducts()
-        .then(products => {
-            res.render("../views/products.ejs", { products });
-        })
-        .catch(error => {
-            console.error('Error fetching all products:', error);
-            res.status(500).send('Internal Server Error');
+// Function to render all products as HTML
+async function getAllProducts(req, res) {
+    try {
+        // Fetch products from the database
+        const products = await Product.find({});
+        res.render('products', { products }); // Render your products.ejs with the products
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}
+async function getAllProductsAPI(req, res) {
+    const searchTerm = req.query.term || '';
+    try {
+        const products = await Product.find({
+            name: { $regex: searchTerm, $options: 'i' } // Case-insensitive search
         });
+        res.json({ products });
+    } catch (err) {
+        res.status(500).send(err);
+    }
+}
+
+// Function to fetch all products as JSON
+async function getAllProductsJSON(req, res) {
+    try {
+        const searchTerm = req.query.term || '';
+        const products = searchTerm ? await Product.find({ name: { $regex: searchTerm, $options: 'i' } }) : await Product.find({});
+        res.json({ products });
+    } catch (err) {
+        res.status(500).send(err);
+    }
 }
 
 function getProductByCategory(req, res) {
@@ -64,8 +87,10 @@ function liveSearch(req, res) {
 
 module.exports = {
     getAllProducts,
+    getAllProductsAPI,
+    getAllProductsJSON, // Don't forget to export this new function
     getProductByCategory,
     getProductByName,
     getProductById,
-    liveSearch
+    liveSearch,
 };

@@ -1,6 +1,3 @@
-<!-- views/products.ejs -->
-<!--put a title that says all products / products by category depending on the context-->
-<!-- views/products.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clothing Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="/css/mainStyle.css">
     <link rel="stylesheet" href="/css/productStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -22,136 +19,100 @@
     <section class="background"></section>
     <div class="product-container">
         <div class="container my-5">
-            <div class="row">
-                <div class="col-md-6">
-                    <!-- Product Image with Zoom on Hover -->
-                    <a href="/img/<%= product.name %>.png" data-bs-toggle="modal" data-bs-target="#imageModal">
-                        <img src="/img/<%= product.name %>.png" alt="Monet's Water Lilies Dress" class="img-fluid product-image" />
-                    </a>
-
-                    <!-- Modal for Image Zoom -->
-                    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="imageModalLabel"><%= product.name %></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="/img/<%= product.name %>.png" alt="<%= product.name %>" class="img-fluid" />
-                                </div>
-                            </div>
-                        </div>
+            <div class="row" id="productList">
+                <!-- Dynamic product list will be rendered here -->
+                <% products.forEach(product => { %>
+                    <div class="col-md-6 product-item">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal">
+                            <img src="/img/<%= product.image %>" alt="<%= product.name %>"
+                                class="img-fluid product-image" />
+                        </a>
+                        <h2 class="product-title"><%= product.name %></h2>
+                        <h4 class="mt-3">Price: $<%= product.price %></h4>
+                        <p class="text-muted">Size: <%= product.size %></p>
+                        <p class="text-muted">Color: <%= product.color %></p>
+                        <p class="short-description"><%= product.short_description %></p>
                     </div>
-                </div>
-                
-                <div class="col-md-6" id="productInfo" data-max-stock="<%= product.stock %>">
-                    <h2 class="product-title"><%= product.name %></h2>
-                    <h4 class="mt-3">Price: <%= product.price %></h4>
-                    <p class="text-muted">Size: <%= product.size %></p>
-                    <p class="text-muted">Color: <%= product.color %></p>
-                    <p class="short-description"><%= product.short_description %></p>
-                
-                    <!-- Accordion for Expandable Sections -->
-                    <div class="accordion mt-4" id="productInfoAccordion">
-
-                        <!-- Additional Product Information -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingAdditionalInfo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseAdditionalInfo" aria-expanded="false"
-                                    aria-controls="collapseAdditionalInfo">
-                                    Additional Product Information
-                                </button>
-                            </h2>
-                            <div id="collapseAdditionalInfo" class="accordion-collapse collapse"
-                                aria-labelledby="headingAdditionalInfo" data-bs-parent="#productInfoAccordion">
-                                <div class="accordion-body">
-                                    <ul>
-                                        <li>Category: <%= product.category %></li>
-                                        <li>Available Stock: <%= product.stock %></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Care Instructions -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingCareInstructions">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCareInstructions" aria-expanded="false" aria-controls="collapseCareInstructions">
-                                    How to Care for your Product
-                                </button>
-                            </h2>
-                            <div id="collapseCareInstructions" class="accordion-collapse collapse"
-                                aria-labelledby="headingCareInstructions" data-bs-parent="#productInfoAccordion">
-                                <div class="accordion-body">
-                                    Hand wash cold, hang to dry.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Return Policy -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingReturnPolicy">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseReturnPolicy" aria-expanded="false" aria-controls="collapseReturnPolicy">
-                                    Our Return Policy
-                                </button>
-                            </h2>
-                            <div id="collapseReturnPolicy" class="accordion-collapse collapse"
-                                aria-labelledby="headingReturnPolicy" data-bs-parent="#productInfoAccordion">
-                                <div class="accordion-body">
-                                    We want you to love your purchase! If you are not satisfied, our <a src="/index">return policy</a> is here to help.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Quantity Selector with + and - buttons -->
-                    <div class="mt-4">
-                        <label for="quantity" class="form-label">Quantity:</label>
-                        <div class="input-group quantity-selector">
-                            <button class="btn btn-outline-secondary" type="button" id="decreaseQuantity">-</button>
-                            <input type="text" id="quantity" class="form-control text-center" value="1" readonly>
-                            <button class="btn btn-outline-secondary" type="button" id="increaseQuantity">+</button>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-primary mt-3" id="addToCartButton">Add to Cart</button>
-                </div>
+                <% }); %>
             </div>
         </div>
     </div>
 
-    <div class="text-center mt-5">
-        <button class="btn btn-back" onclick="window.location.href='/products/search/all'">Back to Shop</button>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript to handle search and quantity -->
     <script>
-        // Select the form and input elements
         const searchForm = document.getElementById('searchForm');
         const searchInput = document.getElementById('searchInput');
+        const productList = document.getElementById('productList');
 
-        // Add an event listener to handle the form submission
-        searchForm.addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission (page reload)
-
-            // Get the search term from the input field
-            const searchTerm = searchInput.value.trim();
-
-            if (searchTerm) {
-                // Redirect to /products/<searchTerm>
-                window.location.href = `/products/search/name/${encodeURIComponent(searchTerm)}`;
+        // Function to fetch all products
+function fetchAllProducts() {
+    fetch('/products/search/all') // This should return the JSON data
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
             }
-        });
-    </script>
-    <!-- Custom JavaScript for Scroll Animations -->
-    <script src="/js/quantity-selector.js"></script>
-    <script src="/js/scroll-animation.js"></script>
+            return response.json();
+        })
+        .then(data => {
+            productList.innerHTML = ''; // Clear the current product list
+            data.products.forEach(product => {
+                const li = document.createElement('li');
+                li.className = 'product-item';
+                li.innerHTML = `
+                    <a href="/products/search/product/${product.product_id}" class="product-link">
+                        <p><img src="/img/${product.name}.png" alt="${product.name}" class="card-product-img" /></p>
+                        <h3>${product.name}</h3>
+                    </a>
+                    <p>Price: $${product.price}</p>
+                    <p>Color: ${product.color}</p>
+                    <p>Size: ${product.size}</p>
+                    <p>Gender: ${product.gender}</p>
+                    <p>Category: ${product.category}</p>
+                `;
+                productList.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Error fetching products:', error));
+}
 
+// Add event listener for input changes
+searchInput.addEventListener('input', function() {
+    const searchTerm = searchInput.value.trim();
+    if (searchTerm) {
+        fetch(`/products/search/live/${encodeURIComponent(searchTerm)}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                productList.innerHTML = ''; // Clear the current product list
+                data.products.forEach(product => {
+                    const li = document.createElement('li');
+                    li.className = 'product-item';
+                    li.innerHTML = `
+                        <a href="/products/search/product/${product.product_id}" class="product-link">
+                            <p><img src="/img/${product.name}.png" alt="${product.name}" class="card-product-img" /></p>
+                            <h3>${product.name}</h3>
+                        </a>
+                        <p>Price: $${product.price}</p>
+                        <p>Color: ${product.color}</p>
+                        <p>Size: ${product.size}</p>
+                        <p>Gender: ${product.gender}</p>
+                        <p>Category: ${product.category}</p>
+                    `;
+                    productList.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error during live search:', error));
+    } else {
+        // If the input is empty, fetch all products
+        fetchAllProducts(); // This will update the product list with all products
+    }
+});
+    </script>
 </body>
 
 </html>

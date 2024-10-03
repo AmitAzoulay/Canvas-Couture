@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clothing Store</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
     <link rel="stylesheet" href="/css/mainStyle.css">
     <link rel="stylesheet" href="/css/productsStyle.css">
     <script src="/js/cartFunctions.js" defer></script>
@@ -16,32 +18,30 @@
     
     <section class="background"></section>
 
+    <div class="product-container"> 
+        <ul class="product-list" id="productList">
+            <% products.forEach(product => { %>
+                <li class="product-item">
+                    <a href="/products/search/product/<%= product.product_id %>" class="product-link">
+                        <p><img src="/img/<%= product.name %>.png" alt="<%= product.name %>" class="card-product-img" /></p>
+                        <h3><%= product.name %></h3>
+                    </a>
+                    <p>Price: $<%= product.price %></p>
+                    <p>Color: <%= product.color %></p>
+                    <p>Size: <%= product.size %></p>
+                    <p>Gender: <%= product.gender %></p>
+                    <p>Category: <%= product.category %></p>
 
-        <div class="product-container"> 
-            <ul class="product-list" id="productList">
-                <% products.forEach(product => { %>
-                    <li class="product-item">
-                        <a href="/products/search/product/<%= product.product_id %>" class="product-link">
-                            <p><img src="/img/<%= product.name %>.png" alt="<%= product.name %>" class="card-product-img" /></p>
-                            <h3><%= product.name %></h3>
-                        </a>
-                        <p>Price: $<%= product.price %></p>
-                        <p>Color: <%= product.color %></p>
-                        <p>Size: <%= product.size %></p>
-                        <p>Gender: <%= product.gender %></p>
-                        <p>Category: <%= product.category %></p>
-
-                        <% if (product.stock > 0) { %>
-                            <button class="stock-btn" onclick="addToCart('<%= product.id %>')">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        <% } else { %>
-                            <p class="out-of-stock">Out of stock</p>
-                        <% } %>
-                    </li>
-                <% }); %>
-            </ul>
-        </div>
+                    <% if (product.stock > 0) { %>
+                        <button class="stock-btn" onclick="addToCart('<%= product.product_id %>')">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    <% } else { %>
+                        <p class="out-of-stock">Out of stock</p>
+                    <% } %>
+                </li>
+            <% }); %>
+        </ul>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
@@ -50,11 +50,16 @@
     <script>
         const searchInput = document.getElementById('searchInput');
         const productList = document.getElementById('productList');
-    
+
         // Function to fetch all products
         function fetchAllProducts() {
-            fetch('/products/search/all')
-                .then(response => response.json())
+            fetch('/products/search/all') // This should return the JSON data
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Network response was not ok: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     productList.innerHTML = ''; // Clear the current product list
                     data.products.forEach(product => {
@@ -76,13 +81,18 @@
                 })
                 .catch(error => console.error('Error fetching products:', error));
         }
-    
+
         // Add event listener for input changes
         searchInput.addEventListener('input', function() {
             const searchTerm = searchInput.value.trim();
             if (searchTerm) {
                 fetch(`/products/search/live/${encodeURIComponent(searchTerm)}`)
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Network response was not ok: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
                     .then(data => {
                         productList.innerHTML = ''; // Clear the current product list
                         data.products.forEach(product => {
@@ -101,24 +111,16 @@
                             `;
                             productList.appendChild(li);
                         });
-                    });
+                    })
+                    .catch(error => console.error('Error during live search:', error));
             } else {
                 // If the input is empty, fetch all products
-                fetchAllProducts();
+                fetchAllProducts(); // This will update the product list with all products
             }
         });
-    
-        // Submit form handling
-        document.getElementById('searchForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
-            const searchTerm = searchInput.value.trim();
-            if (searchTerm) {
-                window.location.href = `/products/search/name/${encodeURIComponent(searchTerm)}`;
-            }
-        });
-    
+
         // Fetch all products on initial load
-        fetchAllProducts();
+        fetchAllProducts(); // Fetch all products on initial load
     </script>
 </body>
 
