@@ -19,10 +19,10 @@ class ProfileService {
         try {
             // Fetch only orders that are marked as ordered: true
             const orders = await Order.find({ userId, ordered: true }).populate('items.productId').exec();
-            console.log("Orders fetched of service:", orders);
+            /*console.log("Orders fetched of service:", orders);
             orders.forEach(order => {
                 console.log("Order items:", order.items);
-            });
+            });*/
             return orders;
         } catch (error) {
             throw error;
