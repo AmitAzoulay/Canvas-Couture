@@ -66,6 +66,7 @@ td .price {
     /* Space between buttons */
 }
 
+.plus-btn,
 .minus-btn {
     background-color: black;
     /* Button background color */
