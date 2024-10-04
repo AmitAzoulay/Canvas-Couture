@@ -1,5 +1,6 @@
 const Payments = require("../models/payment")
 const Orders = require("../models/orders")
+const Products = require("../models/product")
 
 function savePayment(address, cardName, cardNumber, expiryDate, cvv, uid) {
 
@@ -22,7 +23,15 @@ function savePayment(address, cardName, cardNumber, expiryDate, cvv, uid) {
                 ordered_at: new Date(),
                 paymentPrice: totalPrice // Use the resolved value of totalPrice
             });
-
+            Orders.updateMany(
+                { userId: uid, ordered: false },  // Filter: userId matches, ordered is false
+                {
+                    $set: {
+                        ordered: true,  // Set ordered to true
+                        ordered_at: new Date()  // Set the current date as the ordered_at date
+                    }
+                }
+            );
             // Step 1: Save the payment
             return newPayment.save();
         })
