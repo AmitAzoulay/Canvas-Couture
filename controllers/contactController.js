@@ -5,8 +5,8 @@ const postContact = async (req, res) => {
     const { email, message } = req.body;
 
     try {
-        // Use the service to store the contact information
-        await contactService.storeContact(email, message);
+        const uid = req.session.userId
+        await contactService.storeContact(uid, message);
         res.redirect('/index');
     } catch (error) {
         console.error(error);
