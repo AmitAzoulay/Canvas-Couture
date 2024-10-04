@@ -26,9 +26,10 @@ async function removeCartItem(req, res) {
 async function addToCartById(req, res) {
     console.log(req.params.productId)
     const productId = req.params.productId;
+    const quantity = req.params.quantity
     const uid = req.session.userId
     try {
-        const result = await orderService.addToCartById(uid, productId);
+        const result = await orderService.addToCartById(uid, productId, quantity);
         res.status(200).json(result); // Respond with a success message
     } catch (error) {
         res.status(500).json({ message: error.message }); // Handle errors
