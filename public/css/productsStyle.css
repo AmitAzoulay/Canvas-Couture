@@ -156,7 +156,7 @@ h2 {
     background-color: white; /* White background */
     color: #d9534f; /* Red text */
     font-weight: bold; /* Bold text */
-    padding: 10px 20px; /* Padding for better spacing */
+    margin-right: 10px;
     border-radius: 5px; /* Rounded corners */
     transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
