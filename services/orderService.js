@@ -93,10 +93,13 @@ async function removeCartItem(orderId, productId) {
 
 async function addToCartById(uid, productId, quantityOfProduct) {
 
+    quantityOfProduct = parseInt(quantityOfProduct, 10);
     const product = await Products.findById(productId);
     if (!product) {
         throw new Error('Product not found');
     }
+
+    // Find the existing order for the user
     let order = await Orders.findOne({ userId: new mongoose.Types.ObjectId(uid), ordered: false });
 
     if (!order) {
@@ -105,15 +108,19 @@ async function addToCartById(uid, productId, quantityOfProduct) {
             _id: new mongoose.Types.ObjectId(),
             userId: new mongoose.Types.ObjectId(uid),
             items: [],
-            orderDate: new Date(), //placeholder
+            orderDate: new Date(), // Placeholder
             status: 'Pending',
             ordered: false,
         });
     }
-    const existingItem = order.items.find(item => item.productId.toString() === productId); // Check if the product already exists in the cart items
 
+    // Check if the product already exists in the cart items
+    const existingItem = order.items.find(item => item.productId.toString() === productId);
+
+    // Debugging existing item
     if (existingItem) {
-        existingItem.quantity += quantityOfProduct; // If the item exists, increase the quantity
+        // If the item exists, increase the quantity
+        existingItem.quantity += quantityOfProduct;
     } else {
         // If the item does not exist, add it to the items array
         order.items.push({
@@ -124,9 +131,10 @@ async function addToCartById(uid, productId, quantityOfProduct) {
         });
     }
 
+    // Save the updated order
     await order.save();
-    return order;
 
+    return order;
 }
 
 module.exports = {

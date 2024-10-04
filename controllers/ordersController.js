@@ -24,7 +24,7 @@ async function removeCartItem(req, res) {
 }
 
 async function addToCartById(req, res) {
-    console.log(req.params.productId)
+    console.log(req.params.quantity)
     const productId = req.params.productId;
     const quantity = req.params.quantity
     const uid = req.session.userId
