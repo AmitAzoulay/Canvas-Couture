@@ -91,7 +91,7 @@ async function removeCartItem(orderId, productId) {
     }
 }
 
-async function addToCartById(uid, productId) {
+async function addToCartById(uid, productId, quantityOfProduct) {
 
     const product = await Products.findById(productId);
     if (!product) {
@@ -113,14 +113,14 @@ async function addToCartById(uid, productId) {
     const existingItem = order.items.find(item => item.productId.toString() === productId); // Check if the product already exists in the cart items
 
     if (existingItem) {
-        existingItem.quantity += 1; // If the item exists, increase the quantity
+        existingItem.quantity += quantityOfProduct; // If the item exists, increase the quantity
     } else {
         // If the item does not exist, add it to the items array
         order.items.push({
             productId: product._id,
             name: product.name, // Use the product name from the fetched product
             price: product.price, // Use the product price from the fetched product
-            quantity: 1
+            quantity: quantityOfProduct
         });
     }
 
