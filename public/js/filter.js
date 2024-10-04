@@ -1,52 +1,68 @@
-// filter.js
+document.getElementById("applyFilter").addEventListener("click", function () {
+    const form = document.getElementById("filterForm");
+    const selectedFilters = {
+        category: Array.from(form.elements['category'])
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value),
+        color: Array.from(form.elements['color'])
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value),
+        size: Array.from(form.elements['size'])
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value),
+        price: Array.from(form.elements['price'])
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value),
+    };
 
-document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.getElementById('searchInput');
-    const filterCheckboxes = document.querySelectorAll('.filter-checkbox');
-    const productList = document.getElementById('productList');
-    const applyFiltersButton = document.getElementById('applyFilters');
+    applyFilters(selectedFilters);
 
-    function applyFilters() {
-        const selectedCategories = Array.from(filterCheckboxes)
-            .filter(checkbox => checkbox.checked && checkbox.dataset.type === 'category')
-            .map(checkbox => checkbox.value);
-        const selectedColors = Array.from(filterCheckboxes)
-            .filter(checkbox => checkbox.checked && checkbox.dataset.type === 'color')
-            .map(checkbox => checkbox.value);
-        const selectedSizes = Array.from(filterCheckboxes)
-            .filter(checkbox => checkbox.checked && checkbox.dataset.type === 'size')
-            .map(checkbox => checkbox.value);
-        const selectedPriceRanges = Array.from(filterCheckboxes)
-            .filter(checkbox => checkbox.checked && checkbox.dataset.type === 'price')
-            .map(checkbox => checkbox.value);
-
-        const productItems = productList.children;
-
-        for (let item of productItems) {
-            const category = item.getAttribute('data-category');
-            const color = item.getAttribute('data-color');
-            const size = item.getAttribute('data-size');
-            const price = parseFloat(item.getAttribute('data-price'));
-
-            const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(category);
-            const matchesColor = selectedColors.length === 0 || selectedColors.includes(color);
-            const matchesSize = selectedSizes.length === 0 || selectedSizes.includes(size);
-            const matchesPrice = selectedPriceRanges.length === 0 || selectedPriceRanges.some(range => {
-                const [min, max] = range.split('-').map(Number);
-                return price >= min && price <= max;
-            });
-
-            item.style.display = (matchesCategory && matchesColor && matchesSize && matchesPrice) ? 'block' : 'none';
-        }
-    }
-
-    searchInput.addEventListener('input', function () {
-        const searchTerm = searchInput.value.trim().toLowerCase();
-        Array.from(productList.children).forEach(item => {
-            const title = item.querySelector('.product-title').innerText.toLowerCase();
-            item.style.display = title.includes(searchTerm) ? 'block' : 'none';
-        });
-    });
-
-    applyFiltersButton.addEventListener('click', applyFilters);
+    // Hide the filter modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('filterModal'));
+    modal.hide();
 });
+
+function applyFilters(filters) {
+    fetch('/products/search/filtered', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(filters)
+    })
+    .then(response => response.json())
+    .then(data => {
+        const productList = document.getElementById('productList');
+        productList.innerHTML = ''; // Clear the current product list
+
+        if (data.products.length === 0) {
+            const noProductsMessage = document.createElement('div');
+            noProductsMessage.className = 'no-products-message';
+            noProductsMessage.textContent = 'No products found';
+            productList.appendChild(noProductsMessage);
+        } else {
+            data.products.forEach(product => {
+                const li = document.createElement('li');
+                li.className = 'product-item';
+                li.innerHTML = `
+                    <a href="/products/search/product/${product.product_id}" class="product-link">
+                        <p><img src="/img/${product.name}.png" alt="${product.name}" class="card-product-img" /></p>
+                        <h3>${product.name}</h3>
+                    </a>
+                    <p>Price: $${product.price}</p>
+                    <p>Color: ${product.color}</p>
+                    <p>Size: ${product.size}</p>
+                    <p>Gender: ${product.gender}</p>
+                    <p>Category: ${product.category}</p>
+                    ${product.stock > 0 ? `
+                        <button class="stock-btn" onclick="addToCart('${product._id}')">
+                            <i class="fa fa-plus">+</i>
+                        </button>
+                    ` : `<p class="out-of-stock">Out of stock</p>`}
+                `;
+                productList.appendChild(li);
+            });
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
