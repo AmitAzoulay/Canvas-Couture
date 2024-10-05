@@ -28,26 +28,31 @@ async function loginUser(req, res) {
  * Handle user registration.
  */
 async function registerUser(req, res) {
+    console.log("Incoming User Data:", req.body); // Log incoming data
+    console.log("Is coming from admin:",req.body.isAdmin);
+    
     try {
-        // Ensure that the isAdmin checkbox is handled correctly
-        const userData = {
-            ...req.body,
-            // Use the correct checkbox ID to check if it's selected (true/false)
-            isAdmin: req.body.isAdminCheckbox === 'on' // 'on' means the checkbox was checked
-        };
-        await userService.register(userData);
-        // Check if the request came from the admin dashboard
-        if (req.url === '/admin/newUser') {
-            // Stay on the admin page or show a success message
-            res.render('admin', { success: 'User created successfully!' });
+        await userService.register(req.body);
+
+        if (req.body.isAdmin) {
+            // Respond with JSON for admin requests
+            return res.json({ success: true, message: "User added successfully" });
         } else {
-            // Redirect regular users to the login page after registration
+            // Redirect to login for regular user registration
             res.redirect("/login");
         }
     } catch (error) {
-        res.status(400).render("register", { error: error.message }); // Render register view with error
+        if (req.body.isAdmin) {
+            // Respond with JSON in case of errors for admin requests
+            return res.json({ success: false, message: error.message });
+        } else {
+            // Render registration page with the error for regular users
+            res.status(400).render("register", { error: error.message });
+        }
     }
 }
+
+
 
 /**
  * Handle user logout.

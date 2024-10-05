@@ -26,11 +26,11 @@ router.delete('/products/delete', isAdmin,adminController.deleteProduct);
 router.post("/newUser",isAdmin, userController.registerUser);
 
 // Fetch all users
-router.get('/admin/users', adminController.getAllUsers);
+router.get('/users',isAdmin, adminController.getAllUsers);
 
 // Update user
-router.post('/admin/users/update', adminController.updateUser);
+router.put('/users/update',isAdmin, adminController.updateUser);
 
 // Delete user
-router.post('/admin/users/delete', adminController.deleteUser);
+router.delete('/users/delete',isAdmin, adminController.deleteUser);
 module.exports = router;

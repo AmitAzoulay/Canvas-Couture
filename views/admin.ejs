@@ -166,7 +166,7 @@
                                 <option value="Accessories">Accessories</option>
                                 <option value="Tops">Tops</option>
                                 <option value="Bottoms">Bottoms</option>
-                                <option value="Bottoms">Dresses</option>
+                                <option value="Dresses">Dresses</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -224,18 +224,18 @@
 <!-- Manage Users Section -->
 <div class="content-section d-none" id="users-section">
     
-    <!--Add new Admin section-->
+    <!--Add new user section-->
     <div class="mt-4">
         <div class="accordion" id="addUserAccordion">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingAddUser"></h2>
                     <button class="accordion-button collapsed" id="add-user-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAddUser" aria-expanded="false" aria-controls="collapseAddUser">
-                        Add New User
+                        Add New Admin
                     </button>
                 </h2>
                 <div id="collapseAddUser" class="accordion-collapse collapse" aria-labelledby="headingAddUser" data-bs-parent="#addUserAccordion">
                     <div class="accordion-body">  
-                        <form id="addUserForm" action="/admin/newUser" method="POST">
+                        <form id="form" name="newAdminForm">
                             <div class="mb-3">
                                 <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName" required />
                                 <div class="error" id="firstNameError" style="display: none;"></div> <!-- Error message for first name -->
@@ -256,9 +256,10 @@
                                 <input name="password" type="password" class="form-control" placeholder="Password" id="password" required autocomplete="new-password" />
                                 <div class="error" id="passwordError" style="display: none;"></div> <!-- Error message for password -->
                             </div>
+                            
                             <div class="mb-3">
-                                <input type="checkbox" name="isAdminCheckbox" id="isAdminCheckbox" />
-                                <label for="isAdminCheckbox">Make User Admin</label>
+                            <!-- Hidden field to always submit "true" for isAdmin -->
+                                <input type="hidden" name="isAdmin" value="true" />
                             </div>
                             <button type="submit" class="btn btn-primary">Create Account</button>
                         </form>
@@ -286,10 +287,11 @@
                                     <th>Email</th>
                                     <th>Phone Number</th>
                                     <th>Is Admin</th>
+                                    <th>Is Active</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody id="userTableBody">
+                            <tbody id="usersTableBody">
                                 <!-- Users will be dynamically populated here -->
                             </tbody>
                         </table>
@@ -299,29 +301,70 @@
         </div>
     </div>
     <!-- Edit User Modal -->
-    <div id="editUserModal" class="modal">
-        <div class="modal-content">
-            <h4>Edit User</h4>
-            <form id="editUserForm">
-                <!-- Include fields: firstName, lastName, email, phoneNumber, isAdmin -->
-                <input type="hidden" id="userId" name="userId">
-                <input type="text" id="firstName" name="firstName" required>
-                <input type="text" id="lastName" name="lastName" required>
-                <input type="email" id="email" name="email" required>
-                <input type="text" id="phoneNumber" name="phoneNumber" required>
-                <label for="isAdminCheckbox">Is Admin:</label>
-                <input type="checkbox" id="isAdminCheckbox" name="isAdmin">
-                <button type="submit">Update</button>
-            </form>
+    <div id="editUserModal" class="modal fade" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="editUserForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Hidden field to store User ID -->
+                        <input type="hidden" id="edit_id" name="_id">
+                        <!-- Include fields: firstName, lastName, email, phoneNumber, isAdmin -->
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="edit_firstName" name="firstName" class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="edit_lastName" name="lastName" class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="edit_email" name="email" class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="text" id="edit_phoneNumber" name="phoneNumber" class="form-control" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="isAdmin" class="form-check-label">Is Admin</label>
+                            <input type="checkbox" id="isAdmin" name="isAdmin" class="form-check-input"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="isActive" class="form-check-label">Is Active</label>
+                            <input type="checkbox" id="isActive" name="isActive" class="form-check-input"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <!-- Delete User Confirmation Modal -->
-    <div id="deleteUserModal" class="modal">
-        <div class="modal-content">
-            <h4>Delete User</h4>
-            <p>Are you sure you want to delete this user?</p>
-            <button id="confirmDeleteUser" class="btn btn-danger">Delete</button>
-            <button id="cancelDeleteUser" class="btn btn-secondary">Cancel</button>
+
+    <!-- Delete User Modal -->
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModalLabel">Delete User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this user?</p>
+                    <!-- Hidden field to store User ID -->
+                    <input type="hidden" id="delete_user_id">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" id="confirmUserDelete" class="btn btn-danger">Delete</button> 
+                </div>
+            </div>
         </div>
     </div>
 
@@ -346,6 +389,7 @@
 <script src="/js/delete-modal.js"></script>
 <script src="/js/edit-modal.js"></script>
 <script src="/js/add-product.js"></script>
+<script src="/js/register.js"></script>
 <script src="/js/manage-users.js"></script>
 </body>
 </html>

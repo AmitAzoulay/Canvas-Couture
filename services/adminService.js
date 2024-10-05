@@ -1,22 +1,6 @@
 const Product = require("../models/product");
 const User = require('../models/user'); // Assuming you have a User model
 
-async function createUser(userData) {
-    const { firstName, lastName, email, phoneNumber, password, isAdmin } = userData;
-
-    // Hash the password and create the user
-    const hashedPassword = await hashPassword(password); // Assuming you have a hash function
-    const newUser = new User({
-        firstName,
-        lastName,
-        email,
-        phoneNumber,
-        password: hashedPassword,
-        isAdmin,  // Assign admin status
-    });
-
-    await newUser.save();
-};
 
 // Add a new product
 async function addProduct(productData) {
@@ -65,12 +49,18 @@ async function deleteProduct(productId) {
     }
 }
 async function getAllUsers() {
-    return await User.find(); // Retrieve all users
+    // Retrieve all users
+    try {
+        const users = await User.find();
+        return users;
+    } catch (error) {
+        throw new Error('Error retrieving users');
+    }
 }
 
 async function updateUser(userData) {
-    const { userId, firstName, lastName, phoneNumber, email, isAdmin } = userData;
-    const user = await User.findById(userId);
+    const { _id,firstName, lastName, phoneNumber, email, isAdmin,isActive } = userData;
+    const user = await User.findById(_id);
     if (!user) throw new Error("User not found");
 
     user.firstName = firstName;
@@ -78,21 +68,25 @@ async function updateUser(userData) {
     user.phoneNumber = phoneNumber;
     user.email = email;
     user.isAdmin = isAdmin;
-
+    user.isActive = isActive;
     await user.save();
     return user;
 }
 
-async function deleteUser(userId) {
-    const user = await User.findByIdAndDelete(userId);
-    if (!user) throw new Error("User not found");
+async function deleteUser(_id) {
+    console.log("delete user admin service",_id);
+    try {
+        // Delete the user from the database using _id
+        await User.findOneAndDelete({ _id: _id });
+    } catch (error) {
+        throw new Error('Error deleting user');
+    }
 }
 module.exports = {
     getAllProducts,
     addProduct,
     updateProduct,
     deleteProduct,
-    createUser,
     getAllUsers,
     updateUser,
     deleteUser

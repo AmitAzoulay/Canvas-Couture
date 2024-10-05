@@ -1,4 +1,5 @@
-document.getElementById('show-products-btn').addEventListener('click', function() {
+document.getElementById('show-products-btn').addEventListener('click', loadProducts);
+function loadProducts(){
     // Fetch products from the server
     fetch('/admin/products')
         .then(response => response.json())
@@ -21,7 +22,7 @@ document.getElementById('show-products-btn').addEventListener('click', function(
                         <td>${product.short_description}</td>
                         <td>
                             <!-- Edit button with data-* attributes -->
-                            <button class="btn btn-warning btn-sm edit-btn"
+                            <button class="btn btn-warning btn-sm edit-product-btn"
                                 data-id="${product.product_id}"
                                 data-name="${product.name}"
                                 data-category="${product.category}"
@@ -49,7 +50,7 @@ document.getElementById('show-products-btn').addEventListener('click', function(
                     });
                 });
                 // After the table is populated, attach the event listeners for the edit buttons
-                document.querySelectorAll('.edit-btn').forEach(button => {
+                document.querySelectorAll('.edit-product-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const product = {
                             product_id: this.getAttribute('data-id'),
@@ -70,4 +71,7 @@ document.getElementById('show-products-btn').addEventListener('click', function(
             }
         })
         .catch(error => console.error('Error fetching products:', error));
-});
+}
+module.exports = {
+    loadProducts
+};

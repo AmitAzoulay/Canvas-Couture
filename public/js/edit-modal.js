@@ -1,6 +1,8 @@
+
+
 document.addEventListener('DOMContentLoaded', function () {
     // When any edit button is clicked
-    document.querySelectorAll('.edit-btn').forEach(button => {
+    document.querySelectorAll('.edit-product-btn').forEach(button => {
         button.addEventListener('click', function () {
             const product = {
                 product_id: this.dataset.id,
@@ -12,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 stock: this.dataset.stock,
                 short_description: this.dataset.description
             };
-
+            console.log(product);
+            console.log("product");
             populateEditModal(product); // Call the function to populate modal
         });
     });
@@ -20,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Populate Edit Modal with product data
 function populateEditModal(product) {
-    
     document.getElementById('edit_product_id').value = product.product_id;
     document.getElementById('edit_name').value = product.name;
     document.getElementById('edit_category').value = product.category;
@@ -29,7 +31,7 @@ function populateEditModal(product) {
     document.getElementById('edit_price').value = product.price;
     document.getElementById('edit_stock').value = product.stock;
     document.getElementById('edit_short_description').value = product.short_description;
-    
+
     // If you're using a dropdown for categories, ensure the correct category is selected
     const categoryDropdown = document.getElementById('edit_category');
     for (let option of categoryDropdown.options) {
@@ -39,6 +41,7 @@ function populateEditModal(product) {
         }
     }
 }
+
 document.getElementById('editProductForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent the form from submitting the traditional way
 
@@ -67,15 +70,7 @@ document.getElementById('editProductForm').addEventListener('submit', async func
             let modalInstance = bootstrap.Modal.getInstance(editProductModal); 
             modalInstance.hide();
 
-            // Update the product in the table without reloading
-            const row = document.querySelector(`button[data-id="${formData.get('product_id')}"]`).closest('tr');
-            row.querySelector('td:nth-child(2)').textContent = formData.get('name');
-            row.querySelector('td:nth-child(3)').textContent = formData.get('category');
-            row.querySelector('td:nth-child(4)').textContent = formData.get('color');
-            row.querySelector('td:nth-child(5)').textContent = formData.get('size');
-            row.querySelector('td:nth-child(6)').textContent = formData.get('price');
-            row.querySelector('td:nth-child(7)').textContent = formData.get('stock');
-            row.querySelector('td:nth-child(8)').textContent = formData.get('short_description');
+            loadProducts();
         } else {
             alert(result.message || 'Failed to update product');
         }

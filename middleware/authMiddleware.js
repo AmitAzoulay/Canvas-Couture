@@ -1,5 +1,5 @@
 function isLoggedIn(req, res, next) {
-    console.log("Checking session:", req.session);
+    
     if (req.session.isActive) {
         return next(); // User is logged in, proceed to the next middleware or route handler
     } else {
