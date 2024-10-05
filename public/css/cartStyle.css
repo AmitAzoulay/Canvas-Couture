@@ -57,34 +57,37 @@ td .price {
     /* Price in Italian red */
 }
 
-/* Minus button (black circle with minus sign) */
+.button-group {
+    display: flex;
+    /* Ensures buttons are in a row */
+    align-items: center;
+    /* Vertically aligns buttons */
+    gap: 5px;
+    /* Space between buttons */
+}
+
+.plus-btn,
 .minus-btn {
     background-color: black;
-    /* Black background */
+    /* Button background color */
     color: white;
-    /* White text/icon */
+    /* Button text color */
     border-radius: 50%;
-    /* Make the button circular */
+    /* Make buttons circular */
     border: none;
     /* Remove default border */
     padding: 10px;
     /* Space inside the button */
     font-size: 16px;
-    /* Font size for icon or text */
+    /* Font size for text */
     cursor: pointer;
     /* Pointer on hover */
-    width: 40px;
-    /* Set width to make it a circle */
-    height: 40px;
-    /* Set height to make it a circle */
-    display: flex;
-    /* Flexbox to center content */
-    align-items: center;
-    /* Vertically center content */
-    justify-content: center;
-    /* Horizontally center content */
     transition: background-color 0.3s ease;
     /* Smooth hover effect */
+    width: 50px;
+    /* Adjusted width for narrower buttons */
+    height: 50px;
+    /* Adjusted height accordingly to maintain circular shape */
 }
 
 .minus-btn:hover {
