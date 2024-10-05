@@ -1,43 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas Couture Admin Dashboard</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/mainStyle.css">
     <link rel="stylesheet" href="/css/adminStyle.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
-<body>
-    
-    <!-- Navbar -->
-    <%- include('./navbar.ejs') %>
-    
-    <!-- Main Content with Sidebar -->
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-lg-3 col-md-4" id="sidebar">
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active" data-target="dashboard">Dashboard</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-target="products">Manage Products</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-target="users">Manage Users</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-target="orders">Manage Orders</a>
-                </div>
-            </div>
 
-            <!-- Content Section -->
-            <div class="content col-lg-9 col-md-8">
-                <!-- Dashboard Section -->
-                <div class="content-section" id="dashboard-section">
-                    <div class="card">
-                        <div class="card-header">Dashboard</div>
-                        <div class="card-body">
-                            <p>Welcome to the admin dashboard!</p>
-                            <p>Stats:</p>
+<body>
+
+    <!-- Navbar -->
+    <%- include('./homeNavbar.ejs') %>
+
+        <!-- Main Content with Sidebar -->
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-lg-3 col-md-4" id="sidebar">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action active"
+                            data-target="dashboard">Dashboard</a>
+                        <a href="#" class="list-group-item list-group-item-action" data-target="products">Manage
+                            Products</a>
+                        <a href="#" class="list-group-item list-group-item-action" data-target="users">Manage Users</a>
+                        <a href="#" class="list-group-item list-group-item-action" data-target="orders">Manage
+                            Orders</a>
+                    </div>
+                </div>
+
+                <!-- Content Section -->
+                <div class="content col-lg-9 col-md-8">
+                    <!-- Dashboard Section -->
+                    <div class="content-section" id="dashboard-section">
+                        <div class="card">
+                            <div class="card-header">Dashboard</div>
+                            <div class="card-body">
+                                <p>Welcome to the admin dashboard!</p>
+                                <p>Stats:</p>
+                                <div class="charts-container">
+                                    <div class="chart-container">
+                                        <h2>Top Expensive Orders</h2>
+                                        <div class="chart" id="top-orders-chart"></div>
+                                    </div>
+                                    <div class="chart-container">
+                                        <h2>Sales by Category (Pie Chart)</h2>
+                                        <div class="chart" id="sales-category-chart"></div>
+                                        <div class="sales-category-legend" id="sales-category-legend"></div>
+                                    </div>
+                                </div>
+                                <script>
+                                    // Store topExpensiveOrders in a data attribute
+                                    const topExpensiveOrders = JSON.parse('<%- JSON.stringify(statistics.topExpensiveOrders) %>');
+                                    // Store salesByCategory in a data attribute
+                                    const salesByCategory = JSON.parse('<%- JSON.stringify(statistics.salesByCategory) %>');
+
+                                    // D3.js Visualization for Top 5 Expensive Orders
+                                    const topOrdersSvg = d3.select("#top-orders-chart")
+                                        .append("svg")
+                                        .attr("width", 600)
+                                        .attr("height", 300);
+
+                                    const topOrderBars = topOrdersSvg.selectAll(".bar")
+                                        .data(topExpensiveOrders)
+                                        .enter()
+                                        .append("rect")
+                                        .attr("class", "bar")
+                                        .attr("x", (d, i) => i * (600 / topExpensiveOrders.length))
+                                        .attr("y", d => 300 - (d.totalOrderCost / d3.max(topExpensiveOrders, order => order.totalOrderCost) * 300))
+                                        .attr("width", 600 / topExpensiveOrders.length)
+                                        .attr("height", d => (d.totalOrderCost / d3.max(topExpensiveOrders, order => order.totalOrderCost) * 300))
+                                        .style("fill", "blue"); // Change the color to blue
+
+                                    // Add labels for Top 5 Expensive Orders below the bars
+                                    topOrdersSvg.selectAll(".label")
+                                        .data(topExpensiveOrders)
+                                        .enter()
+                                        .append("text")
+                                        .attr("class", "label")
+                                        .attr("x", (d, i) => i * (600 / topExpensiveOrders.length) + (600 / topExpensiveOrders.length) / 2)
+                                        .attr("y", 290) // Positioning below the bars
+                                        .attr("text-anchor", "middle")
+                                        .text(d => `$${d.totalOrderCost}`); // Display the total cost below each bar
+
+                                    // D3.js Visualization for Sales by Category (Pie Chart)
+                                    // D3.js Visualization for Sales by Category (Pie Chart)
+                                    const width = 600;
+                                    const height = 300;
+                                    const radius = Math.min(width, height) / 2;
+
+                                    const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+                                    const pie = d3.pie()
+                                        .value(d => d.totalSales);
+
+                                    const arc = d3.arc()
+                                        .innerRadius(0)
+                                        .outerRadius(radius);
+
+                                    const salesSvg = d3.select("#sales-category-chart")
+                                        .append("svg")
+                                        .attr("width", width)
+                                        .attr("height", height)
+                                        .append("g")
+                                        .attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+                                    const pieData = pie(salesByCategory);
+
+                                    const arcs = salesSvg.selectAll(".arc")
+                                        .data(pieData)
+                                        .enter()
+                                        .append("g")
+                                        .attr("class", "arc");
+
+                                    arcs.append("path")
+                                        .attr("d", arc)
+                                        .attr("fill", (d, i) => color(i));
+
+                                    // Create Legend for Sales by Category
+                                    const salesLegend = d3.select("#sales-category-legend").selectAll(".legend-item")
+                                        .data(pieData)
+                                        .enter()
+                                        .append("div")
+                                        .attr("class", "legend-item");
+
+                                    salesLegend.append("div")
+                                        .attr("class", "legend-color")
+                                        .style("background-color", (d, i) => color(i)) // Set the background color to match the pie segment
+                                        .style("width", "20px") // Set a fixed width for the color swatch
+                                        .style("height", "20px") // Set a fixed height for the color swatch
+                                        .style("display", "inline-block") // Align items inline
+                                        .style("margin-right", "5px"); // Add some space between the color and text
+
+                                    salesLegend.append("span")
+                                        .text(d => `${d.data._id}: ${d.data.totalSales}`); // Add the category name and total sales to the legend
+
+                                </script>
+                            </div>
+                            <script
+                                src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
                         </div>
                     </div>
                 </div>
@@ -218,8 +328,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 <!-- Manage Users Section -->
 <div class="content-section d-none" id="users-section">
@@ -370,16 +478,16 @@
 
 </div>
 
-<!-- Footer -->
-<div class="footer text-center mt-5">
-    <p>&copy; 2024 Canvas Couture - Admin Dashboard</p>
-</div>
+        <!-- Footer -->
+        <div class="footer text-center mt-5">
+            <p>&copy; 2024 Canvas Couture - Admin Dashboard</p>
+        </div>
 
-<!-- Bootstrap and jQuery Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap and jQuery Scripts -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Custom JavaScript -->
+        <!-- Custom JavaScript -->
 
 <script src="/js/toggle-products.js"></script>
 <script src="/js/quantity-selector.js"></script>
@@ -392,4 +500,5 @@
 <script src="/js/register.js"></script>
 <script src="/js/manage-users.js"></script>
 </body>
+
 </html>

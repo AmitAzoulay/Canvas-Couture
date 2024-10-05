@@ -129,3 +129,45 @@ h2 {
 .btn-back:hover {
     background-color: #c93d3d;
 }
+
+.btn-outline-success {
+    padding: 0.25rem 0.5rem; /* Adjust padding */
+    font-size: 0.8rem; /* Adjust font size */
+    height: auto; /* Let the height adjust automatically */
+    min-width: 50px; /* Minimum width */
+}
+
+.btn-outline-success:focus,
+.btn-outline-success:active {
+    background-color: #e0e0e0 !important; /* Desired background color on focus/active */
+    border-color: #c93d3d !important; /* Change border color */
+    color: #000 !important; /* Text color on focus/active */
+    box-shadow: none; /* Remove default box shadow */
+}
+
+/* Override the active state to avoid turning green */
+.btn-outline-success:active {
+    background-color: #c93d3d !important; /* Change this to your desired color */
+    color: white !important; /* Change text color if needed */
+}
+
+.filter-button {
+    border: 1px solid #d9534f; /* Red border */
+    background-color: white; /* White background */
+    color: #d9534f; /* Red text */
+    font-weight: bold; /* Bold text */
+    margin-right: 10px;
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.filter-button:hover {
+    background-color: #c93d3d; /* Background color on hover */
+    color: white; /* Text color on hover */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.filter-button:focus {
+    outline: none; /* Remove focus outline */
+    box-shadow:#c93d3d /* Custom focus outline */
+}

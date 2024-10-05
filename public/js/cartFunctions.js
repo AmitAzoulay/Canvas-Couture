@@ -16,9 +16,9 @@ async function removeFromCart(orderId, productId) {
     }
 }
 
-async function addToCart(productId) {
+async function addToCart(productId, quantity) {
     try {
-        const response = await fetch(`/order/add/${productId}`, {
+        const response = await fetch(`/order/add/${productId}/${quantity}`, {
             method: 'POST',
         });
 

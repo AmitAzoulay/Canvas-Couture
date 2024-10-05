@@ -4,6 +4,6 @@ const orderController = require('../controllers/ordersController')
 
 router.get("/", orderController.getCurrentCart);
 router.delete('/remove/:orderId/:productId', orderController.removeCartItem);
-router.post('/add/:productId', orderController.addToCartById);
+router.post('/add/:productId/:quantity', orderController.addToCartById);
 
 module.exports = router;

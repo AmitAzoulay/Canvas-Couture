@@ -1,5 +1,6 @@
 const adminService = require('../services/adminService');
 const productService = require('../services/productService');
+const infoService = require('../services/infoService');
 
 async function getAllProducts(req, res) {
     try {
@@ -78,11 +79,11 @@ async function deleteProduct(req, res) {
         // Call the service to delete the product
         await adminService.deleteProduct(product_id);
         // Send a success response
-        res.json({ success: true });  
+        res.json({ success: true });
     } catch (error) {
         console.error("Error deleting product:", error);
         // Send an error response
-        res.status(500).json({ success: false, message: 'Error deleting product' }); 
+        res.status(500).json({ success: false, message: 'Error deleting product' });
     }
 }
 
@@ -143,6 +144,16 @@ async function deleteUser(req, res) {
     }
 }
 
+async function getAllStatistics(req, res) {
+    try {
+        const statistics = await infoService.getAllStatistics();
+        console.log(statistics)
+        res.render("../views/admin.ejs", { statistics });
+    } catch (error) {
+        console.error('Error fetching statistics:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
 module.exports = {
     getAllProducts,
     getProductById,
@@ -151,5 +162,6 @@ module.exports = {
     deleteProduct,
     getAllUsers,
     updateUser,
-    deleteUser
+    deleteUser,
+    getAllStatistics
 };

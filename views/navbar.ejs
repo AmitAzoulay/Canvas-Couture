@@ -4,8 +4,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="shopNowDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="shopNowDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Shop Now
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="shopNowDropdown">
@@ -18,24 +17,22 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Info</a>
+                    <a class="nav-link" href="/info">Info</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/aboutus">About Us</a>
                 </li>
-                <!-- Conditionally show the admin dashboard link if the user is an admin -->
-                <% if (session && session.isAdmin) {%>
+                <% if (session && session.isAdmin) { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/dashboard" id="adminDashboard">Admin Dashboard</a>
                     </li>
-                <% } %>
+                    <% } %>
             </ul>
 
-           
             <form class="d-flex" id="searchForm">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                    id="searchInput">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button id="filterButton" class="btn filter-button" type="button" data-bs-toggle="modal" data-bs-target="#filterModal">Filters</button>
+                <input class="form-control me-2" type="text" id="searchInput" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Clear Search</button>
             </form>
             <ul class="navbar-nav ms-3">
                 <li class="nav-item">
@@ -51,4 +48,89 @@
             </ul>
         </div>
     </div>
-</nav> 
+</nav>
+
+<!-- Filter Modal -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="filterModalLabel">Filter Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="filterForm">
+                    <h5>Category</h5>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="category" value="Tops" id="categoryTops">
+                        <label class="form-check-label" for="categoryTops">Tops</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="category" value="Bottoms" id="categoryBottoms">
+                        <label class="form-check-label" for="categoryBottoms">Bottoms</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="category" value="Dresses" id="categoryDresses">
+                        <label class="form-check-label" for="categoryDresses">Dresses</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="category" value="Outerwear" id="categoryOuterwear">
+                        <label class="form-check-label" for="categoryOuterwear">Outerwear</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="category" value="Footwear" id="categoryFootwear">
+                        <label class="form-check-label" for="categoryFootwear">Footwear</label>
+                    </div>
+
+                    <h5>Color</h5>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="color" value="Ivory" id="colorIvory">
+                        <label class="form-check-label" for="colorIvory">Ivory</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="color" value="Blue" id="colorBlue">
+                        <label class="form-check-label" for="colorBlue">Blue</label>
+                    </div>
+
+                    <h5>Size</h5>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="size" value="S" id="sizeS">
+                        <label class="form-check-label" for="sizeS">S</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="size" value="M" id="sizeM">
+                        <label class="form-check-label" for="sizeM">M</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="size" value="L" id="sizeL">
+                        <label class="form-check-label" for="sizeL">L</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="size" value="XL" id="sizeXL">
+                        <label class="form-check-label" for="sizeXL">XL</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="size" value="One Size" id="sizeOneSize">
+                        <label class="form-check-label" for="sizeOneSize">One Size</label>
+                    </div>
+
+                    <h5>Price</h5>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="price" value="0-50" id="price0-50">
+                        <label class="form-check-label" for="price0-100">$0 - $100</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="price" value="51-100" id="price51-100">
+                        <label class="form-check-label" for="price101-200">$101 - $200</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="price" value="101-200" id="price101-200">
+                        <label class="form-check-label" for="price201-300">$201 - $300</label>
+                    </div>
+
+                    <button type="button" id="applyFilter" class="btn btn-primary">Apply Filters</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
