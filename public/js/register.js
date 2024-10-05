@@ -14,9 +14,10 @@
 });
 */
 
-document.querySelector('form').addEventListener('submit', function(event) {
+document.getElementById('form').addEventListener('submit',async function(event) {
     let isValid = true;
-
+    const formType = this.name;
+    //console.log("name is: ",this.name);
     // Clear previous error messages
     document.querySelectorAll('.error').forEach(el => {
         el.style.display = 'none';
@@ -57,6 +58,41 @@ document.querySelector('form').addEventListener('submit', function(event) {
 
     if (!isValid) {
         event.preventDefault(); // Prevent form submission if invalid
+        return; // Stop further execution
     }
-});
+    
+    if(formType == "newAdminForm"){
+        // If the form is valid, proceed with the AJAX request
+        event.preventDefault(); // Prevent the default form submission
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData.entries());
 
+        try {
+            const response = await fetch('/admin/newUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            
+            const result = await response.json();
+
+            if (result.success) {
+                // Show success message in a popup alert
+                alert(result.message);
+                // Close the accordion
+                const accordion = new bootstrap.Collapse(document.getElementById('collapseAddUser'));
+                accordion.hide();
+                // reset the form
+                document.getElementsByName('newAdminForm').reset();
+            } else {
+                // Show error message in a popup alert
+                alert(`Error: ${result.message}`);
+            }
+        } catch (error) {
+            alert(`Error: ${error.message}`);
+        }
+    }
+
+});
