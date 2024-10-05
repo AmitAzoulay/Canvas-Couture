@@ -27,10 +27,35 @@ function getProductsByNameStartsWith(searchTerm) {
     }).exec(); // Ensures it returns a promise
 }
 
+function getFilteredProducts(filters) {
+    const query = {};
+
+    if (filters.category && filters.category.length > 0) {
+        query.category = { $in: filters.category };
+    }
+    if (filters.color && filters.color.length > 0) {
+        query.color = { $in: filters.color };
+    }
+    if (filters.size && filters.size.length > 0) {
+        query.size = { $in: filters.size };
+    }
+    if (filters.price && filters.price.length > 0) {
+        const priceRanges = filters.price.map(price => {
+            const [min, max] = price.split('-').map(Number);
+            return { price: { $gte: min, $lte: max } };
+        });
+        query.$or = priceRanges;
+    }
+
+    return Products.find(query).exec();
+}
+
+
 module.exports = {
     getAllProducts,
     getProductsByCategory,
     getProductsByName,
     getProductById,
-    getProductsByNameStartsWith
+    getProductsByNameStartsWith,
+    getFilteredProducts,
 };

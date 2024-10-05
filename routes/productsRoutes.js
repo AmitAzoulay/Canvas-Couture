@@ -15,4 +15,7 @@ router.get('/search/all', productController.getAllProducts);
 
 // API route for live search
 router.get('/search/live/:searchTerm', productController.liveSearch);
+
+router.post('/search/filtered', productController.getFilteredProducts);
+
 module.exports = router;

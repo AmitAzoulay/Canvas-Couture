@@ -10,6 +10,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="/css/mainStyle.css">
     <link rel="stylesheet" href="/css/productsStyle.css">
+    <link rel="stylesheet" href="/css/filterWindow.css">
     <script src="/js/cartFunctions.js"></script>
 </head>
 
@@ -41,7 +42,7 @@
                         </p>
 
                         <% if (product.stock> 0) { %>
-                            <button class="stock-btn" onclick="addToCart('<%=product._id %>')">
+                            <button class="stock-btn" onclick="addToCart('<%=product._id %>',1)">
                                 <i class="fa fa-plus">+</i>
                             </button>
                             <% } else { %>
@@ -147,6 +148,8 @@
             // Fetch all products on initial load
             fetchAllProducts(); // Fetch all products on initial load
         </script>
+
+        <script src="/js/filter.js"></script>
 </body>
 
 </html>

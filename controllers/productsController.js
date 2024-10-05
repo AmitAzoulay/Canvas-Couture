@@ -71,6 +71,18 @@ async function getProductById(req, res) {
     }
 }
 
+async function getFilteredProducts(req, res) {
+    const filters = req.body; // Get filters from request body
+    try {
+        const products = await productService.getFilteredProducts(filters);
+        res.json({ products });
+    } catch (err) {
+        console.error('Error fetching filtered products:', err);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+
 module.exports = {
     getAllProducts,
     //getAllProductsJSON,
@@ -78,4 +90,5 @@ module.exports = {
     getProductByCategory,
     getProductByName,
     getProductById,
+    getFilteredProducts,
 };
