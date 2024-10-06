@@ -35,6 +35,7 @@ function removeFromCart(orderId, productId) {
             }
 
             updateTotalAmount();
+            alert('Removed from cart successfully!');
         },
         error: function (err) {
             console.error('AJAX Error:', err); // Log the error
@@ -49,11 +50,13 @@ function addToCart(productId, quantity) {
         type: 'POST',
         data: { productId: productId, quantity: quantity },
         success: function (response) {
+
             // Handle the success response (e.g., update quantity in the UI)
             const itemRow = $('#item-' + productId);
             const currentQuantity = itemRow.find('.item-quantity').text();
             itemRow.find('.item-quantity').text(parseInt(currentQuantity) + quantity);
             updateTotalAmount();
+            alert('Added to cart successfully!');
         },
         error: function (err) {
             console.error(err);
