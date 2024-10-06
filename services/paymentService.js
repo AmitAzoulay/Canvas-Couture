@@ -23,7 +23,17 @@ function savePayment(address, cardName, cardNumber, expiryDate, cvv, uid) {
             });
 
             // Step 1: Save the payment
-            return newPayment.save();
+            // Step 1: Save the payment
+            newPayment.save()
+                .then((savedPayment) => {
+                    console.log("Payment saved successfully:", savedPayment);
+                    // Handle success (e.g., send a response to the client)
+                })
+                .catch((error) => {
+                    console.error("Error saving payment:", error);
+                    // Handle error (e.g., send an error response to the client)
+                    console.log("failed")
+                });
         })
         .then(() => {
             // Step 2: Update orders for the user and set them to ordered
