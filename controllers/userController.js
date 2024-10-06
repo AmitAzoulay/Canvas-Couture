@@ -28,13 +28,31 @@ async function loginUser(req, res) {
  * Handle user registration.
  */
 async function registerUser(req, res) {
+    console.log("Incoming User Data:", req.body); // Log incoming data
+    console.log("Is coming from admin:",req.body.isAdmin);
+    
     try {
         await userService.register(req.body);
-        res.redirect("/login"); // Redirect to login page after successful registration
+
+        if (req.body.isAdmin) {
+            // Respond with JSON for admin requests
+            return res.json({ success: true, message: "User added successfully" });
+        } else {
+            // Redirect to login for regular user registration
+            res.redirect("/login");
+        }
     } catch (error) {
-        res.status(400).render("register", { error: error.message }); // Render register view with error
+        if (req.body.isAdmin) {
+            // Respond with JSON in case of errors for admin requests
+            return res.json({ success: false, message: error.message });
+        } else {
+            // Render registration page with the error for regular users
+            res.status(400).render("register", { error: error.message });
+        }
     }
 }
+
+
 
 /**
  * Handle user logout.

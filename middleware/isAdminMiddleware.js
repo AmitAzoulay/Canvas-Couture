@@ -1,6 +1,6 @@
 // Middleware to check if the user is an admin
 function isAdmin(req, res, next) {
-    console.log("Session in isAdmin middleware:", req.session);
+    
     // Check if the user is logged in and if they have admin rights
     if (req.session.isActive && req.session.isAdmin) {
         // User is logged in and is an admin, proceed to the next middleware

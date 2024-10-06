@@ -12,7 +12,7 @@ function savePayment(req, res) {
     if (!userId) {
         return res.status(400).send('User ID is required'); // Handle the case when user ID is not present
     }
-
+    console.log(address, cardName, cardNumber, expiryDate, cvv)
     try {
         paymentService.savePayment(address, cardName, cardNumber, expiryDate, cvv, userId);
         res.redirect("/index");

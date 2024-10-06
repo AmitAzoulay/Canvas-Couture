@@ -6,6 +6,7 @@ body {
     color: #333;
     /* Dark text */
     margin: 20px;
+    /* Margin around body */
 }
 
 h1 {
@@ -23,41 +24,60 @@ h1 {
 
 h2 {
     font-size: 2em;
+    /* Section title size */
     color: #333;
+    /* Dark text color */
     margin-top: 40px;
     /* Space above section title */
     text-align: center;
+    /* Center section titles */
+}
+
+.container {
+    max-width: 800px;
+    /* Limit container width */
+    margin: 0 auto;
+    /* Center the container */
 }
 
 form {
     max-width: 600px;
     /* Limit the width of the form */
-    margin: 0 auto;
-    /* Center the form */
+    margin: 20px auto;
+    /* Center the form and add space above */
     padding: 20px;
-    background-color: #f9f9f9;
-    /* Light background for form */
+    /* Inner padding for form */
+    background-color: #ffffff;
+    /* White background for form */
     border: 1px solid #ccc;
+    /* Light border */
     border-radius: 8px;
+    /* Rounded corners */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
 }
 
 label {
     display: block;
     /* Stack labels */
     margin-bottom: 8px;
+    /* Space below labels */
     font-weight: bold;
-    /* Make labels bold */
+    /* Bold labels */
     color: #555;
+    /* Darker color for labels */
 }
 
-input[type="text"] {
+input[type="text"],
+textarea {
     width: 100%;
     /* Full width for input */
     padding: 10px;
+    /* Inner padding for input */
     margin-bottom: 20px;
     /* Space below input */
     border: 1px solid #ccc;
+    /* Light border */
     border-radius: 4px;
     /* Rounded corners */
     box-sizing: border-box;
@@ -66,14 +86,25 @@ input[type="text"] {
 
 button {
     padding: 10px 15px;
+    /* Inner padding for button */
     background-color: #c72c4d;
     /* Italian wine red */
     color: white;
     /* White text */
     border: none;
+    /* No border */
     border-radius: 4px;
+    /* Rounded corners */
     cursor: pointer;
+    /* Pointer cursor */
     font-size: 1em;
+    /* Font size */
+    transition: background-color 0.3s;
+    /* Smooth transition */
+    display: block;
+    /* Block display for better alignment */
+    width: 100%;
+    /* Full width for button */
 }
 
 button:hover {
@@ -81,20 +112,55 @@ button:hover {
     /* Darker red on hover */
 }
 
-.recommendations-list {
-    list-style-type: none;
-    /* Remove bullet points */
-    padding: 0;
-    /* Remove default padding */
-    margin-top: 20px;
-    /* Space above the list */
+/* Additional styles for primary buttons */
+.btn-primary {
+    background-color: #c72c4d;
+    /* Set the primary button color to Italian wine red */
+    border-color: #a41e38;
+    /* Border color on hover */
 }
 
-.recommendation-item {
+.btn-primary:hover {
+    background-color: #a41e38;
+    /* Darker red on hover */
+    border-color: #8B0000;
+    /* Darker red border on hover */
+}
+
+
+#weatherResult {
     background-color: #e9f5f9;
     /* Light blue background */
     border: 1px solid #c7e1eb;
     /* Light blue border */
+    border-radius: 8px;
+    /* Rounded corners */
+    padding: 20px;
+    /* Padding for spacing */
+    margin-top: 20px;
+    /* Space above weather result */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
+
+/* Headings within the weather result */
+#weatherResult h2 {
+    color: #8B0000;
+    /* Dark red color for headings */
+    text-align: center;
+    /* Centered heading */
+    font-size: 1.8em;
+    /* Font size for subheadings */
+    margin-bottom: 15px;
+    /* Space below heading */
+}
+
+/* Weather recommendation items */
+.recommendation-item {
+    background-color: #fdfd96;
+    /* Light yellow background for recommendations */
+    border: 1px solid #e5e500;
+    /* Yellow border */
     border-radius: 5px;
     /* Rounded corners */
     padding: 15px;
@@ -108,8 +174,31 @@ button:hover {
 }
 
 .recommendation-item:hover {
-    background-color: #d1ebf6;
-    /* Darker blue on hover */
+    background-color: #f3f300;
+    /* Slightly darker yellow on hover */
     cursor: pointer;
     /* Change cursor to pointer on hover */
+}
+
+
+.alert {
+    margin-top: 20px;
+    /* Space above alert messages */
+    padding: 15px;
+    /* Inner padding for alert */
+    border-radius: 5px;
+    /* Rounded corners */
+    color: #ffffff;
+    /* White text for alert */
+}
+
+/* Specific styles for success and error messages */
+.alert-success {
+    background-color: #4CAF50;
+    /* Green background for success */
+}
+
+.alert-danger {
+    background-color: #f44336;
+    /* Red background for error */
 }
