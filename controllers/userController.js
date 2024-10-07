@@ -73,4 +73,3 @@ module.exports = {
     logoutUser,
     changePassword,
 };
-
