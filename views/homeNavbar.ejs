@@ -43,9 +43,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Log Out</a>
+                    <form id="logoutForm" action="/logout" method="POST" style="display:inline;">
+                        <a href="#" id="logoutLink" class="nav-link">Log Out</a>
+                    </form>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script src="/js/homeNavbar.js"></script>
