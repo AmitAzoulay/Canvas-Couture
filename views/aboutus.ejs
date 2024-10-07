@@ -155,16 +155,12 @@
             <div id="map"></div>
           </div>
           <div class="col-md-6 map-description">
-            <h3>Our Branches in North Carolina</h3>
-            <p>We are proud to have multiple locations across North Carolina to serve you better. Each branch offers our
+            <h3>Our Branches</h3>
+            <p>We are proud to have multiple locations to serve you better. Each branch offers our
               full range of products and services, and our dedicated team is always ready to assist you. Find the
-              nearest branch below:</p>
+              nearest branch here</p>
             <ul>
-              <li>Branch 1: 123 Maple St, Charlotte, NC 28202</li>
-              <li>Branch 2: 456 Oak Ave, Raleigh, NC 27601</li>
-              <li>Branch 3: 789 Pine Rd, Greensboro, NC 27401</li>
-              <li>Branch 4: 321 Elm St, Durham, NC 27701</li>
-              <li>Branch 5: 654 Birch Blvd, Asheville, NC 28801</li>
+              <!-- Branch addresses will be dynamically added here by JavaScript -->
             </ul>
           </div>
         </div>
@@ -175,11 +171,10 @@
     <section class="cta-section text-center py-5 animate-on-scroll">
       <div class="container">
         <h2>Want to Learn More?</h2>
-        <p class="lead">Discover how we can bring value to your life. Explore our collection today!</p>
+        <p class="lead">Let Every Step Be a Masterpiece. Explore our collection today!</p>
         <a href="/products/search/all" class="btn btn-primary">Shop Now</a>
       </div>
     </section>
-
     <!-- Footer -->
     <footer class="text-center py-4 ">
       <p class="mb-0">© Canvas Couture, All Rights Reserved.</p>
@@ -197,8 +192,9 @@
     <script src="/js/search.js"></script>
 
     <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4OvS9ScQ5grp7CQ4qa4mDrW3ngTV9lgY&callback=initMap"
-      async defer></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=<%= process.env.MAP_API %>&libraries=marker&callback=initMap">
+  </script>
     <script src="/js/branches-map.js"></script>
 </body>
 

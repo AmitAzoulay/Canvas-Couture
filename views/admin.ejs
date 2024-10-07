@@ -390,8 +390,8 @@
                                 <tr>
                                     <th>First Name</th>
                                     <th>Last Name</th>
-                                    <th>Email</th>
                                     <th>Phone Number</th>
+                                    <th>Email</th>
                                     <th>Is Admin</th>
                                     <th>Is Active</th>
                                     <th>Actions</th>
@@ -474,6 +474,41 @@
         </div>
     </div>
 
+</div>
+<!-- Manage Orders Section -->
+<!-- Manage Orders Section -->
+<div class="content-section d-none" id="orders-section">
+    <div class="mt-4">
+        <div class="accordion" id="ordersAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOrders">
+            <button class="accordion-button collapsed" id="show-orders-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOrders" aria-expanded="false" aria-controls="collapseOrders">
+                Show All Orders
+            </button>
+            </h2>
+            <div id="collapseOrders" class="accordion-collapse collapse" aria-labelledby="headingOrders" data-bs-parent="#ordersAccordion">
+            <div class="accordion-body">
+                <table class="table-admin">
+                <thead>
+                    <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Order Date</th>
+                    <th>Status</th>
+                    <th>Items</th>
+                    <th>Total Price</th>
+                    <th>Change Status</th>
+                    </tr>
+                </thead>
+                <tbody id="orders-table-body">
+                    <!-- Orders will be dynamically inserted here by JavaScript -->
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div> 
+</div>
 </div>
                 </div>
             </div>
