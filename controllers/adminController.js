@@ -1,6 +1,7 @@
 const adminService = require('../services/adminService');
 const productService = require('../services/productService');
 const infoService = require('../services/infoService');
+const sendTweet = require('../services/twitterService');
 
 async function getAllProducts(req, res) {
     try {
@@ -34,6 +35,12 @@ async function addProduct(req, res) {
         await adminService.addProduct({
             product_id, name, category, color, size, price, stock, short_description
         });
+        // Prepare the tweet text
+        const tweetText = `New Arrival✨: ${name} (${category}) - only in $${price}. \n🛍️ Check it out on our website!`;
+
+        // Send the tweet
+        await sendTweet(tweetText); // Call the function to post a tweet
+
         res.json({ success: true, message: 'Product added successfully' }); // Send JSON response
     } catch (error) {
         console.error("Error adding product:", error);
