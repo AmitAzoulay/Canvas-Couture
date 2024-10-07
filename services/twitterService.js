@@ -15,24 +15,19 @@ const client = new TwitterApi({
         console.error('Error sending tweet:', error);
     }
 };*/
+const twitterClient=client.readWrite;
 
-
-const TwitterSDK = {
-    async tweet() {
-        try {
-            const text = "Hello World!"; // Your simple tweet text
-            const response = await client.v1.tweet(text);
-
-            console.log("Tweet posted successfully:", response);
-            return response; // Return the response if needed
-        } catch (ex) {
-            console.error("Error posting to Twitter:", ex.message);
-            throw new Error("Couldn't post to Twitter");
-        }
+// Function to post a tweet using v2 API
+async function postTweet(tweetText) {
+    try {
+        const response = await twitterClient.v2.tweet(tweetText); // Use twitterClient here
+        console.log('Tweet posted successfully:', response);
+    } catch (error) {
+        console.error('Error posting tweet:', error);
     }
-}
+} 
 
-module.exports = TwitterSDK;
+module.exports = postTweet;
 
 
 //module.exports = sendTweet;
