@@ -6,69 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment - Canvas Couture</title>
     <link rel="stylesheet" href="/css/paymentStyle.css">
-    <script>
-        function validateForm(event) {
-            // Prevent form submission for validation
-            event.preventDefault();
-
-            // Get form values
-            const address = document.getElementById("address").value;
-            const cardName = document.getElementById("cardName").value;
-            const cardNumber = document.getElementById("cardNumber").value;
-            const expiryDate = document.getElementById("expiryDate").value;
-            const cvv = document.getElementById("cvv").value;
-
-            // Regular expressions for validation
-            const cardNumberPattern = /^\d{16}$/; // 16 digits
-            const expiryDatePattern = /^(0[1-9]|1[0-2])\/\d{2}$/; // MM/YY format
-            const cvvPattern = /^\d{3}$/; // 3 digits
-
-            // Validation flags
-            let isValid = true;
-
-            // Address validation
-            if (address.trim() === "") {
-                alert("Address is required.");
-                isValid = false;
-            }
-
-            // Name validation
-            if (cardName.trim() === "") {
-                alert("Name on Card is required.");
-                isValid = false;
-            }
-
-            // Card Number validation
-            if (!cardNumberPattern.test(cardNumber)) {
-                alert("Card Number must be 16 digits.");
-                isValid = false;
-            }
-
-            // Expiry Date validation
-            if (!expiryDatePattern.test(expiryDate)) {
-                alert("Expiration Date must be in MM/YY format.");
-                isValid = false;
-            }
-
-            // CVV validation
-            if (!cvvPattern.test(cvv)) {
-                alert("CVV must be 3 digits.");
-                isValid = false;
-            }
-
-            // Submit the form if all validations pass
-            if (isValid) {
-                document.querySelector("form").submit();
-            }
-        }
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/paymentValidation.js"></script>
 </head>
 
 <body>
     <div class="container">
         <h1>Complete Your Purchase</h1>
 
-        <form action="/payment/checkout" method="POST" onsubmit="validateForm(event)">
+        <form action="/payment/checkout" method="POST">
             <!-- Shipping Address -->
             <h2>Shipping Information</h2>
             <label for="address">Address</label>
@@ -102,8 +48,31 @@
         </form>
     </div>
     <div class="text-center mt-5">
-        <button class="btn btn-back" onclick="window.history.back().back()">Back to Shop</button>
+        <button class="btn btn-back" onclick="window.history.back()">Back to Shop</button>
     </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" id="closePopup">&times;</span>
+            <p id="popupMessage">Payment has been successfully completed!</p>
+        </div>
+    </div>
+
+    <script>
+        // Check if the payment was successful
+        const successMessage = "<%= successMessage %>";
+
+        if (successMessage && successMessage.trim() !== "") {
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        // Close the popup when clicking the close button
+        document.getElementById('closePopup').onclick = function() {
+            document.getElementById('popup').style.display = 'none';
+            window.location.href = "/index";
+        };
+    </script>
+
 </body>
 
 </html>

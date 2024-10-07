@@ -1,4 +1,5 @@
-document.getElementById('show-products-btn').addEventListener('click', function() {
+document.getElementById('show-products-btn').addEventListener('click', loadProducts);
+function loadProducts(){
     // Fetch products from the server
     fetch('/admin/products')
         .then(response => response.json())
@@ -21,7 +22,7 @@ document.getElementById('show-products-btn').addEventListener('click', function(
                         <td>${product.short_description}</td>
                         <td>
                             <!-- Edit button with data-* attributes -->
-                            <button class="btn btn-warning btn-sm edit-btn"
+                            <button class="btn btn-warning btn-sm edit-product-btn"
                                 data-id="${product.product_id}"
                                 data-name="${product.name}"
                                 data-category="${product.category}"
@@ -49,7 +50,7 @@ document.getElementById('show-products-btn').addEventListener('click', function(
                     });
                 });
                 // After the table is populated, attach the event listeners for the edit buttons
-                document.querySelectorAll('.edit-btn').forEach(button => {
+                document.querySelectorAll('.edit-product-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const product = {
                             product_id: this.getAttribute('data-id'),
@@ -70,42 +71,7 @@ document.getElementById('show-products-btn').addEventListener('click', function(
             }
         })
         .catch(error => console.error('Error fetching products:', error));
-});
-
-document.getElementById('confirmDelete').addEventListener('click', function() {
-    const productId = document.getElementById('delete_product_id').value; // Get the product ID from hidden input
-    
-    // Send DELETE request to the server
-    fetch(`/admin/products/delete`, { 
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ product_id: productId }) // Send product ID in the request body
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json(); // Parse the JSON response
-        } else {
-            throw new Error('Failed to delete product');
-        }
-    })
-    .then(data => {
-        if (data.success) {
-            alert("Product deleted successfully");
-            // Find the row in the table and remove it
-            const row = document.querySelector(`button[data-id="${productId}"]`).closest('tr');
-            if (row) {
-                row.remove(); // Remove the row from the table
-            }
-            // Hide the modal
-            const deleteProductModal = bootstrap.Modal.getInstance(document.getElementById('deleteProductModal'));
-            deleteProductModal.hide();
-        } else {
-            alert("Failed to delete product");
-        }
-    })
-    .catch(error => {
-        alert(error.message); // Show error message if something goes wrong
-    });
-});
+}
+module.exports = {
+    loadProducts
+};

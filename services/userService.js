@@ -24,8 +24,10 @@ async function register(userData) {
     if (existingUser) {
         throw new Error("Email already in use.");
     }
-
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    if (!userData.password) {
+        throw new Error("Password is required."); // Check if password is provided
+    }
+    const hashedPassword = await bcrypt.hash(userData.password.trim(), 10);
 
     const newUser = new User({
         firstName: userData.firstName,

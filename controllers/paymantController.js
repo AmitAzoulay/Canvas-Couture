@@ -2,7 +2,7 @@ const paymentService = require("../services/paymentService")
 
 
 function getPaymentPage(req, res) {
-    res.render("../views/payment.ejs", {});
+    res.render("../views/payment.ejs", { successMessage: "" });
 }
 
 function savePayment(req, res) {
@@ -12,10 +12,12 @@ function savePayment(req, res) {
     if (!userId) {
         return res.status(400).send('User ID is required'); // Handle the case when user ID is not present
     }
-
+    console.log(address, cardName, cardNumber, expiryDate, cvv)
     try {
         paymentService.savePayment(address, cardName, cardNumber, expiryDate, cvv, userId);
-        res.redirect("/index");
+        res.render("../views/payment.ejs", {
+            successMessage: "Payment has been successfully completed!"
+        });
     } catch (error) {
         console.error('Error saving payment:', error);
         res.status(500).send('Internal Server Error');

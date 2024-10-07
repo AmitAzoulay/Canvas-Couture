@@ -119,8 +119,12 @@ async function addToCartById(uid, productId, quantityOfProduct) {
 
     // Debugging existing item
     if (existingItem) {
-        // If the item exists, increase the quantity
-        existingItem.quantity += quantityOfProduct;
+        const totalQuantity = existingItem.quantity + quantityOfProduct;
+        if (totalQuantity > product.stock) {
+            throw new Error(`Not enough stock. Available stock: ${product.stock}`);
+        }
+        // If the item exists and stock is available, increase the quantity
+        existingItem.quantity = totalQuantity;
     } else {
         // If the item does not exist, add it to the items array
         order.items.push({
