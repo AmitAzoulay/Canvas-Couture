@@ -41,6 +41,7 @@ server.use("/admin", require('./routes/adminRoutes'));
 server.use('/contact', require('./routes/contactRoutes'))
 server.use('/info', require('./routes/infoRoutes'))
 
+
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URI)
     .then(() => console.log('Connected to MongoDB!'))
