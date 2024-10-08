@@ -13,6 +13,39 @@ document.getElementById('addProductForm').addEventListener('submit', async funct
         short_description: document.getElementById('short_description').value
     };
 
+    //Validation
+    // Get form data
+    const priceInput = document.getElementById('price');
+    const stockInput = document.getElementById('stock');
+
+    const price = parseFloat(priceInput.value);
+    const stock = parseFloat(stockInput.value);
+
+    // Get error message elements
+    const priceError = document.getElementById('priceError');
+    const stockError = document.getElementById('stockError');
+
+    // Reset the error messages
+    priceError.style.display = 'none';
+    stockError.style.display = 'none';
+
+    // Validation flags
+    let valid = true;
+
+    // Validate the price
+    if (price <= 0) {
+        priceError.style.display = 'block'; // Show price error
+        priceInput.focus();
+        return;
+    }
+
+    // Validate the stock
+    if (stock <= 0) {
+        stockError.style.display = 'block'; // Show stock error
+        stockInput.focus();
+        return;
+    }
+    
     try {
         const response = await fetch('/admin/products/add', {
             method: 'POST',
