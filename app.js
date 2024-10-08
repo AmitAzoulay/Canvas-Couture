@@ -40,6 +40,7 @@ server.use("/", require('./routes/profileRoutes'));
 server.use("/admin", require('./routes/adminRoutes'));
 server.use('/contact', require('./routes/contactRoutes'))
 server.use('/info', require('./routes/infoRoutes'))
+server.use('/', require('./routes/branchRoutes'))
 server.use('/', require('./routes/twitterRoutes.js')); // Make sure you're using the correct prefix
 
 // Connect to MongoDB
