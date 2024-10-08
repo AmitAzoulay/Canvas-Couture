@@ -112,6 +112,35 @@ async function getTotalPrice(uid) {
 
     return totalPrice.toFixed(2); // Returns the total price formatted to two decimal places
 }
+
+const deletePayment = async (paymentId) => {
+    try {
+        const payment = await Payments.findById(paymentId);
+
+        if (!payment) {
+            throw new Error('Payment not found');
+        }
+
+        await payment.remove();
+        return { success: true, message: 'Payment deleted successfully' };
+    } catch (error) {
+        console.error('Error deleting payment:', error.message);
+        throw new Error('Failed to delete payment');
+    }
+};
+
+const getAllPayments = async () => {
+    try {
+        const payments = await Payments.find(); // Fetch all payment records
+        return payments;
+    } catch (error) {
+        console.error('Error fetching payments:', error.message);
+        throw new Error('Failed to fetch payments');
+    }
+};
+
 module.exports = {
-    savePayment
+    savePayment,
+    deletePayment,
+    getAllPayments
 };

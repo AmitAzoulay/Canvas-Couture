@@ -24,8 +24,46 @@ function savePayment(req, res) {
     }
 }
 
+const getAllPayments = async (req, res) => {
+    try {
+        const payments = await paymentService.getAllPayments();
+        res.status(200).json({ success: true, payments });
+    } catch (error) {
+        console.error('Error in getAllPayments controller:', error.message);
+        res.status(500).json({ success: false, message: 'Error fetching payments' });
+    }
+};
+
+const updatePayment = async (req, res) => {
+    const { paymentId } = req.params;
+    const updateData = req.body; // Expecting the fields to be updated in req.body
+
+    try {
+        const result = await paymentService.updatePayment(paymentId, updateData);
+        res.status(200).json(result);
+    } catch (error) {
+        console.error('Error in updatePayment controller:', error.message);
+        res.status(500).json({ success: false, message: 'Error updating payment' });
+    }
+};
+
+
+const deletePayment = async (req, res) => {
+    const { paymentId } = req.params;
+
+    try {
+        const result = await paymentService.deletePayment(paymentId);
+        res.status(200).json(result);
+    } catch (error) {
+        console.error('Error in deletePayment controller:', error.message);
+        res.status(500).json({ success: false, message: 'Error deleting payment' });
+    }
+};
 
 module.exports = {
     getPaymentPage,
-    savePayment
+    savePayment,
+    getAllPayments,
+    updatePayment,
+    deletePayment
 }
