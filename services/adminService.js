@@ -82,6 +82,12 @@ async function deleteUser(_id) {
         throw new Error('Error deleting user');
     }
 }
+
+async function searchUsers(searchTerm) {
+    return await User.find({ firstName: { $regex: `^${searchTerm}`, $options: 'i' } });
+}
+
+
 module.exports = {
     getAllProducts,
     addProduct,
@@ -89,5 +95,6 @@ module.exports = {
     deleteProduct,
     getAllUsers,
     updateUser,
-    deleteUser
+    deleteUser,
+    searchUsers,
 };

@@ -2,6 +2,7 @@ const adminService = require('../services/adminService');
 const productService = require('../services/productService');
 const infoService = require('../services/infoService');
 const sendTweet = require('../services/twitterService');
+const User = require('../models/user');
 
 async function getAllProducts(req, res) {
     try {
@@ -161,6 +162,23 @@ async function getAllStatistics(req, res) {
         res.status(500).send('Internal Server Error');
     }
 }
+
+async function searchUsers(req, res) {
+    const searchTerm = req.query.search || '';
+    try {
+        const users = await User.find({
+            $or: [
+                { firstName: { $regex: `^${searchTerm}`, $options: 'i' } },
+                { lastName: { $regex: `^${searchTerm}`, $options: 'i' } }
+            ]
+        });
+        res.json({ users });
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
 module.exports = {
     getAllProducts,
     getProductById,
@@ -170,5 +188,6 @@ module.exports = {
     getAllUsers,
     updateUser,
     deleteUser,
-    getAllStatistics
+    getAllStatistics,
+    searchUsers,
 };
