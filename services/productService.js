@@ -33,8 +33,8 @@ function getFilteredProducts(filters) {
     if (filters.category && filters.category.length > 0) {
         query.category = { $in: filters.category };
     }
-    if (filters.color && filters.color.length > 0) {
-        query.color = { $in: filters.color };
+    if (filters.gender && filters.gender.length > 0) {
+        query.gender = { $in: filters.gender };
     }
     if (filters.size && filters.size.length > 0) {
         query.size = { $in: filters.size };
