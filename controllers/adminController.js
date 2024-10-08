@@ -2,6 +2,7 @@ const adminService = require('../services/adminService');
 const productService = require('../services/productService');
 const infoService = require('../services/infoService');
 const sendTweet = require('../services/twitterService');
+const User = require('../models/user');
 
 async function getAllProducts(req, res) {
     try {
@@ -154,13 +155,75 @@ async function deleteUser(req, res) {
 async function getAllStatistics(req, res) {
     try {
         const statistics = await infoService.getAllStatistics();
-        console.log(statistics)
         res.render("../views/admin.ejs", { statistics });
     } catch (error) {
         console.error('Error fetching statistics:', error);
         res.status(500).send('Internal Server Error');
     }
 }
+
+async function searchUsers(req, res) {
+    const searchTerm = req.query.search || '';
+    try {
+        const users = await User.find({
+            $or: [
+                { firstName: { $regex: `^${searchTerm}`, $options: 'i' } },
+                { lastName: { $regex: `^${searchTerm}`, $options: 'i' } }
+            ]
+        });
+        res.json({ users });
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
+
+// Fetch all orders
+async function getAllOrders(req, res) {
+    try {
+        const orders = await adminService.getAllOrders();
+        res.status(200).json({ orders }); // Return orders as JSON
+    } catch (error) {
+        console.error('Failed to fetch orders:', error);
+        res.status(500).json({ error: 'Failed to retrieve orders.' });
+    }
+}
+
+//Update Order
+async function updateOrder(req, res) {
+    const { _id, status } = req.body;
+
+    console.log("Data received from frontend:", req.body);
+
+    try {
+        const updatedOrder = await adminService.updateOrderStatus(_id, status);
+
+        if (!updatedOrder) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        res.json({ message: 'Order status updated successfully', order: updatedOrder });
+    } catch (error) {
+        console.error("Error updating order status:", error);
+        res.status(500).json({ message: 'Error updating order status' });
+    }
+}
+
+
+// Delete order
+async function deleteOrder(req, res) {
+    const { _id } = req.body;
+    console.log("delete order admin controller");
+    try {
+        await adminService.deleteOrder(_id);
+        res.json({ success: true });
+    } catch (error) {
+        console.error("Error deleting order:", error);
+        res.status(500).json({ success: false, message: 'Error deleting order' });
+    }
+}
+
+
 module.exports = {
     getAllProducts,
     getProductById,
@@ -170,5 +233,9 @@ module.exports = {
     getAllUsers,
     updateUser,
     deleteUser,
-    getAllStatistics
+    getAllStatistics,
+    searchUsers,
+    deleteOrder,
+    updateOrder,
+    getAllOrders
 };

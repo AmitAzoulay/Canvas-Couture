@@ -1,5 +1,6 @@
 const Product = require("../models/product");
 const User = require('../models/user'); // Assuming you have a User model
+const Orders = require('../models/orders'); 
 
 
 // Add a new product
@@ -82,6 +83,43 @@ async function deleteUser(_id) {
         throw new Error('Error deleting user');
     }
 }
+
+async function searchUsers(searchTerm) {
+    return await User.find({ firstName: { $regex: `^${searchTerm}`, $options: 'i' } });
+}
+
+// Retrieve all orders
+async function getAllOrders() {
+    try {
+        const orders = await Orders.find();
+        return orders;
+    } catch (error) {
+        throw new Error('Error retrieving orders');
+    }
+}
+
+// Update order status
+async function updateOrderStatus(orderId, status) {
+    const order = await Orders.findById(orderId);
+    if (!order) throw new Error('Order not found');
+
+    // Update only the status
+    order.status = status;
+
+    await order.save();
+    return order;
+}
+
+
+// Delete an order
+async function deleteOrder(_id) {
+    try {
+        await Orders.findOneAndDelete({ _id: _id });
+    } catch (error) {
+        throw new Error('Error deleting order');
+    }
+}
+
 module.exports = {
     getAllProducts,
     addProduct,
@@ -89,5 +127,9 @@ module.exports = {
     deleteProduct,
     getAllUsers,
     updateUser,
-    deleteUser
+    deleteUser,
+    searchUsers,
+    getAllOrders,
+    updateOrderStatus,
+    deleteOrder
 };

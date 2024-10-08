@@ -30,6 +30,7 @@ router.get('/users', isAdmin, adminController.getAllUsers);
 router.put('/users/update', isAdmin, adminController.updateUser);
 
 // Delete user
+<<<<<<< HEAD
 router.delete('/users/delete', isAdmin, adminController.deleteUser);
 
 // Delete payment
@@ -38,3 +39,19 @@ router.get('/payments', paymentController.getAllPayments);
 router.delete('/payment/:paymentId', paymentController.deletePayment);
 
 module.exports = router;
+=======
+router.delete('/users/delete',isAdmin, adminController.deleteUser);
+
+// Route to search users
+router.get('/users/search', adminController.searchUsers);
+
+// Fetch all orders
+router.get('/orders',isAdmin, adminController.getAllOrders);
+
+// Update order
+router.put('/orders/update',isAdmin, adminController.updateOrder);
+
+// Delete order
+router.delete('/orders/delete',isAdmin, adminController.deleteOrder);
+module.exports = router;
+>>>>>>> eeae8053c3f95c08cdb858c6065c023b6cccd468
