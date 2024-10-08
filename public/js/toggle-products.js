@@ -1,12 +1,12 @@
 document.getElementById('show-products-btn').addEventListener('click', loadProducts);
-function loadProducts(){
+function loadProducts() {
     // Fetch products from the server
     fetch('/admin/products')
         .then(response => response.json())
         .then(data => {
             const productsTableBody = document.getElementById('products-table-body');
             productsTableBody.innerHTML = ''; // Clear the existing table content
-            
+
             // Check if products exist and loop through them
             if (data.products && data.products.length > 0) {
                 data.products.forEach(product => {
@@ -44,14 +44,14 @@ function loadProducts(){
                 });
                 // Attach delete button event listeners after the rows are added
                 document.querySelectorAll('.delete-product').forEach(button => {
-                    button.addEventListener('click', function() {
+                    button.addEventListener('click', function () {
                         const productId = this.getAttribute('data-id'); // Get the product ID
                         document.getElementById('delete_product_id').value = productId; // Set product ID in hidden input
                     });
                 });
                 // After the table is populated, attach the event listeners for the edit buttons
                 document.querySelectorAll('.edit-product-btn').forEach(button => {
-                    button.addEventListener('click', function() {
+                    button.addEventListener('click', function () {
                         const product = {
                             product_id: this.getAttribute('data-id'),
                             name: this.getAttribute('data-name'),
@@ -72,6 +72,6 @@ function loadProducts(){
         })
         .catch(error => console.error('Error fetching products:', error));
 }
-module.exports = {
-    loadProducts
-};
+// module.exports = {
+//     loadProducts
+// };
