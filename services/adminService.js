@@ -84,6 +84,10 @@ async function deleteUser(_id) {
     }
 }
 
+async function searchUsers(searchTerm) {
+    return await User.find({ firstName: { $regex: `^${searchTerm}`, $options: 'i' } });
+}
+
 // Retrieve all orders
 async function getAllOrders() {
     try {
@@ -129,6 +133,7 @@ module.exports = {
     getAllUsers,
     updateUser,
     deleteUser,
+    searchUsers,
     getAllOrders,
     updateOrder,
     deleteOrder
