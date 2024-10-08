@@ -4,7 +4,7 @@ document.getElementById("applyFilter").addEventListener("click", function () {
         category: Array.from(form.elements['category'])
             .filter(checkbox => checkbox.checked)
             .map(checkbox => checkbox.value),
-        color: Array.from(form.elements['color'])
+        gender: Array.from(form.elements['gender'])
             .filter(checkbox => checkbox.checked)
             .map(checkbox => checkbox.value),
         size: Array.from(form.elements['size'])
@@ -50,7 +50,7 @@ function applyFilters(filters) {
                         <h3>${product.name}</h3>
                     </a>
                     <p>Price: $${product.price}</p>
-                    <p>Color: ${product.color}</p>
+                    <p>Gender: ${product.gender}</p>
                     <p>Size: ${product.size}</p>
                     <p>Gender: ${product.gender}</p>
                     <p>Category: ${product.category}</p>
