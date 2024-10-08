@@ -170,7 +170,7 @@ document.getElementById('confirmOrderDelete').addEventListener('click', function
         if (data.success) {
             alert("order deleted successfully");
             // Find the row in the table and remove it
-            const row = document.querySelector(`button[data-id="${userId}"]`).closest('tr');
+            const row = document.querySelector(`button[data-id="${orderId}"]`).closest('tr');
             if (row) {
                 row.remove(); // Remove the row from the table
             }

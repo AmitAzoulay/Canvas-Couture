@@ -1,6 +1,7 @@
 const Product = require("../models/product");
 const User = require('../models/user'); // Assuming you have a User model
 const Orders = require('../models/orders'); 
+const Branch = require('../models/branch'); 
 
 
 // Add a new product
@@ -120,6 +121,49 @@ async function deleteOrder(_id) {
     }
 }
 
+// Add a new branch
+async function addBranch(branchData) {
+    try {
+        const branch = new Branch(branchData);
+        await branch.save();
+    } catch (error) {
+        throw new Error('Error adding branch');
+    }
+}
+
+// Retrieve all branches
+async function getAllBranches() {
+    try {
+        const branches = await Branch.find();
+        return branches;
+    } catch (error) {
+        throw new Error('Error retrieving branches');
+    }
+}
+
+// Update branch
+async function updateBranch(branchId, name, address) {
+    const branch = await Branch.findById(branchId);
+    if (!branch) throw new Error('Branch not found');
+
+    // Update only the status
+    branch.name = name;
+    branch.address = address;
+
+    await branch.save();
+    return branch;
+}
+
+
+// Delete a branch
+async function deleteBranch(_id) {
+    try {
+        await Branch.findOneAndDelete({ _id: _id });
+    } catch (error) {
+        throw new Error('Error deleting branch');
+    }
+}
+
 module.exports = {
     getAllProducts,
     addProduct,
@@ -131,5 +175,9 @@ module.exports = {
     searchUsers,
     getAllOrders,
     updateOrderStatus,
-    deleteOrder
+    deleteOrder,
+    deleteBranch,
+    updateBranch,
+    getAllBranches,
+    addBranch
 };

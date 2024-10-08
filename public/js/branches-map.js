@@ -1,7 +1,6 @@
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 7,
-    //center: { lat: 35.2271, lng: -80.8431 }, // Default center on Charlotte
     mapId: '1ef79a163a70d375'
   });
 

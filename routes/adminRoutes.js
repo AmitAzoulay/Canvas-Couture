@@ -42,11 +42,21 @@ router.get('/orders', isAdmin, adminController.getAllOrders);
 router.put('/orders/update', isAdmin, adminController.updateOrder);
 
 // Delete order
-router.delete('/orders/delete', isAdmin, adminController.deleteOrder);
+router.delete('/orders/delete',isAdmin, adminController.deleteOrder);
 
-// Delete payment
+// POST route to add a new branch
+router.post('/branches/add', isAdmin, adminController.addBranch);
+
+// Fetch all branches
+router.get('/branches',isAdmin, adminController.getAllBranches);
+
+// Update branch
+router.put('/branches/update',isAdmin, adminController.updateBranch);
+
+// Delete branch
+router.delete('/branches/delete',isAdmin, adminController.deleteBranch);
+// payment
 router.put('/payment/:paymentId', paymentController.updatePayment);
 router.get('/payments', paymentController.getAllPayments);
 router.delete('/payment/:paymentId', paymentController.deletePayment);
-
 module.exports = router;
