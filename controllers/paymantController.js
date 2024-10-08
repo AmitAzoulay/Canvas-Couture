@@ -25,7 +25,6 @@ function savePayment(req, res) {
 }
 
 const getAllPayments = async (req, res) => {
-    console.log("aaaaaaaaaaaa")
     try {
         const payments = await paymentService.getAllPayments();
         res.status(200).json({ success: true, payments });
@@ -51,7 +50,6 @@ const updatePayment = async (req, res) => {
 
 const deletePayment = async (req, res) => {
     const { paymentId } = req.params;
-    console.log("alino kmo geshem")
 
     try {
         const result = await paymentService.deletePayment(paymentId);
