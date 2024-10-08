@@ -43,7 +43,6 @@ server.use('/info', require('./routes/infoRoutes'))
 server.use('/', require('./routes/branchRoutes'))
 server.use('/', require('./routes/twitterRoutes.js')); // Make sure you're using the correct prefix
 
-
 // Connect to MongoDB
 mongoose.connect(process.env.DB_URI)
     .then(() => console.log('Connected to MongoDB!'))
