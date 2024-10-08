@@ -172,32 +172,26 @@ async function getAllOrders(req, res) {
     }
 }
 
-// Update order
+//Update Order
 async function updateOrder(req, res) {
-    const { _id, userId, items, orderDate, status, ordered } = req.body;  // Correctly destructuring req.body
-    console.log("admin controller update order");
+    const { _id, status } = req.body;
+
     console.log("Data received from frontend:", req.body);
+
     try {
-        const updatedOrder = await adminService.updateOrder({
-            _id,
-            userId,
-            items: items, // Parse items if it's passed as a string (e.g., from a form)
-            orderDate,
-            status,
-            ordered: ordered === 'on' || ordered === true, // Checkbox handling
-        });
-        
+        const updatedOrder = await adminService.updateOrderStatus(_id, status);
+
         if (!updatedOrder) {
             return res.status(404).json({ message: 'Order not found' });
         }
 
-        res.json({ message: 'Order updated successfully', order: updatedOrder });
-
+        res.json({ message: 'Order status updated successfully', order: updatedOrder });
     } catch (error) {
-        console.error("Error updating order:", error);
-        res.status(500).json({ message: 'Error updating order' });
+        console.error("Error updating order status:", error);
+        res.status(500).json({ message: 'Error updating order status' });
     }
 }
+
 
 // Delete order
 async function deleteOrder(req, res) {
