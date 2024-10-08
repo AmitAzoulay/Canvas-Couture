@@ -1,5 +1,6 @@
 // Function to dynamically load users
 function loadUsers() {
+    console.log("load users");
     fetch('/admin/users')
         .then(response => response.json())
         .then(data => {
@@ -164,10 +165,10 @@ document.getElementById('confirmUserDelete').addEventListener('click', function(
                 row.remove(); // Remove the row from the table
             }
             // Hide the modal
-            const deleteProductModal = bootstrap.Modal.getInstance(document.getElementById('deleteUserModal'));
-            deleteProductModal.hide();
+            const deleteUserModal = bootstrap.Modal.getInstance(document.getElementById('deleteUserModal'));
+            deleteUserModal.hide();
         } else {
-            alert("Failed to delete product");
+            alert("Failed to delete user");
         }
     })
     .catch(error => {

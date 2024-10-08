@@ -30,4 +30,16 @@ router.put('/users/update',isAdmin, adminController.updateUser);
 
 // Delete user
 router.delete('/users/delete',isAdmin, adminController.deleteUser);
+
+// Route to search users
+router.get('/users/search', adminController.searchUsers);
+
+// Fetch all orders
+router.get('/orders',isAdmin, adminController.getAllOrders);
+
+// Update order
+router.put('/orders/update',isAdmin, adminController.updateOrder);
+
+// Delete order
+router.delete('/orders/delete',isAdmin, adminController.deleteOrder);
 module.exports = router;
