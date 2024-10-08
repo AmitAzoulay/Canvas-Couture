@@ -11,16 +11,6 @@ async function getAllProducts(req, res) {
     }
 }
 
-// API route to fetch all products as JSON
-/*async function getAllProductsJSON(req, res) {
-    try {
-        const products = await productService.getAllProducts(); // Fetch all products
-        res.json({ products });
-    } catch (err) {
-        res.status(500).send(err);
-    }
-}*/
-
 // Function for live search
 async function liveSearch(req, res) {
     const searchTerm = req.params.searchTerm.toLowerCase();
@@ -85,7 +75,6 @@ async function getFilteredProducts(req, res) {
 
 module.exports = {
     getAllProducts,
-    //getAllProductsJSON,
     liveSearch,
     getProductByCategory,
     getProductByName,
