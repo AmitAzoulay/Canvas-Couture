@@ -139,8 +139,30 @@ const getAllPayments = async () => {
     }
 };
 
+const updatePayment = async (paymentId, updateData) => {
+    try {
+        const payment = await Payments.findById(paymentId);
+
+        if (!payment) {
+            throw new Error('Payment not found');
+        }
+
+        // Update the fields that are passed
+        Object.keys(updateData).forEach((key) => {
+            payment[key] = updateData[key];
+        });
+
+        await payment.save();
+        return { success: true, message: 'Payment updated successfully', payment };
+    } catch (error) {
+        console.error('Error updating payment:', error.message);
+        throw new Error('Failed to update payment');
+    }
+};
+
 module.exports = {
     savePayment,
     deletePayment,
-    getAllPayments
+    getAllPayments,
+    updatePayment
 };
