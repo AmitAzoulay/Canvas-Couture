@@ -223,6 +223,71 @@ async function deleteOrder(req, res) {
     }
 }
 
+// Fetch all branches
+async function getAllBranches(req, res) {
+    try {
+        const branches = await adminService.getAllBranches();
+        res.status(200).json({ branches }); // Return branches as JSON
+    } catch (error) {
+        console.error('Failed to fetch branches:', error);
+        res.status(500).json({ error: 'Failed to retrieve branches.' });
+    }
+}
+
+//Update Order
+async function updateBranch(req, res) {
+    const { _id, name, address } = req.body;
+
+    console.log("Data received from frontend:", req.body);
+
+    try {
+        const updatedBranch = await adminService.updateBranch(_id, name, address);
+
+        if (!updatedBranch) {
+            return res.status(404).json({ message: 'Branch not found' });
+        }
+
+        res.json({ message: 'Branch updated successfully', order: updatedBranch });
+    } catch (error) {
+        console.error("Error updating order status:", error);
+        res.status(500).json({ message: 'Error updating branch' });
+    }
+}
+
+
+// Delete branch
+async function deleteBranch(req, res) {
+    const { _id } = req.body;
+    console.log("delete branch admin controller");
+    try {
+        await adminService.deleteBranch(_id);
+        res.json({ success: true });
+    } catch (error) {
+        console.error("Error deleting branch:", error);
+        res.status(500).json({ success: false, message: 'Error deleting branch' });
+    }
+}
+
+// Add a new branch
+async function addBranch(req, res) {
+    const { name, address} = req.body;
+    console.log("Incoming Branch Data:", req.body); // Log the incoming data
+    try {
+        await adminService.addBranch({
+            name, address
+        });
+        // Prepare the tweet text
+        const tweetText = `News Flash!!! Opening a new branch✨: ${name} in (${address}). \n🛍️ Go Check it out!`;
+
+        // Send the tweet
+        await sendTweet(tweetText); // Call the function to post a tweet
+
+        res.json({ success: true, message: 'Branch added successfully' }); // Send JSON response
+    } catch (error) {
+        console.error("Error adding branch:", error);
+        res.status(500).json({ success: false, message: 'Error adding branch' }); // Send error response
+    }
+}
 
 module.exports = {
     getAllProducts,
@@ -237,5 +302,9 @@ module.exports = {
     searchUsers,
     deleteOrder,
     updateOrder,
-    getAllOrders
+    getAllOrders,
+    deleteBranch,
+    updateBranch,
+    getAllBranches,
+    addBranch
 };

@@ -42,4 +42,16 @@ router.put('/orders/update',isAdmin, adminController.updateOrder);
 
 // Delete order
 router.delete('/orders/delete',isAdmin, adminController.deleteOrder);
+
+// POST route to add a new branch
+router.post('/branches/add', isAdmin, adminController.addBranch);
+
+// Fetch all branches
+router.get('/branches',isAdmin, adminController.getAllBranches);
+
+// Update branch
+router.put('/branches/update',isAdmin, adminController.updateBranch);
+
+// Delete branch
+router.delete('/branches/delete',isAdmin, adminController.deleteBranch);
 module.exports = router;
