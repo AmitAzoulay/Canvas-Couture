@@ -8,6 +8,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    table-layout: auto; /* Allows the table to automatically adjust column widths */
 }
 
 .table-admin th,
@@ -15,6 +16,8 @@
     padding: 15px;
     border: 1px solid #dee2e6;
     text-align: left;
+    white-space: normal; /* Allows text to wrap inside table cells */
+    word-wrap: break-word; /* Ensures long words break into the next line */
 }
 
 .table-admin th {
@@ -72,4 +75,9 @@
     /* Height of the color box */
     margin-right: 10px;
     /* Space between color box and text */
+}
+
+.table-admin {
+    width: 100%; /* Ensures the table fits within its container (the card) */
+    
 }

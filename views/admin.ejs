@@ -208,11 +208,13 @@
                                                     <label for="price">Price</label>
                                                     <input type="number" class="form-control" id="price" name="price"
                                                         required>
+                                                    <small id="priceError" class="form-text text-danger" style="display: none;">Price must be greater than 0</small>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="stock">Stock</label>
                                                     <input type="number" class="form-control" id="stock" name="stock"
                                                         required>
+                                                        <small id="stockError" class="form-text text-danger" style="display: none;">Stock must be greater than 0</small>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="short_description">Short Description</label>
@@ -240,7 +242,7 @@
                                     <div id="collapseProducts" class="accordion-collapse collapse"
                                         aria-labelledby="headingProducts" data-bs-parent="#productsAccordion">
                                         <div class="accordion-body">
-                                            <table class="table-admin">
+                                            <table class="table-admin table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th>Product ID</th>
@@ -439,7 +441,7 @@
                                                     placeholder="Search Users..." />
                                             </div>
 
-                                            <table id="userTable" class="table-admin">
+                                            <table id="userTable" class="table-admin table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th>First Name</th>
@@ -559,7 +561,7 @@
                                     <div id="collapseOrders" class="accordion-collapse collapse"
                                         aria-labelledby="headingOrders" data-bs-parent="#ordersAccordion">
                                         <div class="accordion-body">
-                                            <table class="table-admin" id="orderTable">
+                                            <table class="table-admin table table-striped table-bordered" id="orderTable">
                                                 <thead>
                                                     <tr>
                                                         <th>Order ID</th>
@@ -646,14 +648,14 @@
                                     <h2 class="accordion-header" id="headingPayments">
                                         <button class="accordion-button" id="show-payments-btn" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#collapsePayments"
-                                            aria-expanded="true" aria-controls="collapsePayments">
+                                            aria-expanded="false" aria-controls="collapsePayments">
                                             Show All Payments
                                         </button>
                                     </h2>
                                     <div id="collapsePayments" class="accordion-collapse collapse"
                                         aria-labelledby="headingPayments" data-bs-parent="#paymentsAccordion">
                                         <div class="accordion-body">
-                                            <table class="table-admin">
+                                            <table class="table-admin table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th>Payment ID</th>
@@ -785,7 +787,7 @@
                                             <div class="mb-3">
                                                 <input type="text" id="userSearchInput" class="form-control" placeholder="Search Branches..." />
                                             </div>-->
-                                            <table id="BranchesTable" class="table-admin">
+                                            <table id="BranchesTable" class="table-admin table table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th>Branch Name</th>
