@@ -3,7 +3,7 @@ const { isAdmin } = require('../middleware/isAdminMiddleware');
 const router = express.Router();
 const adminController = require('../controllers/adminController')
 const userController = require('../controllers/userController')
-const paymentController = require('../controllers/paymentController')
+const paymentController = require('../controllers/paymantController')
 
 require('dotenv').config();
 
