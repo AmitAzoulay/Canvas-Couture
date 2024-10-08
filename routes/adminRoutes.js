@@ -33,8 +33,8 @@ router.put('/users/update', isAdmin, adminController.updateUser);
 router.delete('/users/delete', isAdmin, adminController.deleteUser);
 
 // Delete payment
-router.delete('/payment/:paymentId', paymentController.deletePayment);
 router.put('/payment/:paymentId', paymentController.updatePayment);
 router.get('/payments', paymentController.getAllPayments);
+router.delete('/payment/:paymentId', paymentController.deletePayment);
 
 module.exports = router;

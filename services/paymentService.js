@@ -121,7 +121,7 @@ const deletePayment = async (paymentId) => {
             throw new Error('Payment not found');
         }
 
-        await payment.remove();
+        await Payments.deleteOne({ _id: payment._id })
         return { success: true, message: 'Payment deleted successfully' };
     } catch (error) {
         console.error('Error deleting payment:', error.message);

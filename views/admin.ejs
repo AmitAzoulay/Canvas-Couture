@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="/css/mainStyle.css">
     <link rel="stylesheet" href="/css/adminStyle.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </head>
 
 <body>
@@ -35,6 +39,8 @@
                         <a href="#" class="list-group-item list-group-item-action" data-target="users">Manage Users</a>
                         <a href="#" class="list-group-item list-group-item-action" data-target="orders">Manage
                             Orders</a>
+                        <a href="#" class="list-group-item list-group-item-action" data-target="payment">Manage
+                            Payments</a>
                     </div>
                 </div>
 
@@ -532,6 +538,47 @@
                         </div>
 
                     </div>
+                    <div class="content-section" id="payment-section">
+                        <!-- All Payments section card -->
+                        <div class="mt-4">
+                            <div class="accordion" id="paymentsAccordion">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingPayments">
+                                        <button class="accordion-button" id="show-payments-btn" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapsePayments"
+                                            aria-expanded="true" aria-controls="collapsePayments">
+                                            Show All Payments
+                                        </button>
+                                    </h2>
+                                    <div id="collapsePayments" class="accordion-collapse collapse show"
+                                        aria-labelledby="headingPayments" data-bs-parent="#paymentsAccordion">
+                                        <div class="accordion-body">
+                                            <table class="table-admin">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Payment ID</th>
+                                                        <th>User ID</th>
+                                                        <th>Address</th>
+                                                        <th>Credit Name</th>
+                                                        <th>Credit Number</th>
+                                                        <th>Expiration Date</th>
+                                                        <th>CVV</th>
+                                                        <th>Payment Price</th>
+                                                        <th>Paid at</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="payments-table-body">
+                                                    <!-- Payments will be inserted here by JavaScript -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Manage Orders Section -->
                     <!-- Manage Orders Section -->
                     <div class="content-section d-none" id="orders-section">
@@ -573,13 +620,16 @@
                 </div>
             </div>
         </div>
+
+
+
+
         <!-- Footer -->
         <div class="footer text-center mt-5">
             <p>&copy; 2024 Canvas Couture - Admin Dashboard</p>
         </div>
 
         <!-- Bootstrap and jQuery Scripts -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 
 
@@ -595,6 +645,7 @@
         <script src="/js/add-product.js"></script>
         <script src="/js/register.js"></script>
         <script src="/js/manage-users.js"></script>
+        <script src="/js/paymentFunctions.js"></script>
 </body>
 
 </html>
