@@ -155,7 +155,6 @@ async function deleteUser(req, res) {
 async function getAllStatistics(req, res) {
     try {
         const statistics = await infoService.getAllStatistics();
-        console.log(statistics)
         res.render("../views/admin.ejs", { statistics });
     } catch (error) {
         console.error('Error fetching statistics:', error);
@@ -179,6 +178,58 @@ async function searchUsers(req, res) {
     }
 }
 
+// Fetch all orders
+async function getAllOrders(req, res) {
+    try {
+        const orders = await adminService.getAllOrders();
+        res.status(200).json({ orders }); // Return orders as JSON
+    } catch (error) {
+        console.error('Failed to fetch orders:', error);
+        res.status(500).json({ error: 'Failed to retrieve orders.' });
+    }
+}
+
+// Update order
+async function updateOrder(req, res) {
+    const { _id, userId, items, orderDate, status, ordered } = req.body;  // Correctly destructuring req.body
+    console.log("admin controller update order");
+    console.log("Data received from frontend:", req.body);
+    try {
+        const updatedOrder = await adminService.updateOrder({
+            _id,
+            userId,
+            items: items, // Parse items if it's passed as a string (e.g., from a form)
+            orderDate,
+            status,
+            ordered: ordered === 'on' || ordered === true, // Checkbox handling
+        });
+        
+        if (!updatedOrder) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        res.json({ message: 'Order updated successfully', order: updatedOrder });
+
+    } catch (error) {
+        console.error("Error updating order:", error);
+        res.status(500).json({ message: 'Error updating order' });
+    }
+}
+
+// Delete order
+async function deleteOrder(req, res) {
+    const { _id } = req.body;
+    console.log("delete order admin controller");
+    try {
+        await adminService.deleteOrder(_id);
+        res.json({ success: true });
+    } catch (error) {
+        console.error("Error deleting order:", error);
+        res.status(500).json({ success: false, message: 'Error deleting order' });
+    }
+}
+
+
 module.exports = {
     getAllProducts,
     getProductById,
@@ -190,4 +241,7 @@ module.exports = {
     deleteUser,
     getAllStatistics,
     searchUsers,
+    deleteOrder,
+    updateOrder,
+    getAllOrders
 };
