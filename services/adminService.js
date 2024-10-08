@@ -98,23 +98,18 @@ async function getAllOrders() {
     }
 }
 
-// Update an existing order
-async function updateOrder(orderData) {
-    const { _id, userId, items, orderDate, status, ordered } = orderData;
-    console.log("admin service update order",orderData);
-    const order = await Orders.findById(_id);
+// Update order status
+async function updateOrderStatus(orderId, status) {
+    const order = await Orders.findById(orderId);
     if (!order) throw new Error('Order not found');
 
-    // Update the order fields
-    order.userId = userId;
-    order.items = items;
-    order.orderDate = orderDate;
+    // Update only the status
     order.status = status;
-    order.ordered = ordered;
 
     await order.save();
     return order;
 }
+
 
 // Delete an order
 async function deleteOrder(_id) {
@@ -135,6 +130,6 @@ module.exports = {
     deleteUser,
     searchUsers,
     getAllOrders,
-    updateOrder,
+    updateOrderStatus,
     deleteOrder
 };

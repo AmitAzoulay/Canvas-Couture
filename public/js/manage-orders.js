@@ -51,6 +51,18 @@ function loadOrders() {
                 // Attach the event listeners for the edit buttons
                 document.querySelectorAll('.edit-order-btn').forEach(button => {
                     button.addEventListener('click', function() {
+                        const itemsString = this.getAttribute('data-items');
+        
+                        // Parse the string to an array of objects
+                        const items = itemsString.split(', ').map(itemString => {
+                            const match = itemString.match(/(.+)\s\(x(\d+)\)/);
+                            if (match) {
+                                return {
+                                    name: match[1],
+                                    quantity: parseInt(match[2], 10)
+                                };
+                            }
+                        }).filter(item => item);  // Remove undefined values if the regex doesn't match
                         const order = {
                             _id: this.getAttribute('data-id'),
                             userId: this.getAttribute('data-user'),
@@ -96,11 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Open modal with order details for editing
 function openEditModal(order) {
     document.getElementById('edit_order_id').value = order._id;
-    document.getElementById('edit_userId').value = order.userId;
-    document.getElementById('edit_items').value = JSON.stringify(order.items);
-    document.getElementById('edit_orderDate').value = new Date(order.orderDate).toISOString().slice(0, 16); // Format date for input
     document.getElementById('edit_status').value = order.status;
-    document.getElementById('ordered').checked = JSON.parse(order.ordered);
 }
 
 
@@ -109,43 +117,34 @@ document.getElementById('editOrderForm').addEventListener('submit', async functi
     e.preventDefault();
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
-    // Convert the items back to an array
-    try {
-        data.items = JSON.parse(data.items); // Convert the string back into an array of objects
-    } catch (error) {
-        console.error('Failed to parse items:', error);
-        alert('Invalid items format');
-        return; // Stop if the items can't be parsed
-    }
+
     console.log("Data being sent to the server:", data);
-    try{
-        // Send PUT request to the backend
+
+    try {
         const response = await fetch('/admin/orders/update', {
-            method: 'PUT', // Use PUT for updating
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data), // Send data as JSON
+            body: JSON.stringify(data), // Send only _id and status
         });
-    const result = await response.json();
-    if (response.ok) {
-        // Successfully updated the order
-        alert('Order updated successfully!');
 
-        // Close the modal
-        let editOrderModal = document.getElementById('editOrderModal');
-        let modalInstance = bootstrap.Modal.getInstance(editOrderModal); 
-        modalInstance.hide();
-
-        loadOrders();
-    } else {
-        alert(result.message || 'Failed to update order');
-    }
+        const result = await response.json();
+        if (response.ok) {
+            alert('Order status updated successfully!');
+            let editOrderModal = document.getElementById('editOrderModal');
+            let modalInstance = bootstrap.Modal.getInstance(editOrderModal); 
+            modalInstance.hide();
+            loadOrders(); // Reload the orders after update
+        } else {
+            alert(result.message || 'Failed to update order status');
+        }
     } catch (error) {
         console.error('Error updating order:', error);
-        alert('Error updating order');
+        alert('Error updating order status');
     }
 });
+
 
 // Delete order
 document.getElementById('confirmOrderDelete').addEventListener('click', function() {
