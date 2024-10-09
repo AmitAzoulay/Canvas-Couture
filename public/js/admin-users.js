@@ -1,4 +1,3 @@
-// Add this to your JavaScript file
 document.getElementById("userSearchInput").addEventListener("input", function () {
     const searchTerm = this.value;
     searchUsers(searchTerm);

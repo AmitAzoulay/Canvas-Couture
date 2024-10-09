@@ -3,7 +3,6 @@ const User = require('../models/user'); // Assuming you have a User model
 const Orders = require('../models/orders'); 
 const Branch = require('../models/branch'); 
 
-
 // Add a new product
 async function addProduct(productData) {
     try {
@@ -99,6 +98,27 @@ async function getAllOrders() {
     }
 }
 
+// Service function to search orders by status
+async function searchOrdersByStatus(status){
+    try {
+        // Use case-insensitive search by status
+        const orders = await Orders.find({ status: new RegExp(status, 'i') });
+        return orders;
+    } catch (error) {
+        throw new Error('Error fetching orders by status');
+    }
+};
+
+// Service function to fetch all orders
+exports.getAllOrders = async () => {
+    try {
+        const orders = await Orders.find({});
+        return orders;
+    } catch (error) {
+        throw new Error('Error fetching all orders');
+    }
+};
+
 // Update order status
 async function updateOrderStatus(orderId, status) {
     const order = await Orders.findById(orderId);
@@ -174,6 +194,7 @@ module.exports = {
     deleteUser,
     searchUsers,
     getAllOrders,
+    searchOrdersByStatus,
     updateOrderStatus,
     deleteOrder,
     deleteBranch,

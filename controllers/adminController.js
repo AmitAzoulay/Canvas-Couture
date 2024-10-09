@@ -189,6 +189,25 @@ async function getAllOrders(req, res) {
     }
 }
 
+// Controller function to search orders by status
+async function searchOrdersByStatus(req, res) {
+    const searchStatus = req.query.status;
+
+    try {
+        // If no status is provided or it's "All", return all orders
+        if (!searchStatus || searchStatus === 'All') {
+            const orders = await adminService.getAllOrders();
+            return res.json({ orders });
+        }
+
+        // Otherwise, filter by the provided status
+        const orders = await adminService.searchOrdersByStatus(searchStatus);
+        res.json({ orders });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching orders', error });
+    }
+};
+
 //Update Order
 async function updateOrder(req, res) {
     const { _id, status } = req.body;
@@ -303,6 +322,7 @@ module.exports = {
     deleteOrder,
     updateOrder,
     getAllOrders,
+    searchOrdersByStatus,
     deleteBranch,
     updateBranch,
     getAllBranches,
