@@ -25,7 +25,7 @@
                 <% products.forEach(product=> { %>
                     <li class="product-item">
                         <a href="/products/search/product/<%= product.product_id %>" class="product-link">
-                            <p><img src="/img/<%= product.name %>.png" alt="<%= product.name %>"
+                            <p><img src="/img/<%= product.image %>" alt="<%= product.name %>"
                                     class="card-product-img" /></p>
                             <h3>
                                 <%= product.name %>

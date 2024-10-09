@@ -9,7 +9,8 @@ const ProductsSchema = new mongoose.Schema({
     "price": Number,
     "stock": Number,
     "gender": String,
-    "short_description": String
+    "short_description": String,
+    "image": String
 
 });
 

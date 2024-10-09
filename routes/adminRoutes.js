@@ -1,5 +1,6 @@
 const express = require('express');
 const { isAdmin } = require('../middleware/isAdminMiddleware');
+const upload  = require('../middleware/multerConfig'); // Multer configuration for file uploads
 const router = express.Router();
 const adminController = require('../controllers/adminController')
 const userController = require('../controllers/userController')
@@ -13,7 +14,7 @@ router.get("/dashboard", isAdmin, adminController.getAllStatistics);
 router.get('/products', isAdmin, adminController.getAllProducts);
 
 // POST route to add a new product
-router.post('/products/add', isAdmin, adminController.addProduct); // Add new product
+router.post('/products/add', isAdmin,upload.single('image'), adminController.addProduct); // Add new product
 // Route to edit a product
 router.put('/products/edit', isAdmin, adminController.editProduct);
 
