@@ -20,25 +20,22 @@ function removeFromCart(orderId, productId) {
         data: JSON.stringify({ orderId: orderId, productId: productId, action: 'decrease' }), // Pass the action
         contentType: 'application/json', // Set content type to JSON
         success: function (response) {
-            // Remove the item from the cart in the UI
-            $(`#item-${productId}`).remove();
+            console.log('Response:', response); // Log response
 
-            // Update the total amount
-            let totalAmount = 0;
-            $('.item-price').each(function () {
-                const price = parseFloat($(this).text());
-                const quantity = parseFloat($(this).closest('tr').find('.item-quantity').text());
-                totalAmount += price * quantity;
-            });
+            // Get the current quantity from the UI
+            const itemQuantityElem = $('#item-' + productId).find('.item-quantity');
+            let currentQuantity = parseInt(itemQuantityElem.text());
 
-            // If the total amount is 0 or the cart is empty, reload the cart page
-            if (totalAmount === 0 || $('.item-price').length === 0) {
-                window.location.reload(); // Reload the page to refresh the cart
+            if (currentQuantity > 1) {
+                // Decrease the quantity by 1
+                itemQuantityElem.text(currentQuantity - 1);
             } else {
-                // Update the displayed total amount if there are still items in the cart
-                $('.total h2').text(`Total Amount: $${totalAmount.toFixed(2)}`);
+                // Remove the item if quantity reaches 0
+                $('#item-' + productId).remove();
             }
-            alert('Remove from cart successfully!');
+
+            updateTotalAmount();
+            alert('Removed from cart successfully!');
         },
         error: function (err) {
             console.error('AJAX Error:', err); // Log the error
