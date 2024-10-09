@@ -60,8 +60,9 @@ async function getAllUsers() {
 }
 
 async function updateUser(userData) {
-    const { _id,firstName, lastName, phoneNumber, email, isAdmin,isActive } = userData;
-    const user = await User.findById(_id);
+    const { user_id,firstName, lastName, phoneNumber, email, isAdmin,isActive } = userData;
+    const user = await User.findById(user_id);
+    console.log("user id:",user_id);
     if (!user) throw new Error("User not found");
 
     user.firstName = firstName;
@@ -162,8 +163,8 @@ async function getAllBranches() {
 }
 
 // Update branch
-async function updateBranch(branchId, name, address) {
-    const branch = await Branch.findById(branchId);
+async function updateBranch(branch_id, name, address) {
+    const branch = await Branch.findById(branch_id);
     if (!branch) throw new Error('Branch not found');
 
     // Update only the status
@@ -176,9 +177,9 @@ async function updateBranch(branchId, name, address) {
 
 
 // Delete a branch
-async function deleteBranch(_id) {
+async function deleteBranch(branch_id) {
     try {
-        await Branch.findOneAndDelete({ _id: _id });
+        await Branch.findOneAndDelete({ _id: branch_id });
     } catch (error) {
         throw new Error('Error deleting branch');
     }

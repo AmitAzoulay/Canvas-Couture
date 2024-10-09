@@ -278,10 +278,10 @@ async function updateBranch(req, res) {
 
 // Delete branch
 async function deleteBranch(req, res) {
-    const { _id } = req.body;
+    const { branch_id } = req.body;
     console.log("delete branch admin controller");
     try {
-        await adminService.deleteBranch(_id);
+        await adminService.deleteBranch(branch_id);
         res.json({ success: true });
     } catch (error) {
         console.error("Error deleting branch:", error);

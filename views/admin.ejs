@@ -174,6 +174,8 @@
                                                     <label for="product_id">Product ID</label>
                                                     <input type="number" class="form-control" id="product_id"
                                                         name="product_id" required>
+                                                    <small id="idError" class="form-text text-danger"
+                                                    style="display: none;">ID must be greater than 0</small>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="name">Product Name</label>
@@ -855,7 +857,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- Hidden field to store Branch ID -->
-                                    <input type="hidden" id="edit_branch_id" name="branch__id">
+                                    <input type="hidden" id="edit_branch_id" name="branch_id">
 
                                             <div class="form-group">
                                                 <label for="name">Branch Name</label>
