@@ -79,7 +79,9 @@ async function changePassword(req, res) {
 
     try {
         const result = await userService.updatePassword(email, newPassword);
-        res.redirect("/login");
+        // Pass success message to the change-password view
+        res.render("login", { success: "Password changed successfully. Please log in with your new password." });
+        //res.redirect("/login");
     } catch (error) {
         res.status(400).send(error.message);
     }
