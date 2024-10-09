@@ -79,7 +79,7 @@ async function changePassword(req, res) {
 
     try {
         const result = await userService.updatePassword(email, newPassword);
-        res.send("Password changed successfully.");
+        res.redirect("/login");
     } catch (error) {
         res.status(400).send(error.message);
     }
