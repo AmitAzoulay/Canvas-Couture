@@ -20,14 +20,18 @@ document.getElementById('addProductForm').addEventListener('submit', async funct
     // Validation
     const priceInput = document.getElementById('price');
     const stockInput = document.getElementById('stock');
+    const idInput = document.getElementById('product_id');
     const price = parseFloat(priceInput.value);
     const stock = parseFloat(stockInput.value);
+    const product_id = parseFloat(idInput.value);
     const priceError = document.getElementById('priceError');
     const stockError = document.getElementById('stockError');
+    const idError = document.getElementById('idError');
 
     // Reset error messages
     priceError.style.display = 'none';
     stockError.style.display = 'none';
+    idError.style.display = 'none';
 
     // Validate price and stock
     if (price <= 0) {
@@ -38,6 +42,11 @@ document.getElementById('addProductForm').addEventListener('submit', async funct
     if (stock < 0) {
         stockError.style.display = 'block'; // Show stock error
         stockInput.focus();
+        return;
+    }
+    if (product_id <= 0) {
+        idError.style.display = 'block'; // Show price error
+        idInput.focus();
         return;
     }
 
