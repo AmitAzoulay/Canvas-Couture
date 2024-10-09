@@ -7,15 +7,15 @@
 }
 
 .table-admin {
-    width: 100%; /* Allow the table to take the full width of the container */
-    min-width: 800px; /* Set a minimum width for better layout */
-    border-collapse: collapse; /* Merge borders */
+    width: auto; /* Allow the table to auto-size based on content */
+    min-width: 800px; 
+    border-collapse: collapse; 
     padding-top: 30px;
 }
 
 .table-admin th,
 .table-admin td {
-    padding: 10px; /* Padding for cells */
+    padding: 5px 8px; /* Reduced padding for cells to minimize space */
     border: 1px solid #dee2e6; /* Border for cells */
     text-align: left; /* Align text to the left */
     white-space: nowrap; /* Prevent text wrapping for all columns */
@@ -29,78 +29,72 @@
 
 /* Header Styles */
 .table-admin th {
-    background-color: #6A3B3B; /* Header background color */
-    color: #ffffff; /* Header text color */
-    font-weight: bold; /* Bold header text */
+    background-color: #6A3B3B; 
+    color: #ffffff; 
+    font-weight: bold; 
 }
 
 /* Body Styles */
 .table-admin td {
-    background-color: #f8f9fa; /* Body cell background color */
+    background-color: #f8f9fa; 
     vertical-align: middle;
 }
 
 .table-admin tr:hover {
-    background-color: #f1f1f1; /* Row hover effect */
-    transition: background-color 0.3s; /* Smooth transition */
+    background-color: #f1f1f1; 
+    transition: background-color 0.3s; 
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .table-admin th, .table-admin td {
         font-size: 12px; /* Smaller font size for smaller screens */
-        padding: 8px; /* Smaller padding */
+        padding: 5px; /* Smaller padding */
     }
 }
 
 .scroll-indicator {
     position: absolute; /* Position it relative to the container */
-    top: 10px; /* Position above the table */
-    right: 10px; /* Position it towards the right */
+    top: 10px; 
+    right: 10px; 
     font-size: 1.5rem;
     color: #6A3B3B; 
-    pointer-events: none; /* Prevent clicks on the indicator */
-    opacity: 0.7; /* Slightly transparent */
-    display: none; /* Initially hidden */
+    pointer-events: none; 
+    opacity: 0.7;
+    display: none; 
 }
 
 .scroll-hint {
-    text-align: right; /* Align text to the right */
-    margin-top: 5px; /* Space above the hint */
-    font-size: 0.9rem; /* Smaller font for hint */
+    text-align: right; 
+    margin-top: 5px; 
+    font-size: 0.9rem;
     color: #6A3B3B; 
 }
 
 .legend-item {
-    display: flex;
-    /* Use flexbox to align color and text */
-    align-items: center;
-    /* Center items vertically */
-    margin: 5px 0;
-    /* Add some vertical spacing between legend items */
+    display: flex; 
+    align-items: center; 
+    margin: 5px 0; 
 }
 
 .legend-color {
-    width: 20px;
-    /* Width of the color box */
-    height: 20px;
-    /* Height of the color box */
+    width: 20px; 
+    height: 20px; 
     margin-right: 10px;
-    /* Space between color box and text */
 }
 
 /* Make buttons smaller and adjust spacing */
 .btn {
-    width: 64px; /* Set a fixed width */
-    height: 23px; /* Set a fixed height */
-    padding: 0; /* Remove padding to ensure consistent sizing */
-    font-size: 0.9rem; /* Adjust the font size */
-    display: inline-block; /* Ensure buttons don't stretch unexpectedly */
-    text-align: center; /* Center-align text within the button */
+    width: 64px; 
+    height: 23px; 
+    padding: 0; 
+    font-size: 0.9rem;
+    display: inline-block; 
+    text-align: center;
 }
 
 .btn-edit {
-    margin-right: 5px; /* Add space between the Edit and Delete buttons */
+    margin-right: 5px; 
 }
 
 .btn-primary {
@@ -117,7 +111,8 @@
     background-color: #a02e2e;
     border-color: #340c10;
 }
+
 /* Show the scroll indicator on hover */
 .table-container:hover .scroll-indicator {
-    display: block; /* Show on hover */
+    display: block; 
 }
