@@ -27,6 +27,30 @@ document.getElementById('editProductForm').addEventListener('submit', async func
     // Gather form data
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
+
+    // Validation
+    const priceInput = document.getElementById('edit_price');
+    const stockInput = document.getElementById('edit_stock');
+    const price = parseFloat(priceInput.value);
+    const stock = parseFloat(stockInput.value);
+    const priceError = document.getElementById('editPriceError');
+    const stockError = document.getElementById('editStockError');
+
+    // Reset error messages
+    priceError.style.display = 'none';
+    stockError.style.display = 'none';
+
+    // Validate price and stock
+    if (price <= 0) {
+        priceError.style.display = 'block'; // Show price error
+        priceInput.focus();
+        return;
+    }
+    if (stock < 0) {
+        stockError.style.display = 'block'; // Show stock error
+        stockInput.focus();
+        return;
+    }
     
     try {
         // Send PUT request to the backend
