@@ -4,6 +4,7 @@ const infoService = require('../services/infoService');
 const sendTweet = require('../services/twitterService');
 const User = require('../models/user');
 
+
 async function getAllProducts(req, res) {
     try {
         const products = await adminService.getAllProducts(); // Assuming this returns a list of products
@@ -31,10 +32,11 @@ function getProductById(req, res) {
 // Add a new product
 async function addProduct(req, res) {
     const { product_id, name, category, color, size, price, stock, short_description } = req.body;
-    console.log("Incoming Product Data:", req.body); // Log the incoming data
+    const image = req.file ? req.file.filename : null; // Get the uploaded image filename
+    console.log("Incoming Product Data:", req.body,"and",image); // Log the incoming data
     try {
         await adminService.addProduct({
-            product_id, name, category, color, size, price, stock, short_description
+            product_id, name, category, color, size, price, stock, short_description, image
         });
         // Prepare the tweet text
         const tweetText = `New Arrival✨: ${name} (${category}) - only in $${price}. \n🛍️ Check it out on our website!`;

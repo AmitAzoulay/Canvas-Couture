@@ -6,7 +6,6 @@ require('dotenv').config();
 const { injectSession } = require('./middleware/inject-session-middleware.js'); // Import the session middleware
 
 
-
 const server = express()
 // Set up session management
 server.use(session({

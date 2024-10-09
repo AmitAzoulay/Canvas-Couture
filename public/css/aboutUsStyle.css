@@ -1,12 +1,10 @@
 /* Base styles */
 body {
-  font-family: 'Roboto', sans-serif;
   line-height: 1.6;
   background-color: #F9F9F9; /* Bright light gray */
   color: #2F2F2F; /* Dark gray for text */
 }
 body h2{
-  font-family: "Spicy Rice", serif;
   font-weight: 400;
   font-style: normal;
 }
