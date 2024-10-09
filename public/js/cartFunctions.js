@@ -73,4 +73,11 @@ function updateTotalAmount() {
         total += price * quantity;
     });
     $('.total h2').text('Total Amount: $' + total.toFixed(2));
+
+    // Show or hide the Proceed to Payment button based on total amount
+    if (total > 0) {
+        $('#proceed-payment').show(); // Show the button
+    } else {
+        $('#proceed-payment').hide(); // Hide the button if total is 0
+    }
 }
