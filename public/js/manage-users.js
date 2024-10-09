@@ -4,7 +4,14 @@ function loadUsers() {
     fetch('/admin/users')
         .then(response => response.json())
         .then(data => {
-            const usersTableBody = document.getElementById('usersTableBody');
+            renderUsers(data); // Use the new function to render the users
+        })  
+        .catch(error => console.error('Error loading users:', error));
+};
+
+//render users
+function renderUsers(data) {
+const usersTableBody = document.getElementById('usersTableBody');
             usersTableBody.innerHTML = ''; // Clear current users
             // Check if users exist and loop through them
             if (data.users && data.users.length > 0) {
@@ -63,35 +70,16 @@ function loadUsers() {
             } else {
                 usersTableBody.innerHTML = '<tr><td colspan="8">No users found</td></tr>';
             }
-        })
-        .catch(error => console.error('Error loading users:', error));
-};
+        
+    }
 
 // Event listener for "Show All Users" button
 document.getElementById('all-users-btn').addEventListener('click', loadUsers);
 
-document.addEventListener('DOMContentLoaded', function () {
-    // When any edit button is clicked
-    document.querySelectorAll('.edit-user-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const user = {
-                _id: this.dataset.id,
-                firstName: this.dataset.first,
-                lastName: this.dataset.last,
-                phoneNumber: this.dataset.phone,
-                email: this.dataset.email,
-                isAdmin: this.dataset.isAdmin,
-                isActive: this.dataset.isActive,
-            };
-            console.log(user);
-            console.log("user");
-            openEditModal(user); // Call the function to populate modal
-        });
-    });
-});
 
 // Open modal with user details for editing
 function openEditModal(user) {
+    console.log("opened edit modal");
     document.getElementById('edit_id').value = user._id;
     document.getElementById('edit_firstName').value = user.firstName;
     document.getElementById('edit_lastName').value = user.lastName;
@@ -175,4 +163,26 @@ document.getElementById('confirmUserDelete').addEventListener('click', function(
         alert(error.message); // Show error message if something goes wrong
     });
 });
+
+document.getElementById("userSearchInput").addEventListener("input", function () {
+    const searchTerm = this.value;
+    searchUsers(searchTerm);
+});
+
+function searchUsers(searchTerm) {
+    if (searchTerm.length < 1) {
+        loadAllUsers(); // Load all users if the search term is empty
+        return;
+    }
+
+    fetch(`/admin/users/search?search=${encodeURIComponent(searchTerm)}`)
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            renderUsers(data); // Use the new function to render the users
+        })
+        .catch(error => console.error('Error:', error));
+}
 

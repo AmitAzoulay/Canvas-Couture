@@ -52,6 +52,7 @@ function loadProducts() {
                 // After the table is populated, attach the event listeners for the edit buttons
                 document.querySelectorAll('.edit-product-btn').forEach(button => {
                     button.addEventListener('click', function () {
+                        console.log("edit click");
                         const product = {
                             product_id: this.getAttribute('data-id'),
                             name: this.getAttribute('data-name'),

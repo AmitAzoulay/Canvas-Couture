@@ -1,28 +1,7 @@
 
-
-document.addEventListener('DOMContentLoaded', function () {
-    // When any edit button is clicked
-    document.querySelectorAll('.edit-product-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const product = {
-                product_id: this.dataset.id,
-                name: this.dataset.name,
-                category: this.dataset.category,
-                color: this.dataset.color,
-                size: this.dataset.size,
-                price: this.dataset.price,
-                stock: this.dataset.stock,
-                short_description: this.dataset.description
-            };
-            console.log(product);
-            console.log("product");
-            populateEditModal(product); // Call the function to populate modal
-        });
-    });
-});
-
 // Populate Edit Modal with product data
 function populateEditModal(product) {
+    console.log("edit modal");
     document.getElementById('edit_product_id').value = product.product_id;
     document.getElementById('edit_name').value = product.name;
     document.getElementById('edit_category').value = product.category;

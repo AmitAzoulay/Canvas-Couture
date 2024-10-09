@@ -28,6 +28,7 @@
 
 .table-admin td {
     background-color: #f8f9fa;
+    vertical-align: middle;
 }
 
 .table-admin tr:hover {
@@ -77,7 +78,32 @@
     /* Space between color box and text */
 }
 
-.table-admin {
-    width: 100%; /* Ensures the table fits within its container (the card) */
-    
+/* Make buttons smaller and adjust spacing */
+.btn {
+    width: 64px; /* Set a fixed width */
+    height: 23px; /* Set a fixed height */
+    padding: 0; /* Remove padding to ensure consistent sizing */
+    font-size: 0.9rem; /* Adjust the font size */
+    display: inline-block; /* Ensure buttons don't stretch unexpectedly */
+    text-align: center; /* Center-align text within the button */
+  
+}
+
+.btn-edit {
+    margin-right: 5px; /* Add space between the Edit and Delete buttons */
+}
+
+.btn-primary {
+    background-color: #6A3B3B;
+    border-color: #ffffff;
+}
+
+.btn-warning {
+    background-color: #fdd358;
+    border-color: #ffc107;
+}
+
+.btn-danger {
+    background-color: #a02e2e;
+    border-color: #340c10;
 }

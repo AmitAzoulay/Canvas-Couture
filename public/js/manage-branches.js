@@ -45,7 +45,10 @@ function loadBranches() {
                         name: this.getAttribute('data-name'),
                         address: this.getAttribute('data-address'),
                     };
-                    openEditModal(branch);
+                    // populate modal
+                    document.getElementById('edit_branch_id').value = branch._id;
+                    document.getElementById('edit_branchName').value = branch.name;
+                    document.getElementById('edit_branchAddress').value = branch.address;
                 });
             });
             } else {
@@ -57,29 +60,6 @@ function loadBranches() {
 
 // Event listener for "Show All branches" button
 document.getElementById('all-branches-btn').addEventListener('click', loadBranches);
-
-document.addEventListener('DOMContentLoaded', function () {
-    // When any edit button is clicked
-    document.querySelectorAll('.edit-branch-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const branch = {
-                _id: this.dataset.id,
-                name: this.dataset.name,
-                address: this.dataset.address,
-            };
-            console.log(branch);
-            console.log("branch");
-            openEditModal(branch); // Call the function to populate modal
-        });
-    });
-});
-
-// Open modal with branch details for editing
-function openEditModal(branch) {
-    document.getElementById('edit_id').value = branch._id;
-    document.getElementById('edit_branchName').value = branch.name;
-    document.getElementById('edit_address').value = branch.address;
-}
 
 // Handle the form submission for updating branch
 document.getElementById('editBranchForm').addEventListener('submit', async function (e) {

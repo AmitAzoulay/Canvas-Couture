@@ -475,7 +475,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <!-- Hidden field to store User ID -->
-                                            <input type="hidden" id="edit_id" name="_id">
+                                            <input type="hidden" id="edit_id" name="user_id">
                                             <!-- Include fields: firstName, lastName, email, phoneNumber, isAdmin -->
                                             <div class="form-group">
                                                 <label for="firstName">First Name</label>
@@ -614,9 +614,14 @@
                                             <input type="hidden" id="edit_order_id" name="_id">
 
                                             <div class="form-group">
-                                                <label for="status">status</label>
-                                                <input type="text" id="edit_status" name="status" class="form-control"
-                                                    required />
+                                                <label for="status">Status</label>
+                                                <!-- Dropdown list for statuses -->
+                                                <select id="edit_status" name="status" class="form-control" required>
+                                                    <option value="Pending">Pending</option>
+                                                    <option value="Delivered">Delivered</option>
+                                                    <option value="Canceled">Canceled</option>
+                                                    <option value="Shipped">Shipped</option>
+                                                </select>
                                             </div>
 
                                         </div>
@@ -656,7 +661,7 @@
                         </div>
                     </div>
                     <!-- Manage Payments Section -->
-                    <div class="content-section" id="payments-section">
+                    <div class="content-section d-none" id="payments-section">
                         <!-- All Payments section card -->
                         <div class="mt-4">
                             <div class="accordion" id="paymentsAccordion">
@@ -834,7 +839,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <!-- Hidden field to store Branch ID -->
-                                            <input type="hidden" id="edit_branch_id" name="_id">
+                                            <input type="hidden" id="edit_branch_id" name="branch_id">
 
                                             <div class="form-group">
                                                 <label for="name">Branch Name</label>
@@ -843,7 +848,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="address">Branch Address</label>
-                                                <input type="text" id="edit_address" name="address" class="form-control"
+                                                <input type="text" id="edit_branchAddress" name="address" class="form-control"
                                                     required />
                                             </div>
                                         </div>
@@ -907,7 +912,7 @@
             <script src="/js/add-product.js"></script>
             <script src="/js/register.js"></script>
             <script src="/js/manage-users.js"></script>
-            <script src="/js/admin-users.js"></script>
+            
             <script src="/js/manage-orders.js"></script>
             <script src="/js/manage-branches.js"></script>
             <script src="/js/paymentFunctions.js"></script>
