@@ -35,7 +35,7 @@ document.getElementById('addProductForm').addEventListener('submit', async funct
         priceInput.focus();
         return;
     }
-    if (stock <= 0) {
+    if (stock < 0) {
         stockError.style.display = 'block'; // Show stock error
         stockInput.focus();
         return;
