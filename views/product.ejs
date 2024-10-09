@@ -128,19 +128,26 @@
                             </div>
                         </div>
 
-                        <!-- Quantity Selector with + and - buttons -->
-                        <div class="mt-4">
-                            <label for="quantity" class="form-label">Quantity:</label>
-                            <div class="input-group quantity-selector">
-                                <button class="btn btn-outline-secondary" type="button" id="decreaseQuantity">-</button>
-                                <input type="text" id="quantity" class="form-control text-center" value="1" readonly>
-                                <button class="btn btn-outline-secondary" type="button" id="increaseQuantity">+</button>
-                            </div>
-                        </div>
 
-                        <button class="btn btn-primary mt-3" id="addToCartButton"
-                            onclick="addToCart('<%=product._id %>',document.getElementById('quantity').value)">Add to
-                            Cart</button>
+                        <% if (product.stock> 0) { %>
+                            <script>console.log(product.stock)</script>
+                            <!-- Quantity Selector with + and - buttons -->
+                            <div class="mt-4">
+                                <label for="quantity" class="form-label">Quantity:</label>
+                                <div class="input-group quantity-selector">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        id="decreaseQuantity">-</button>
+                                    <input type="text" id="quantity" class="form-control text-center" value="1"
+                                        readonly>
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        id="increaseQuantity">+</button>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary mt-3" id="addToCartButton"
+                                onclick="addToCart('<%=product._id %>',document.getElementById('quantity').value)">Add
+                                to
+                                Cart</button>
+                            <% } %>
                     </div>
                 </div>
             </div>
