@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     // Handle Back to Shop button click
     $('#back-to-shop').on('click', function () {
-        window.history.back();
+        window.location.replace('http://localhost:3000/products/search/all');
     });
 });
 
