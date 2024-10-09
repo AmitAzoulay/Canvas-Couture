@@ -109,11 +109,11 @@ async function getAllUsers(req, res) {
 
 // Update user
 async function updateUser(req, res) {
-    const { _id,firstName, lastName, phoneNumber, email, isAdmin,isActive } = req.body;
+    const { user_id,firstName, lastName, phoneNumber, email, isAdmin,isActive } = req.body;
     
     try {
         const updatedUser = await adminService.updateUser({
-            _id,
+            user_id,
             firstName,
             lastName,
             phoneNumber,
@@ -255,12 +255,12 @@ async function getAllBranches(req, res) {
 
 //Update Order
 async function updateBranch(req, res) {
-    const { _id, name, address } = req.body;
+    const { branch_id, name, address } = req.body;
 
     console.log("Data received from frontend:", req.body);
 
     try {
-        const updatedBranch = await adminService.updateBranch(_id, name, address);
+        const updatedBranch = await adminService.updateBranch(branch_id, name, address);
 
         if (!updatedBranch) {
             return res.status(404).json({ message: 'Branch not found' });

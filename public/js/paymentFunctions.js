@@ -17,7 +17,7 @@ $(document).ready(function () {
                         <td>${payment.paymentPrice}</td>
                         <td>${payment.createdAt}</td>
                         <td>
-                            <button class="btn btn-primary btn-edit" data-id="${payment._id}" 
+                            <button class="btn btn-warning btn-primary btn-edit" data-id="${payment._id}" 
                                     data-address="${payment.address}"
                                     data-cardname="${payment.cardName}" 
                                     data-cardnumber="${payment.cardNumber}" 

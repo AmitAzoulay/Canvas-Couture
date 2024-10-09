@@ -37,6 +37,7 @@
 /* Body Styles */
 .table-admin td {
     background-color: #f8f9fa; /* Body cell background color */
+    vertical-align: middle;
 }
 
 .table-admin tr:hover {
@@ -70,7 +71,59 @@
     color: #6A3B3B; /* Use your existing color */
 }
 
+.legend-item {
+    display: flex;
+    /* Use flexbox to align color and text */
+    align-items: center;
+    /* Center items vertically */
+    margin: 5px 0;
+    /* Add some vertical spacing between legend items */
+}
+
+.legend-color {
+    width: 20px;
+    /* Width of the color box */
+    height: 20px;
+    /* Height of the color box */
+    margin-right: 10px;
+    /* Space between color box and text */
+}
+
+/* Make buttons smaller and adjust spacing */
+.btn {
+    width: 64px; /* Set a fixed width */
+    height: 23px; /* Set a fixed height */
+    padding: 0; /* Remove padding to ensure consistent sizing */
+    font-size: 0.9rem; /* Adjust the font size */
+    display: inline-block; /* Ensure buttons don't stretch unexpectedly */
+    text-align: center; /* Center-align text within the button */
+}
+
+.btn-edit {
+    margin-right: 5px; /* Add space between the Edit and Delete buttons */
+}
+
+.btn-primary {
+    background-color: #6A3B3B;
+    border-color: #ffffff;
+}
+
+.btn-warning {
+    background-color: #fdd358;
+    border-color: #ffc107;
+}
+
+.btn-danger {
+    background-color: #a02e2e;
+    border-color: #340c10;
+}
 /* Show the scroll indicator on hover */
 .table-container:hover .scroll-indicator {
     display: block; /* Show on hover */
+}
+.scroll-hint {
+    text-align: right; /* Align text to the right */
+    margin-top: 5px; /* Space above the hint */
+    font-size: 0.9rem; /* Smaller font for hint */
+    color: #6A3B3B; /* Use your existing color */
 }
