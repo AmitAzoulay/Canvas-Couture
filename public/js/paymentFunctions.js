@@ -54,15 +54,70 @@ $(document).ready(function () {
         $('#editPaymentModal').modal('show');
     });
 
+    // Validate credit card details
+    function isValidCardNumber(cardNumber) {
+        const regex = /^\d{13,19}$/;
+        return regex.test(cardNumber) && luhnCheck(cardNumber);
+    }
+
+    function luhnCheck(cardNumber) {
+        let sum = 0;
+        let shouldDouble = false;
+        for (let i = cardNumber.length - 1; i >= 0; i--) {
+            let digit = parseInt(cardNumber[i]);
+            if (shouldDouble) {
+                digit *= 2;
+                if (digit > 9) digit -= 9;
+            }
+            sum += digit;
+            shouldDouble = !shouldDouble;
+        }
+        return sum % 10 === 0;
+    }
+
+    function isValidExpiryDate(expiryDate) {
+        const regex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
+        if (!regex.test(expiryDate)) return false;
+
+        const [month, year] = expiryDate.split('/');
+        const now = new Date();
+        const expiry = new Date(`20${year}`, month);
+        return expiry > now;
+    }
+
+    function isValidCvv(cvv) {
+        const regex = /^\d{3,4}$/;
+        return regex.test(cvv);
+    }
+
     // Confirm payment edit
     $('#confirmPaymentEdit').click(function () {
+        const cardNumber = $('#edit_cardNumber').val();
+        const expiryDate = $('#edit_expiryDate').val();
+        const cvv = $('#edit_cvv').val();
+
+        if (!isValidCardNumber(cardNumber)) {
+            alert('Invalid card number');
+            return;
+        }
+
+        if (!isValidExpiryDate(expiryDate)) {
+            alert('Invalid expiry date');
+            return;
+        }
+
+        if (!isValidCvv(cvv)) {
+            alert('Invalid CVV');
+            return;
+        }
+
         const paymentId = $('#edit_payment_id').val();
         const updatedData = {
             address: $('#edit_address').val(),
             cardName: $('#edit_cardName').val(),
-            cardNumber: $('#edit_cardNumber').val(),
-            expiryDate: $('#edit_expiryDate').val(),
-            cvv: $('#edit_cvv').val(),
+            cardNumber: cardNumber,
+            expiryDate: expiryDate,
+            cvv: cvv,
             paymentPrice: $('#edit_paymentPrice').val(),
         };
 
