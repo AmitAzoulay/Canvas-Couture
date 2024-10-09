@@ -214,7 +214,7 @@
                                                     <label for="stock">Stock</label>
                                                     <input type="number" class="form-control" id="stock" name="stock"
                                                         required>
-                                                        <small id="stockError" class="form-text text-danger" style="display: none;">Stock must be greater than 0</small>
+                                                    <small id="stockError" class="form-text text-danger" style="display: none;">Stock must be greater than 0</small>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="short_description">Short Description</label>
@@ -561,6 +561,22 @@
                                     <div id="collapseOrders" class="accordion-collapse collapse"
                                         aria-labelledby="headingOrders" data-bs-parent="#ordersAccordion">
                                         <div class="accordion-body">
+                                            
+                                            <!-- Search Input Field -->
+                                            <div class="mb-3">
+                                                <!--<input type="text" id="orderStatusSearchInput" class="form-control"
+                                                    placeholder="Search by Status (e.g., Pending, Delivered)" />-->
+                                                    <div class="form-group">
+                                                        <label for="orderStatusDropdown">Filter by Status</label>
+                                                        <select id="orderStatusDropdown" class="form-control">
+                                                            <option value="All">All</option>
+                                                            <option value="Pending">Pending</option>
+                                                            <option value="Delivered">Delivered</option>
+                                                            <option value="Canceled">Canceled</option>
+                                                            <option value="Shipped">Shipped</option>
+                                                        </select>
+                                                    </div>
+                                            </div>
                                             <table class="table-admin table table-striped table-bordered" id="orderTable">
                                                 <thead>
                                                     <tr>

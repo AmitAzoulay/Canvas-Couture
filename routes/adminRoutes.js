@@ -38,6 +38,9 @@ router.get('/users/search', adminController.searchUsers);
 // Fetch all orders
 router.get('/orders', isAdmin, adminController.getAllOrders);
 
+// Route to search orders by status
+router.get('/orders/search',isAdmin, adminController.searchOrdersByStatus);
+
 // Update order
 router.put('/orders/update', isAdmin, adminController.updateOrder);
 
@@ -56,7 +59,7 @@ router.put('/branches/update',isAdmin, adminController.updateBranch);
 // Delete branch
 router.delete('/branches/delete',isAdmin, adminController.deleteBranch);
 // payment
-router.put('/payment/:paymentId', paymentController.updatePayment);
-router.get('/payments', paymentController.getAllPayments);
-router.delete('/payment/:paymentId', paymentController.deletePayment);
+router.put('/payment/:paymentId',isAdmin, paymentController.updatePayment);
+router.get('/payments',isAdmin, paymentController.getAllPayments);
+router.delete('/payment/:paymentId',isAdmin, paymentController.deletePayment);
 module.exports = router;

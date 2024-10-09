@@ -186,3 +186,44 @@ document.getElementById('confirmOrderDelete').addEventListener('click', function
     });
 });
 
+
+document.getElementById("orderStatusDropdown").addEventListener("change", function () {
+    const selectedStatus = this.value;
+    filterOrdersByStatus(selectedStatus);
+});
+
+// Function to fetch and display orders based on the selected status
+function filterOrdersByStatus(status) {
+    // If "All" is selected, load all orders
+    if (status === 'All') {
+        loadOrders();
+        return;
+    }
+
+    // Fetch orders by selected status
+    fetch(`/admin/orders/search?status=${encodeURIComponent(status)}`)
+        .then(response => response.json())
+        .then(data => {
+            const ordersTableBody = document.getElementById("ordersTableBody");
+            ordersTableBody.innerHTML = ''; // Clear current order list
+
+            // Populate the table with the filtered orders
+            data.orders.forEach(order => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order._id}</td>
+                    <td>${order.userId}</td>
+                    <td>${new Date(order.orderDate).toLocaleDateString()}</td>
+                    <td>${order.status}</td>
+                    <td>${order.items.map(item => `${item.name} (x${item.quantity})`).join(', ')}</td>
+                    <td>${order.items.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm edit-order-btn">Edit</button>
+                        <button class="btn btn-danger btn-sm delete-order">Delete</button>
+                    </td>
+                `;
+                ordersTableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+}
