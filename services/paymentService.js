@@ -36,22 +36,11 @@ function savePayment(address, cardName, cardNumber, expiryDate, cvv, uid) {
                 });
         })
         .then(() => {
-            // Step 2: Update orders for the user and set them to ordered
-            return Orders.updateMany(
-                { userId: uid, ordered: false },  // Filter: userId matches, ordered is false
-                {
-                    $set: {
-                        ordered: true,
-                        ordered_at: new Date()
-                    }
-                }
-            );
+            // Step 3: Retrieve the updated orders to get the items
+            return Orders.find({ userId: uid, ordered: false });
+
         })
         .then(() => {
-            // Step 3: Retrieve the updated orders to get the items
-            return Orders.find({ userId: uid, ordered: true });
-        })
-        .then(orders => {
             if (!orders || orders.length === 0) {
                 throw new Error("No orders found for the user.");
             }
@@ -62,6 +51,7 @@ function savePayment(address, cardName, cardNumber, expiryDate, cvv, uid) {
             orders.forEach(order => {
                 if (order.items && Array.isArray(order.items)) {
                     order.items.forEach(item => {
+                        console.log("ssssssssss", item.quantity)
                         const updateStockPromise = Products.updateOne(
                             { _id: item.productId },  // Find the product by ID
                             { $inc: { stock: -item.quantity } }  // Decrease the stock by the quantity ordered
@@ -77,6 +67,20 @@ function savePayment(address, cardName, cardNumber, expiryDate, cvv, uid) {
 
             // Step 5: Execute all stock update operations
             return Promise.all(updateStockPromises);
+
+        })
+        .then(orders => {
+            // Step 2: Update orders for the user and set them to ordered
+            return Orders.updateMany(
+                { userId: uid, ordered: false },  // Filter: userId matches, ordered is false
+                {
+                    $set: {
+                        ordered: true,
+                        ordered_at: new Date()
+                    }
+                }
+            );
+
         })
         .then(() => {
             // All operations are successful, return a success message
