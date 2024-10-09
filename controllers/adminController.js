@@ -7,7 +7,7 @@ const User = require('../models/user');
 
 async function getAllProducts(req, res) {
     try {
-        const products = await adminService.getAllProducts(); // Assuming this returns a list of products
+        const products = await adminService.getAllProducts();
         res.status(200).json({ products }); // Return products as JSON
     } catch (error) {
         console.error('Failed to fetch products:', error);
@@ -33,7 +33,7 @@ function getProductById(req, res) {
 async function addProduct(req, res) {
     const { product_id, name, category, color, size, price, stock, short_description } = req.body;
     const image = req.file ? req.file.filename : null; // Get the uploaded image filename
-    console.log("Incoming Product Data:", req.body,"and",image); // Log the incoming data
+    console.log("Incoming Product Data:", req.body, "and", image); // Log the incoming data
     try {
         await adminService.addProduct({
             product_id, name, category, color, size, price, stock, short_description, image
@@ -111,8 +111,8 @@ async function getAllUsers(req, res) {
 
 // Update user
 async function updateUser(req, res) {
-    const { user_id,firstName, lastName, phoneNumber, email, isAdmin,isActive } = req.body;
-    
+    const { user_id, firstName, lastName, phoneNumber, email, isAdmin, isActive } = req.body;
+
     try {
         const updatedUser = await adminService.updateUser({
             user_id,
@@ -123,7 +123,7 @@ async function updateUser(req, res) {
             isAdmin: isAdmin === 'on', // Checkbox handling
             isActive: isActive === 'on'
         });
-        
+
         // Check if the product was successfully updated
         if (!updatedUser) {
             return res.status(404).json({ message: 'User not found' });
@@ -146,11 +146,11 @@ async function deleteUser(req, res) {
         // Call the service to delete the user
         await adminService.deleteUser(_id);
         // Send a success response
-        res.json({ success: true });  
+        res.json({ success: true });
     } catch (error) {
         console.error("Error deleting user:", error);
         // Send an error response
-        res.status(500).json({ success: false, message: 'Error deleting user' }); 
+        res.status(500).json({ success: false, message: 'Error deleting user' });
     }
 }
 
@@ -291,7 +291,7 @@ async function deleteBranch(req, res) {
 
 // Add a new branch
 async function addBranch(req, res) {
-    const { name, address} = req.body;
+    const { name, address } = req.body;
     console.log("Incoming Branch Data:", req.body); // Log the incoming data
     try {
         await adminService.addBranch({

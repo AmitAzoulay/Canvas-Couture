@@ -40,7 +40,7 @@ async function getProductByName(req, res) {
     const name = req.params.name;
     try {
         const products = await productService.getProductsByName(name); // Fetch by name
-        const product = products[0]; // Assuming only one product per name
+        const product = products[0];
         res.render("product", { product }); // Render product detail page
     } catch (error) {
         console.error('Error fetching product:', error);
@@ -53,7 +53,7 @@ async function getProductById(req, res) {
     const product_id = req.params.product_id;
     try {
         const products = await productService.getProductById(product_id); // Fetch by ID
-        const product = products[0]; // Assuming only one product per ID
+        const product = products[0];
         res.render("product", { product }); // Render product detail page
     } catch (error) {
         console.error('Error fetching product:', error);

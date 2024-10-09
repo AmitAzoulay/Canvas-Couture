@@ -1,7 +1,7 @@
 const Product = require("../models/product");
-const User = require('../models/user'); // Assuming you have a User model
-const Orders = require('../models/orders'); 
-const Branch = require('../models/branch'); 
+const User = require('../models/user');
+const Orders = require('../models/orders');
+const Branch = require('../models/branch');
 
 // Add a new product
 async function addProduct(productData) {
@@ -60,9 +60,9 @@ async function getAllUsers() {
 }
 
 async function updateUser(userData) {
-    const { user_id,firstName, lastName, phoneNumber, email, isAdmin,isActive } = userData;
+    const { user_id, firstName, lastName, phoneNumber, email, isAdmin, isActive } = userData;
     const user = await User.findById(user_id);
-    console.log("user id:",user_id);
+    console.log("user id:", user_id);
     if (!user) throw new Error("User not found");
 
     user.firstName = firstName;
@@ -76,7 +76,7 @@ async function updateUser(userData) {
 }
 
 async function deleteUser(_id) {
-    console.log("delete user admin service",_id);
+    console.log("delete user admin service", _id);
     try {
         // Delete the user from the database using _id
         await User.findOneAndDelete({ _id: _id });
@@ -100,7 +100,7 @@ async function getAllOrders() {
 }
 
 // Service function to search orders by status
-async function searchOrdersByStatus(status){
+async function searchOrdersByStatus(status) {
     try {
         // Use case-insensitive search by status
         const orders = await Orders.find({ status: new RegExp(status, 'i') });
