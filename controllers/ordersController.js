@@ -17,6 +17,8 @@ async function removeCartItem(req, res) {
     const { orderId, productId } = req.params;
     try {
         const result = await orderService.removeCartItem(orderId, productId);
+        uid = req.session.userId
+
         res.status(200).json(result); // Respond with a success message
     } catch (error) {
         res.status(500).json({ message: error.message }); // Handle errors
