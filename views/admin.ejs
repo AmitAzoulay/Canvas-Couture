@@ -261,9 +261,6 @@
                                                     <!-- Products will be inserted here by JavaScript -->
                                                 </tbody>
                                             </table>
-                                            <span class="scroll-indicator">
-                                                <i class="bi bi-arrow-right-circle"></i> <!-- Bootstrap Icon -->
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -429,12 +426,12 @@
                         <div class="mt-4">
                             <div class="accordion" id="allUsersAccordion">
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingAllUsers"></h2>
-                                    <button class="accordion-button collapsed" id="all-users-btn" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapseAllUsers"
-                                        aria-expanded="false" aria-controls="collapseAllUsers">
-                                        Show All Users
-                                    </button>
+                                    <h2 class="accordion-header" id="headingAllUsers">
+                                        <button class="accordion-button collapsed" id="all-users-btn" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseAllUsers"
+                                            aria-expanded="false" aria-controls="collapseAllUsers">
+                                            Show All Users
+                                        </button>
                                     </h2>
                                     <div id="collapseAllUsers" class="accordion-collapse collapse"
                                         aria-labelledby="headingAllUsers" data-bs-parent="#allUsersAccordion">
@@ -444,28 +441,31 @@
                                                 <input type="text" id="userSearchInput" class="form-control"
                                                     placeholder="Search Users..." />
                                             </div>
-
-                                            <table id="userTable" class="table-admin table table-striped table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>First Name</th>
-                                                        <th>Last Name</th>
-                                                        <th>Phone Number</th>
-                                                        <th>Email</th>
-                                                        <th>Is Admin</th>
-                                                        <th>Is Active</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="usersTableBody">
-                                                    <!-- Users will be dynamically populated here -->
-                                                </tbody>
-                                            </table>
+                        
+                                            <div class="table-container">
+                                                <table id="userTable" class="table-admin table table-striped table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>First Name</th>
+                                                            <th>Last Name</th>
+                                                            <th>Phone Number</th>
+                                                            <th>Email</th>
+                                                            <th>Is Admin</th>
+                                                            <th>Is Active</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="usersTableBody">
+                                                        <!-- Users will be dynamically populated here -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- Edit User Modal -->
                         <div id="editUserModal" class="modal fade" tabindex="-1" aria-labelledby="editUserModalLabel"
                             aria-hidden="true">
@@ -565,27 +565,30 @@
                                     <div id="collapseOrders" class="accordion-collapse collapse"
                                         aria-labelledby="headingOrders" data-bs-parent="#ordersAccordion">
                                         <div class="accordion-body">
-                                            <table class="table-admin table table-striped table-bordered" id="orderTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Order ID</th>
-                                                        <th>User ID</th>
-                                                        <th>Order Date</th>
-                                                        <th>Status</th>
-                                                        <th>Items</th>
-                                                        <th>Total Price</th>
-                                                        <th>Change Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="ordersTableBody">
-                                                    <!-- Orders will be dynamically inserted here by JavaScript -->
-                                                </tbody>
-                                            </table>
+                                            <div class="table-container">
+                                                <table class="table-admin table table-striped table-bordered" id="orderTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Order ID</th>
+                                                            <th>User ID</th>
+                                                            <th>Order Date</th>
+                                                            <th>Status</th>
+                                                            <th>Items</th>
+                                                            <th>Total Price</th>
+                                                            <th>Change Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="ordersTableBody">
+                                                        <!-- Orders will be dynamically inserted here by JavaScript -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- Edit Order Modal -->
                         <div id="editOrderModal" class="modal fade" tabindex="-1" aria-labelledby="editOrderModalLabel"
                             aria-hidden="true">
@@ -659,30 +662,34 @@
                                     <div id="collapsePayments" class="accordion-collapse collapse"
                                         aria-labelledby="headingPayments" data-bs-parent="#paymentsAccordion">
                                         <div class="accordion-body">
-                                            <table class="table-admin table table-striped table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Payment ID</th>
-                                                        <th>User ID</th>
-                                                        <th>Address</th>
-                                                        <th>Credit Name</th>
-                                                        <th>Credit Number</th>
-                                                        <th>Expiration Date</th>
-                                                        <th>CVV</th>
-                                                        <th>Payment Price</th>
-                                                        <th>Paid at</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="payments-table-body">
-                                                    <!-- Payments will be inserted here by JavaScript -->
-                                                </tbody>
-                                            </table>
+                                            <div class="table-container">
+                                                <table class="table-admin table table-striped table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Payment ID</th>
+                                                            <th>User ID</th>
+                                                            <th>Address</th>
+                                                            <th>Credit Name</th>
+                                                            <th>Credit Number</th>
+                                                            <th>Expiration Date</th>
+                                                            <th>CVV</th>
+                                                            <th>Payment Price</th>
+                                                            <th>Paid at</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="payments-table-body">
+                                                        <!-- Payments will be inserted here by JavaScript -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    
                         <!-- Edit Payment Modal -->
                         <div class="modal fade" id="editPaymentModal" tabindex="-1"
                             aria-labelledby="editPaymentModalLabel" aria-hidden="true">
@@ -777,38 +784,36 @@
                         <div class="mt-4">
                             <div class="accordion" id="allBranchesAccordion">
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingAllBranches"></h2>
-                                    <button class="accordion-button collapsed" id="all-branches-btn" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#collapseAllBranches"
-                                        aria-expanded="false" aria-controls="collapseAllBranches">
-                                        Show All Branches
-                                    </button>
+                                    <h2 class="accordion-header" id="headingAllBranches">
+                                        <button class="accordion-button collapsed" id="all-branches-btn" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseAllBranches"
+                                            aria-expanded="false" aria-controls="collapseAllBranches">
+                                            Show All Branches
+                                        </button>
                                     </h2>
                                     <div id="collapseAllBranches" class="accordion-collapse collapse"
                                         aria-labelledby="headingAllBranches" data-bs-parent="#allBranchesAccordion">
                                         <div class="accordion-body">
-                                            <!-- Search Input Field
-                                            <div class="mb-3">
-                                                <input type="text" id="userSearchInput" class="form-control" placeholder="Search Branches..." />
-                                            </div>-->
-                                            <table id="BranchesTable" class="table-admin table table-striped table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Branch Name</th>
-                                                        <th>Branch Address</th>
-                                                        <th>Actions</th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="branchesTableBody">
-                                                    <!-- Branch will be dynamically populated here -->
-                                                </tbody>
-                                            </table>
+                                            <div class="table-container">
+                                                <table id="BranchesTable" class="table-admin table table-striped table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Branch Name</th>
+                                                            <th>Branch Address</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="branchesTableBody">
+                                                        <!-- Branches will be dynamically populated here -->
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <!-- Edit branch Modal -->
                         <div id="editBranchModal" class="modal fade" tabindex="-1"
                             aria-labelledby="editBranchModalLabel" aria-hidden="true">

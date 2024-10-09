@@ -3,13 +3,14 @@
     width: 100%; /* Full width of the container */
     border: 1px solid #dee2e6; /* Optional: Add a border around the container */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for depth */
-    position: relative;
+    position: relative; /* Positioning context for scroll indicator */
 }
 
 .table-admin {
     width: 100%; /* Allow the table to take the full width of the container */
     min-width: 800px; /* Set a minimum width for better layout */
     border-collapse: collapse; /* Merge borders */
+    padding-top: 30px;
 }
 
 .table-admin th,
@@ -53,13 +54,13 @@
 
 .scroll-indicator {
     position: absolute; /* Position it relative to the container */
-    top: 50%; /* Center vertically */
+    top: 10px; /* Position above the table */
     right: 10px; /* Position it towards the right */
-    transform: translateY(-50%); /* Adjust for vertical centering */
     font-size: 1.5rem; /* Adjust size as needed */
     color: #6A3B3B; /* Use your existing color */
     pointer-events: none; /* Prevent clicks on the indicator */
     opacity: 0.7; /* Slightly transparent */
+    display: none; /* Initially hidden */
 }
 
 .scroll-hint {
@@ -67,4 +68,9 @@
     margin-top: 5px; /* Space above the hint */
     font-size: 0.9rem; /* Smaller font for hint */
     color: #6A3B3B; /* Use your existing color */
+}
+
+/* Show the scroll indicator on hover */
+.table-container:hover .scroll-indicator {
+    display: block; /* Show on hover */
 }
