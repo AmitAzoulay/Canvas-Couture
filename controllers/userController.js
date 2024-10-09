@@ -74,14 +74,14 @@ async function changePassword(req, res) {
     const { email, newPassword, confirmPassword } = req.body;
 
     if (newPassword !== confirmPassword) {
-        return res.status(400).send("Passwords do not match.");
+        return res.render("change-password", { error: "Passwords do not match." });
     }
 
     try {
         const result = await userService.updatePassword(email, newPassword);
         // Pass success message to the change-password view
         res.render("login", { success: "Password changed successfully. Please log in with your new password." });
-        //res.redirect("/login");
+        
     } catch (error) {
         res.status(400).send(error.message);
     }
