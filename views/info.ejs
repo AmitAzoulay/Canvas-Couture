@@ -25,7 +25,8 @@
             <form id="weatherForm">
                 <div class="mb-3">
                     <label for="city" class="form-label">Enter City:</label>
-                    <input type="text" class="form-control" id="city" name="city" required>
+                    <input type="text" class="form-control" id="city" name="city" required
+                        placeholder="CLUE: Try to enter somthing isn't a city">
                 </div>
                 <button type="submit" class="btn btn-primary" id="getWeatherButton">Get Weather</button>
             </form>
@@ -67,26 +68,7 @@
                 });
             });
 
-            /* // Handle Contact Form Submission with Ajax
-             $('#contactForm').on('submit', function (e) {
-                 e.preventDefault();  // Prevent default form submission
- 
-                 const message = $('#message').val();  // Get the message value
- 
-                 $.ajax({
-                     url: '/contact/send',
-                     type: 'POST',
-                     data: { message: message },
-                     success: function (data) {
-                         alert('Message sent successfully!');
-                         $('#message').val(''); // Clear the message field
-                     },
-                     error: function (err) {
-                         console.error(err);
-                         alert('Error sending message');
-                     }
-                 });
-             });*/
+
         </script>
 </body>
 

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Bot</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/mainStyle.css">
+
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ecded7f9;
+            margin: 0;
+
+            /* Fix: Use Flexbox column to stack Navbar and Chat */
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Wrapper to center the chat in the remaining space */
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Chat Container Styles */
+        .chat-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 0;
+            background-color: #f1e7e3;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
+            border: 1px solid #dccac3;
+        }
+    </style>
+
+    <link rel="stylesheet" href="css/chatbot.css">
+</head>
+
+<body>
+
+    <%- include('./homeNavbar.ejs') %>
+
+        <div class="content-wrapper">
+            <div class="chat-container">
+                <div class="chat-header"
+                    style="background-color: #f1e7e3; padding: 15px; border-bottom: 2px solid #b18787;">
+                    <h2 style="font-family: 'Spicy Rice', serif; margin: 0; color: #6A3B3B;">Chat Bot</h2>
+                </div>
+
+                <div class="chat-messages" id="messages"
+                    style="flex: 1; padding: 20px; overflow-y: auto; background-color: #f9f4f2; display: flex; flex-direction: column; gap: 10px;">
+                    <div class="message bot-msg"
+                        style="background-color: #eaddd7; color: #704646; padding: 10px; border-radius: 8px; align-self: flex-start; max-width: 80%;">
+                        Hello! I can help you find the perfect outfit. What are you looking for?
+                    </div>
+                </div>
+
+                <div class="input-area"
+                    style="display: flex; padding: 20px; background-color: #f1e7e3; border-top: 1px solid #b18787;">
+                    <input type="text" id="userInput" placeholder="CLUE: What about Promt Injection?"
+                        style="flex: 1; padding: 10px; border: 1px solid #b18787;">
+                    <button onclick="sendMessage()"
+                        style="background-color: #9b7272; color: white; border: none; padding: 10px 20px; margin-left: 10px; cursor: pointer;">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            const messagesDiv = document.getElementById('messages');
+            const inputField = document.getElementById('userInput');
+
+            function appendMessage(text, sender) {
+                const msgDiv = document.createElement('div');
+                msgDiv.classList.add('message');
+
+                if (sender === 'user') {
+                    msgDiv.style.cssText = "background-color: #9b7272; color: whitesmoke; padding: 10px; border-radius: 8px; align-self: flex-end; max-width: 80%; margin-bottom: 5px;";
+                } else {
+                    msgDiv.style.cssText = "background-color: #eaddd7; color: #704646; padding: 10px; border-radius: 8px; align-self: flex-start; max-width: 80%; margin-bottom: 5px;";
+                }
+                msgDiv.innerText = text;
+                messagesDiv.appendChild(msgDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+
+            function appendProducts(products) {
+                if (products.length === 0) return;
+
+                const container = document.createElement('div');
+                container.style.cssText = "background-color: #eaddd7; color: #704646; padding: 10px; border-radius: 8px; align-self: flex-start; max-width: 80%; margin-bottom: 5px;";
+
+                products.forEach(p => {
+                    const prodDiv = document.createElement('div');
+                    prodDiv.style.cssText = "border: 1px solid #b18787; padding: 5px; margin-top: 5px; background: #fff;";
+                    prodDiv.innerHTML = `<strong>${p.name}</strong><br>Price: $${p.price}`;
+                    container.appendChild(prodDiv);
+                });
+
+                messagesDiv.appendChild(container);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+
+            async function sendMessage() {
+                const text = inputField.value;
+                if (!text) return;
+
+                appendMessage(text, 'user');
+                inputField.value = '';
+
+                try {
+                    const response = await fetch('/chatbot', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: text })
+                    });
+
+                    const data = await response.json();
+                    appendMessage(data.text, 'bot');
+
+                    if (data.products && data.products.length > 0) {
+                        appendProducts(data.products);
+                    }
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    appendMessage("Sorry, something went wrong.", 'bot');
+                }
+            }
+
+            inputField.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    sendMessage();
+                }
+            });
+        </script>
+
+</body>
+
+</html>

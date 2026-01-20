@@ -1,0 +1,84 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #ecded7f9;
+    margin: 0;
+
+    /* Layout: Column direction to stack Navbar on top of Chat */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    /* Removed 'align-items: center' so the navbar stretches full width */
+}
+
+/* Wrapper to center ONLY the chat container */
+.content-wrapper {
+    flex: 1;
+    /* Takes up all remaining space below navbar */
+    display: flex;
+    justify-content: center;
+    /* Horizontal Center */
+    align-items: center;
+    /* Vertical Center */
+    width: 100%;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 0;
+    background-color: #f1e7e3;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    border: 1px solid #dccac3;
+}
+
+/* Specific CSS to ensure internal elements look good without external file */
+.chat-header {
+    background-color: #f1e7e3;
+    padding: 15px;
+    border-bottom: 2px solid #b18787;
+}
+
+.chat-header h2 {
+    font-family: 'Spicy Rice', serif;
+    margin: 0;
+    color: #6A3B3B;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f9f4f2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-area {
+    display: flex;
+    padding: 20px;
+    background-color: #f1e7e3;
+    border-top: 1px solid #b18787;
+}
+
+#userInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #b18787;
+}
+
+.send-btn {
+    background-color: #9b7272;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}

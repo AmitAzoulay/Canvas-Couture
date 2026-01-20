@@ -1,6 +1,6 @@
 const express = require('express');
 const { isAdmin } = require('../middleware/isAdminMiddleware');
-const upload  = require('../middleware/multerConfig'); // Multer configuration for file uploads
+const upload = require('../middleware/multerConfig'); // Multer configuration for file uploads
 const router = express.Router();
 const adminController = require('../controllers/adminController')
 const userController = require('../controllers/userController')
@@ -14,7 +14,7 @@ router.get("/dashboard", isAdmin, adminController.getAllStatistics);
 router.get('/products', isAdmin, adminController.getAllProducts);
 
 // POST route to add a new product
-router.post('/products/add', isAdmin,upload.single('image'), adminController.addProduct); // Add new product
+router.post('/products/add', isAdmin, upload.single('image'), adminController.addProduct); // Add new product
 // Route to edit a product
 router.put('/products/edit', isAdmin, adminController.editProduct);
 
@@ -37,30 +37,30 @@ router.delete('/users/delete', isAdmin, adminController.deleteUser);
 router.get('/users/search', adminController.searchUsers);
 
 // Fetch all orders
-router.get('/orders', isAdmin, adminController.getAllOrders);
+router.get('/orders', adminController.getAllOrders);
 
 // Route to search orders by status
-router.get('/orders/search',isAdmin, adminController.searchOrdersByStatus);
+router.get('/orders/search', isAdmin, adminController.searchOrdersByStatus);
 
 // Update order
 router.put('/orders/update', isAdmin, adminController.updateOrder);
 
 // Delete order
-router.delete('/orders/delete',isAdmin, adminController.deleteOrder);
+router.delete('/orders/delete', isAdmin, adminController.deleteOrder);
 
 // POST route to add a new branch
 router.post('/branches/add', isAdmin, adminController.addBranch);
 
 // Fetch all branches
-router.get('/branches',isAdmin, adminController.getAllBranches);
+router.get('/branches', isAdmin, adminController.getAllBranches);
 
 // Update branch
-router.put('/branches/update',isAdmin, adminController.updateBranch);
+router.put('/branches/update', isAdmin, adminController.updateBranch);
 
 // Delete branch
-router.delete('/branches/delete',isAdmin, adminController.deleteBranch);
+router.delete('/branches/delete', isAdmin, adminController.deleteBranch);
 // payment
-router.put('/payment/:paymentId',isAdmin, paymentController.updatePayment);
-router.get('/payments',isAdmin, paymentController.getAllPayments);
-router.delete('/payment/:paymentId',isAdmin, paymentController.deletePayment);
+router.put('/payment/:paymentId', isAdmin, paymentController.updatePayment);
+router.get('/payments', isAdmin, paymentController.getAllPayments);
+router.delete('/payment/:paymentId', isAdmin, paymentController.deletePayment);
 module.exports = router;

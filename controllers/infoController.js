@@ -21,12 +21,24 @@ async function getInfoData(req, res) {
                 </ul>
             `;
             res.send(responseHtml);
-        } else {
-            res.status(500).send('Error fetching weather data');
+        }
+        else {
+            const htmlResponse = `<div>Error fetching weather data for: <b>${city}</b>`;
+            res.send(htmlResponse);
         }
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Error fetching weather data');
+        if (city.includes('<script>') || city.includes('http://') || city.includes('https://') || city.includes('localhost') || city.includes('127.0.0.1')) {
+            const responseHtml = `
+                <h2>RESOLVED!!! - Success XSS Code Injection</h2>
+                <h4>${city}</h4>
+            `;
+            res.send(responseHtml);
+        }
+        else {
+            console.error(error);
+            const htmlResponse = `<div>Error fetching weather data for: <b>${city}</b>`;
+            res.send(htmlResponse);
+        }
     }
 }
 // Function to get clothing recommendations based on temperature

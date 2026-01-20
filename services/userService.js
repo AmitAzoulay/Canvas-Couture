@@ -42,7 +42,7 @@ async function register(userData) {
     try {
         await newUser.save();
     } catch (error) {
-        throw new Error("Failed to register user.");
+        throw new Error(error);
     }
 }
 
@@ -68,6 +68,8 @@ async function updatePassword(email, newPassword) {
 
     user.password = await bcrypt.hash(newPassword, 10);
     await user.save();
+
+    return user
 }
 
 

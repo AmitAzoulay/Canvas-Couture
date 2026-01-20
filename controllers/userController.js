@@ -29,18 +29,18 @@ async function loginUser(req, res) {
  */
 async function registerUser(req, res) {
     console.log("Incoming User Data:", req.body); // Log incoming data
-    console.log("Is coming from admin:",req.body.isAdmin);
-    
+    console.log("Is coming from admin:", req.body.isAdmin);
+
     try {
         await userService.register(req.body);
-
-        if (req.body.isAdmin) {
-            // Respond with JSON for admin requests
-            return res.json({ success: true, message: "User added successfully" });
-        } else {
-            // Redirect to login for regular user registration
+        if (req.body.isAdmin == "true") {
+            console.log("admin: ", req.body.isAdmin)
+            res.render("login", { success: "RESOLVED!!! - Added New Admin" });
+        }
+        else {
             res.redirect("/login");
         }
+
     } catch (error) {
         if (req.body.isAdmin) {
             // Respond with JSON in case of errors for admin requests
@@ -79,9 +79,16 @@ async function changePassword(req, res) {
 
     try {
         const result = await userService.updatePassword(email, newPassword);
+        console.log("result:", result)
+        console.log("Ses id: ", req.session.userId)
         // Pass success message to the change-password view
-        res.render("login", { success: "Password changed successfully. Please log in with your new password." });
-        
+        if (result._id != req.session.userId) {
+            res.render("login", { success: "RESOLVED!!! - CHANGE PASSWORD TO OTHER USER" });
+        }
+        else {
+            res.render("login", { success: "Password changed successfully. Please log in with your new password." });
+        }
+
     } catch (error) {
         res.status(400).send(error.message);
     }

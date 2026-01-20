@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Register</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <link href="/css/register.css" rel="stylesheet" />
     <script src="/js/register.js" defer></script>
 </head>
+
 <body>
     <div class="container mt-5">
         <h2 class="text-center">Create an account</h2>
+        <h5>CLUE: Request is sent with - isAdmin=false</h5>
         <form id="form" action="/register" method="POST">
             <div class="mb-3">
-                <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName" required />
-                <div class="error" id="firstNameError" style="display: none;"></div> <!-- Error message for first name -->
+                <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName"
+                    required />
+                <div class="error" id="firstNameError" style="display: none;"></div>
+                <!-- Error message for first name -->
             </div>
             <div class="mb-3">
-                <input name="lastName" type="text" class="form-control" placeholder="Last Name" id="lastName" required />
+                <input name="lastName" type="text" class="form-control" placeholder="Last Name" id="lastName"
+                    required />
                 <div class="error" id="lastNameError" style="display: none;"></div> <!-- Error message for last name -->
             </div>
             <div class="mb-3">
@@ -23,11 +29,14 @@
                 <div class="error" id="emailError" style="display: none;"></div> <!-- Error message for email -->
             </div>
             <div class="mb-3">
-                <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number" id="phoneNumber" required />
+                <input name="phoneNumber" type="text" class="form-control" placeholder="Phone Number" id="phoneNumber"
+                    required />
                 <div class="error" id="phoneError" style="display: none;"></div> <!-- Error message for phone number -->
             </div>
+            <div><input type="hidden" name="isAdmin" value="false" /></div>
             <div class="mb-3">
-                <input name="password" type="password" class="form-control" placeholder="Password" id="password" required autocomplete="new-password" />
+                <input name="password" type="password" class="form-control" placeholder="Password" id="password"
+                    required autocomplete="new-password" />
                 <div class="error" id="passwordError" style="display: none;"></div> <!-- Error message for password -->
             </div>
             <button type="submit" class="btn btn-primary">Create Account</button>
@@ -35,4 +44,5 @@
         <p class="mt-3">Already have an account? <a href="/login">Sign in.</a></p>
     </div>
 </body>
+
 </html>

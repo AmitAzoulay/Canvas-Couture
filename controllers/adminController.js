@@ -3,7 +3,7 @@ const productService = require('../services/productService');
 const infoService = require('../services/infoService');
 const sendTweet = require('../services/twitterService');
 const User = require('../models/user');
-
+const { isAdminRetBool } = require('../middleware/isAdminMiddleware');
 
 async function getAllProducts(req, res) {
     try {
@@ -184,7 +184,12 @@ async function searchUsers(req, res) {
 async function getAllOrders(req, res) {
     try {
         const orders = await adminService.getAllOrders();
-        res.status(200).json({ orders }); // Return orders as JSON
+        if (!isAdminRetBool(req)) {
+            res.status(200).json({ "RESOLVED!!!!!  - ": "GET ORDERS", orders }); // Return orders as JSON
+        }
+        else {
+            res.status(200).json({ orders }); // Return orders as JSON
+        }
     } catch (error) {
         console.error('Failed to fetch orders:', error);
         res.status(500).json({ error: 'Failed to retrieve orders.' });
