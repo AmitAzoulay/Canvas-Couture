@@ -70,21 +70,10 @@ async function removeCartItem(orderId, productId) {
             throw new Error('Item not found in the cart');
         }
 
-        // Check the quantity
-        if (item.quantity > 1) {
-            // Decrease the quantity by 1
-            item.quantity -= 1;
-            await order.save(); // Save the updated order
-            return { message: 'Item quantity decreased by 1' };
-        }
-        else {
-            // Remove the item from the cart
-            await Orders.updateOne(
-                { _id: orderId },
-                { $pull: { items: { productId: new mongoose.Types.ObjectId(productId) } } }
-            );
-            return { message: 'Item removed from cart' };
-        }
+        // Update the order
+        item.quantity -= 1;
+        await order.save(); // Save the updated order
+        return { message: 'Removed Item , Or Maybe....'}
     } catch (error) {
         console.error('Error modifying item in cart:', error);
         throw new Error('Failed to modify item in cart');

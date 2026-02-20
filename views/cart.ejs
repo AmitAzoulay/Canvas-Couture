@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <h1>Your Cart</h1>
+        <h1>Your Cart<br>hint: What you see in the UI doesnt match whats in the cart</h1>
 
         <!-- Check if the cart has items -->
         <% if (cart && cart.length> 0) { %>
@@ -30,28 +30,30 @@
                         <% let totalAmount=0; %>
                             <% cart.forEach(order=> { %>
                                 <% order.items.forEach(item=> { %>
-                                    <tr id="item-<%= item.productId %>">
-                                        <td>
-                                            <%= item.name %>
-                                        </td>
-                                        <td><span class="item-quantity">
-                                                <%= item.quantity %>
-                                            </span></td>
-                                        <td>$<span class="item-price">
-                                                <%= item.price %>
-                                            </span></td>
-                                        <td>
-                                            <div class="button-group">
-                                                <button class="minus-btn"
-                                                    onclick="removeFromCart('<%= order.orderId %>', '<%= item.productId %>')">-</button>
-                                                <button class="plus-btn"
-                                                    onclick="addToCart('<%= item.productId %>', 1)">+</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <% totalAmount +=item.price * item.quantity; %>
-                                        <% }) %>
-                                            <% }) %>
+                                    <% if (item.quantity> 0) { %>
+                                        <tr id="item-<%= item.productId %>">
+                                            <td>
+                                                <%= item.name %>
+                                            </td>
+                                            <td><span class="item-quantity">
+                                                    <%= item.quantity %>
+                                                </span></td>
+                                            <td>$<span class="item-price">
+                                                    <%= item.price %>
+                                                </span></td>
+                                            <td>
+                                                <div class="button-group">
+                                                    <button class="minus-btn"
+                                                        onclick="removeFromCart('<%= order.orderId %>', '<%= item.productId %>')">-</button>
+                                                    <button class="plus-btn"
+                                                        onclick="addToCart('<%= item.productId %>', 1)">+</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                            <% totalAmount +=item.price * item.quantity; %>
+                                                <% }) %>
+                                                    <% }) %>
                     </tbody>
                 </table>
                 <div class="total">
@@ -59,9 +61,13 @@
                     </h2>
 
                     <!-- Only show "Proceed to Payment" if totalAmount is greater than 0 -->
-                    <% if (totalAmount> 0) { %>
+                    <% if (totalAmount !=0) { %>
                         <button class="btn btn-payment" id="proceed-payment">Proceed to Payment</button>
                         <% } %>
+                            <% if (totalAmount < 0) { %>
+                                <h2> Succeed: Amount is Negative
+                                </h2>
+                                <% } %>
 
                 </div>
             </div>
