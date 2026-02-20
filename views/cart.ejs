@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-        <h1>Your Cart</h1>
+        <h1>Your Cart<br>hint: What you see in the UI doesnt match whats in the cart</h1>
 
         <!-- Check if the cart has items -->
         <% if (cart && cart.length> 0) { %>
@@ -30,6 +30,7 @@
                         <% let totalAmount=0; %>
                             <% cart.forEach(order=> { %>
                                 <% order.items.forEach(item=> { %>
+                                    <% if (item.quantity > 0) { %>
                                     <tr id="item-<%= item.productId %>">
                                         <td>
                                             <%= item.name %>
@@ -49,6 +50,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    <% } %>
                                     <% totalAmount +=item.price * item.quantity; %>
                                         <% }) %>
                                             <% }) %>
@@ -59,7 +61,7 @@
                     </h2>
 
                     <!-- Only show "Proceed to Payment" if totalAmount is greater than 0 -->
-                    <% if (totalAmount> 0) { %>
+                    <% if (totalAmount != 0) { %>
                         <button class="btn btn-payment" id="proceed-payment">Proceed to Payment</button>
                         <% } %>
 
