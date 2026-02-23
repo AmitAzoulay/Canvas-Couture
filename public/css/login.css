@@ -13,12 +13,14 @@ body {
 .container {
     width: 100%; 
     max-width: 400px; 
-    height: 450px;
+    height: 500px;
     padding: 60px; 
     background-color: #f1e7e3;
     border-radius: 10px; 
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); 
     text-align: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 /* Heading styles */
