@@ -13,6 +13,17 @@
 
 <body>
     <%- include('./homeNavbar.ejs') %>
+
+    <% if (typeof adminFlag !== 'undefined' && adminFlag) { %>
+        <div class="container mt-3">
+            <div class="alert alert-warning text-center" role="alert">
+                <strong><%= adminFlag %></strong>
+            </div>
+        </div>
+        <script>
+            console.log("FLAG shown:", "<%= adminFlag %>");
+        </script>
+    <% } %>
     
     <section class="background"> <!-- Background section with CSS class -->
         <div class="background-content text-center">
