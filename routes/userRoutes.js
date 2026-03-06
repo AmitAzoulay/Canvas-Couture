@@ -27,15 +27,13 @@ router.post("/register", userController.registerUser);
 // Route for serving the homepage (accessible to everyone)
 router.get('/index', isLoggedIn, (req, res) => {
     console.log("Accessing homepage...");
-    res.render("index", { isLoggedIn: !!req.session.userId }); // Pass login status to the homepage
-});
-
-// Route for serving index
-router.get("/index", (req, res) => {
-    console.log("Accessing index...");
-    res.render("index", { isLoggedIn: !!req.session.userId,
-                        isAdmin: !!req.session.isAdmin
-                        }); // Pass login status, isadmin to the index
+    const adminFlag = req.session.adminLoginFlag;
+    req.session.adminLoginFlag = null;
+    res.render("index", {
+        isLoggedIn: !!req.session.userId,
+        isAdmin: !!req.session.isAdmin,
+        adminFlag
+    }); // Pass login status, isAdmin and one-time admin login flag
 });
 
 // Protected route for logging out
