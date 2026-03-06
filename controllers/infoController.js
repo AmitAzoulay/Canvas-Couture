@@ -29,7 +29,7 @@ async function getInfoData(req, res) {
     } catch (error) {
         if (city.includes('<script>') || city.includes('http://') || city.includes('https://') || city.includes('localhost') || city.includes('127.0.0.1')) {
             const responseHtml = `
-                <h2>RESOLVED!!! - Success XSS Code Injection</h2>
+                <h2>[RESOLVED] - XSS Code Vulnerability\nA03:2021-Injection</h2>
                 <h4>${city}</h4>
             `;
             res.send(responseHtml);

@@ -185,7 +185,7 @@ async function getAllOrders(req, res) {
     try {
         const orders = await adminService.getAllOrders();
         if (!isAdminRetBool(req)) {
-            res.status(200).json({ "RESOLVED!!!!!  - ": "GET ORDERS", orders }); // Return orders as JSON
+            res.status(200).json({ "[RESOLVED]  - ": "Vulnerability in get orders route\nAPI5:2023 Broken Function Level Authorization", orders }); // Return orders as JSON
         }
         else {
             res.status(200).json({ orders }); // Return orders as JSON

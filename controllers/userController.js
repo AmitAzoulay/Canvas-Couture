@@ -35,7 +35,7 @@ async function registerUser(req, res) {
         await userService.register(req.body);
         if (req.body.isAdmin == "true") {
             console.log("admin: ", req.body.isAdmin)
-            res.render("login", { success: "RESOLVED!!! - Added New Admin" });
+            res.render("login", { success: "[RESOLVED] - Added New Admin Vulenrability\nAPI3:2023 Broken Object Property Level Authorization" });
         }
         else {
             res.redirect("/login");
@@ -83,7 +83,7 @@ async function changePassword(req, res) {
         console.log("Ses id: ", req.session.userId)
         // Pass success message to the change-password view
         if (result._id != req.session.userId) {
-            res.render("login", { success: "RESOLVED!!! - CHANGE PASSWORD TO OTHER USER" });
+            res.render("login", { success: "[RESOLVED] - Change password to other user\n" });
         }
         else {
             res.render("login", { success: "Password changed successfully. Please log in with your new password." });

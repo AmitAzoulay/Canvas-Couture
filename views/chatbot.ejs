@@ -118,6 +118,7 @@
             }
 
             async function sendMessage() {
+                const firstName = "REPLACE - THIS";
                 const text = inputField.value;
                 if (!text) return;
 
@@ -128,7 +129,7 @@
                     const response = await fetch('/chatbot', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ message: text })
+                        body: JSON.stringify({ message: text, name: firstName })
                     });
 
                     const data = await response.json();
