@@ -51,7 +51,6 @@ function savePayment(address, cardName, cardNumber, expiryDate, cvv, uid) {
             orders.forEach(order => {
                 if (order.items && Array.isArray(order.items)) {
                     order.items.forEach(item => {
-                        console.log("ssssssssss", item.quantity)
                         const updateStockPromise = Products.updateOne(
                             { _id: item.productId },  // Find the product by ID
                             { $inc: { stock: -item.quantity } }  // Decrease the stock by the quantity ordered

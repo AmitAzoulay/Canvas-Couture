@@ -63,14 +63,18 @@
         const successMessage = "<%= successMessage %>";
 
         if (successMessage && successMessage.trim() !== "") {
-            document.getElementById('popup').style.display = 'block';
-        }
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/successPage';
 
-        // Close the popup when clicking the close button
-        document.getElementById('closePopup').onclick = function() {
-            document.getElementById('popup').style.display = 'none';
-            window.location.href = "/index";
-        };
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'controller';
+            input.value = `<!DOCTYPE html><html><head><meta http-equiv="refresh" content="10;url=/index"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Cormorant Garamond',serif;background:#f9f4f2;display:flex;align-items:center;justify-content:center;height:100vh;flex-direction:column;gap:16px}.circle{width:72px;height:72px;border-radius:50%;background:#8B4040;display:flex;align-items:center;justify-content:center;color:white;font-size:2rem;animation:pop .4s ease}@keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}h1{color:#6A2C2C;font-weight:600;font-size:2.2rem}p{color:#b18787;font-size:1rem;font-style:italic}</style></head><body><div class="circle">✓</div><h1>Payment Successful</h1><p>Redirecting you home in 10 second</p><p>HINT: A03:2021-Injection</p></body></html>`;
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
     </script>
 
 </body>

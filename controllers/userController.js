@@ -12,6 +12,7 @@ async function loginUser(req, res) {
             req.session.userId = isLoggedIn.user._id;; // Store userId in session
             req.session.isActive = true; //Store isActive in session
             req.session.isAdmin = isLoggedIn.user.isAdmin; //store is admin in session
+            req.session.username = isLoggedIn.user.firstName;
             console.log('Session after login:', req.session);
             req.user = user;
             res.redirect("/index"); // Redirect to homepage on success
@@ -35,7 +36,7 @@ async function registerUser(req, res) {
         await userService.register(req.body);
         if (req.body.isAdmin == "true") {
             console.log("admin: ", req.body.isAdmin)
-            res.render("login", { success: "RESOLVED!!! - Added New Admin" });
+            res.render("login", { success: "FLAG{CH3CK_IN_7H3_B4CK}" });
         }
         else {
             res.redirect("/login");
@@ -83,7 +84,7 @@ async function changePassword(req, res) {
         console.log("Ses id: ", req.session.userId)
         // Pass success message to the change-password view
         if (result._id != req.session.userId) {
-            res.render("login", { success: "RESOLVED!!! - CHANGE PASSWORD TO OTHER USER" });
+            res.render("login", { success: "FLAG{4CC0UNT_T4K30V3R}" });
         }
         else {
             res.render("login", { success: "Password changed successfully. Please log in with your new password." });
