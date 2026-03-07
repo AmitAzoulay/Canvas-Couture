@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/css/aiWidget.css">
+
+<!-- Chat Panel -->
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div class="chat-header-dot"></div>
+    <span class="chat-header-title">Canvas Assistant</span>
+  </div>
+  <div class="chat-messages" id="messages">
+    <div class="msg bot">Ask me anything!</div>
+    <div class="msg bot">HINT: LLM01: Prompt Injection</div>
+  </div>
+  <div class="chat-input-area">
+    <input class="chat-input" id="chatInput" placeholder="Ask anything…" />
+    <button class="chat-send" id="sendBtn">
+      <svg viewBox="0 0 24 24">
+        <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Trigger Button -->
+<button class="ai-btn" id="aiBtn" title="AI Assistant">
+  <div class="ai-btn-inner">✦</div>
+</button>
+
+<script src="/js/aiWidget.js"></script>

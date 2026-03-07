@@ -1,30 +1,29 @@
 body {
     font-family: 'Lora', serif;
-    /* Elegant, classical Italian font */
     background-color: #f8f8f8;
-    /* Light background for contrast */
     color: #333;
 }
-.background{
+
+.background {
     background-color: #F9F9F9;
     background-image: none;
-    padding: 10px 0; /* Padding to give space above and below products */
+    padding: 10px 0;
     height: auto;
 }
 
 h2 {
     font-size: 2em;
-    color: #B22222;
-    /* Italian red for headings */
+    color: #8B4040;
     text-align: center;
     margin-bottom: 1em;
 }
+
 .product-container {
-    margin-top: 60px;
-    max-width: 1800px; /* Set a max-width to contain the products */
-    margin: 20px auto; /* Center the container */
-    padding: 0 15px; /* Padding for small screens */
+    max-width: 1800px;
+    margin: 20px auto;
+    padding: 0 15px;
 }
+
 .product-list {
     list-style-type: none;
     padding: 0;
@@ -42,43 +41,44 @@ h2 {
     width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-item:hover {
     transform: scale(1.05);
-    border-color: #B22222;
-    /* Italian red border on hover */
+    border-color: #8B4040;
 }
 
 .product-item h3 {
     font-size: 1.5em;
-    color: #B22222;
-    /* Italian red for product names */
+    color: #8B4040;
     margin-bottom: 0.5em;
 }
 
 .product-item p {
     font-size: 1em;
-    margin: 0.3em 0;
+    margin: 0.1em 0;
 }
+
 .product-item a {
     text-decoration: none;
     color: #6A3B3B;
-   
 }
-.card-product-img{
+
+.card-product-img {
     width: 250px;
 }
 
 .product-item .price {
     font-size: 1.2em;
     font-weight: bold;
-    color: #B22222;
-    /* Price in Italian red */
+    color: #8B4040;
 }
 
+/* Push button to bottom of card */
 .stock-btn {
-    background-color: black;
+    background-color: #8B4040;
     color: white;
     border-radius: 50%;
     border: none;
@@ -90,16 +90,18 @@ h2 {
     justify-content: center;
     width: 40px;
     height: 40px;
+    margin-top: auto;
     transition: background-color 0.3s ease;
 }
 
 .stock-btn:hover {
-    background-color: #444;
+    background-color: #6A2C2C;
 }
 
 .out-of-stock {
-    color: red;
+    color: #8B4040;
     font-weight: bold;
+    margin-top: auto;
 }
 
 @media (max-width: 768px) {
@@ -109,10 +111,9 @@ h2 {
     }
 }
 
-
-/* Back Button Styling */
+/* Back Button */
 .btn-back {
-    background-color: #d9534f;
+    background-color: #8B4040;
     color: white;
     padding: 10px 20px;
     font-size: 1.2rem;
@@ -127,47 +128,70 @@ h2 {
 }
 
 .btn-back:hover {
-    background-color: #c93d3d;
+    background-color: #6A2C2C;
 }
 
+/* ── Navbar Search & Filter ── */
+#searchForm {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-button {
+    border: 2px solid #8B4040;
+    background-color: white;
+    color: #8B4040;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 6px 14px;
+    white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.filter-button:hover {
+    background-color: #8B4040;
+    color: white;
+    cursor: pointer;
+}
+
+#searchInput {
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-family: 'Lora', serif;
+    color: #333;
+    outline: none;
+    min-width: 180px;
+    transition: border-color 0.2s;
+}
+
+#searchInput:focus {
+    border-color: #8B4040;
+}
+
+/* Clear Search - match Filters button */
 .btn-outline-success {
-    padding: 0.25rem 0.5rem; /* Adjust padding */
-    font-size: 0.8rem; /* Adjust font size */
-    height: auto; /* Let the height adjust automatically */
-    min-width: 50px; /* Minimum width */
+    border: 2px solid #8B4040 !important;
+    background-color: white !important;
+    color: #8B4040 !important;
+    font-weight: 600;
+    border-radius: 6px !important;
+    padding: 6px 14px !important;
+    white-space: nowrap;
+    font-size: 0.875rem !important;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-outline-success:hover {
+    background-color: #8B4040 !important;
+    color: white !important;
 }
 
 .btn-outline-success:focus,
 .btn-outline-success:active {
-    background-color: #e0e0e0 !important; /* Desired background color on focus/active */
-    border-color: #c93d3d !important; /* Change border color */
-    color: #000 !important; /* Text color on focus/active */
-    box-shadow: none; /* Remove default box shadow */
-}
-
-/* Override the active state to avoid turning green */
-.btn-outline-success:active {
-    background-color: #c93d3d !important; /* Change this to your desired color */
-    color: white !important; /* Change text color if needed */
-}
-
-.filter-button {
-    border: 1px solid #d9534f; /* Red border */
-    background-color: white; /* White background */
-    color: #d9534f; /* Red text */
-    font-weight: bold; /* Bold text */
-    margin-right: 10px;
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
-}
-
-.filter-button:hover {
-    background-color: #c93d3d; /* Background color on hover */
-    color: white; /* Text color on hover */
-    cursor: pointer; /* Pointer cursor on hover */
-}
-
-.filter-button:focus {
-    outline: none; /* Remove focus outline */
-    box-shadow:#c93d3d /* Custom focus outline */
+    background-color: #6A2C2C !important;
+    border-color: #6A2C2C !important;
+    color: white !important;
+    box-shadow: none !important;
 }
