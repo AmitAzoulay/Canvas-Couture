@@ -185,7 +185,7 @@ async function getAllOrders(req, res) {
     try {
         const orders = await adminService.getAllOrders();
         if (!isAdminRetBool(req)) {
-            res.status(200).json({ "RESOLVED!!!!!  - ": "GET ORDERS", orders }); // Return orders as JSON
+            res.status(200).json({ "FLAG{4CC3SS_PR0VID3D}": "Bite Me", orders }); // Return orders as JSON
         }
         else {
             res.status(200).json({ orders }); // Return orders as JSON

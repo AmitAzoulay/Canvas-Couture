@@ -1,0 +1,2 @@
+FLAG{MY_SERVER_MEOW}
+Make sure you get here at least two different ways

@@ -4,23 +4,31 @@ function loadUsers() {
     fetch('/admin/users')
         .then(response => response.json())
         .then(data => {
-            renderUsers(data); // Use the new function to render the users
-        })  
+            renderUsers(data);
+        })
         .catch(error => console.error('Error loading users:', error));
 };
 
-//render users
+// render users
 function renderUsers(data) {
-const usersTableBody = document.getElementById('usersTableBody');
-            usersTableBody.innerHTML = ''; // Clear current users
-            // Check if users exist and loop through them
-            if (data.users && data.users.length > 0) {
-            data.users.forEach(user => {
-                console.log(user);
-                // Create a row for each user
-                const row = document.createElement('tr');
-                
-                row.innerHTML = `
+    const $usersTableBody = $('#usersTableBody');
+    $usersTableBody.empty(); // Clear current users
+
+    // Check if users exist and loop through them
+    if (data.users && data.users.length > 0) {
+        data.users.forEach(user => {
+            console.log(user);
+
+            // Fixed Regex initialization for the CTF Flag
+            const xss_regex = /<.*>/g;
+
+            if (user.firstName.match(xss_regex) || user.lastName.match(xss_regex) || user.phoneNumber.match(xss_regex) || user.email.match(xss_regex)) {
+                alert("FLAG{XXS_4773MP73D}");
+            }
+
+            // Using jQuery append to ensure <script> tags are executed by the browser
+            const rowHtml = `
+                <tr>
                     <td>${user.firstName}</td>
                     <td>${user.lastName}</td>
                     <td>${user.phoneNumber}</td>
@@ -28,7 +36,6 @@ const usersTableBody = document.getElementById('usersTableBody');
                     <td>${user.isAdmin ? 'Yes' : 'No'}</td>
                     <td>${user.isActive ? 'Yes' : 'No'}</td>
                     <td>
-                        <!-- Edit button with data-* attributes -->
                         <button class="btn btn-warning btn-sm edit-user-btn"
                             data-id="${user._id}"
                             data-first="${user.firstName}"
@@ -42,40 +49,43 @@ const usersTableBody = document.getElementById('usersTableBody');
                         </button>
                         <button class="btn btn-danger btn-sm delete-user" data-id="${user._id}" data-bs-toggle="modal" data-bs-target="#deleteUserModal"> Delete</button>
                     </td>
-                `;
-                usersTableBody.appendChild(row); // Append row to the table body
+                </tr>
+            `;
+
+            $usersTableBody.append(rowHtml); // Append row using jQuery
+        });
+
+        // Attach delete button event listeners after the rows are added
+        document.querySelectorAll('.delete-user').forEach(button => {
+            button.addEventListener('click', function () {
+                const userId = this.getAttribute('data-id'); // Get the user ID
+                document.getElementById('delete_user_id').value = userId; // Set user ID in hidden input
             });
-            // Attach delete button event listeners after the rows are added
-            document.querySelectorAll('.delete-user').forEach(button => {
-                button.addEventListener('click', function() {
-                    const userId = this.getAttribute('data-id'); // Get the user ID
-                    document.getElementById('delete_user_id').value = userId; // Set user ID in hidden input
-                });
+        });
+
+        // After the table is populated, attach the event listeners for the edit buttons
+        document.querySelectorAll('.edit-user-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const user = {
+                    _id: this.getAttribute('data-id'),
+                    firstName: this.getAttribute('data-first'),
+                    lastName: this.getAttribute('data-last'),
+                    phoneNumber: this.getAttribute('data-phone'),
+                    email: this.getAttribute('data-email'),
+                    isAdmin: JSON.parse(this.getAttribute('data-isAdmin')),
+                    isActive: JSON.parse(this.getAttribute('data-isActive'))
+                };
+                openEditModal(user);
             });
-            // After the table is populated, attach the event listeners for the edit buttons
-            document.querySelectorAll('.edit-user-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const user = {
-                        _id: this.getAttribute('data-id'),
-                        firstName: this.getAttribute('data-first'),
-                        lastName: this.getAttribute('data-last'),
-                        phoneNumber: this.getAttribute('data-phone'),
-                        email: this.getAttribute('data-email'),
-                        isAdmin: JSON.parse(this.getAttribute('data-isAdmin')),
-                        isActive: JSON.parse(this.getAttribute('data-isActive'))
-                    };
-                    openEditModal(user);
-                });
-            });
-            } else {
-                usersTableBody.innerHTML = '<tr><td colspan="8">No users found</td></tr>';
-            }
-        
+        });
+
+    } else {
+        $usersTableBody.append('<tr><td colspan="8">No users found</td></tr>');
     }
+}
 
 // Event listener for "Show All Users" button
 document.getElementById('all-users-btn').addEventListener('click', loadUsers);
-
 
 // Open modal with user details for editing
 function openEditModal(user) {
@@ -87,7 +97,6 @@ function openEditModal(user) {
     document.getElementById('edit_phoneNumber').value = user.phoneNumber;
     document.getElementById('isAdmin').checked = JSON.parse(user.isAdmin);
     document.getElementById('isActive').checked = JSON.parse(user.isActive);
-
 }
 
 // Handle the form submission for updating user
@@ -95,7 +104,8 @@ document.getElementById('editUserForm').addEventListener('submit', async functio
     e.preventDefault();
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
-    try{
+
+    try {
         // Send PUT request to the backend
         const response = await fetch('/admin/users/update', {
             method: 'PUT', // Use PUT for updating
@@ -104,20 +114,22 @@ document.getElementById('editUserForm').addEventListener('submit', async functio
             },
             body: JSON.stringify(data), // Send data as JSON
         });
-    const result = await response.json();
-    if (response.ok) {
-        // Successfully updated the user
-        alert('User updated successfully!');
 
-        // Close the modal
-        let editUserModal = document.getElementById('editUserModal');
-        let modalInstance = bootstrap.Modal.getInstance(editUserModal); 
-        modalInstance.hide();
+        const result = await response.json();
 
-        loadUsers();
-    } else {
-        alert(result.message || 'Failed to update user');
-    }
+        if (response.ok) {
+            // Successfully updated the user
+            alert('User updated successfully!');
+
+            // Close the modal
+            let editUserModal = document.getElementById('editUserModal');
+            let modalInstance = bootstrap.Modal.getInstance(editUserModal);
+            modalInstance.hide();
+
+            loadUsers();
+        } else {
+            alert(result.message || 'Failed to update user');
+        }
     } catch (error) {
         console.error('Error updating user:', error);
         alert('Error updating user');
@@ -125,43 +137,43 @@ document.getElementById('editUserForm').addEventListener('submit', async functio
 });
 
 // Delete user
-document.getElementById('confirmUserDelete').addEventListener('click', function() {
+document.getElementById('confirmUserDelete').addEventListener('click', function () {
     const userId = document.getElementById('delete_user_id').value; // Get the user ID from hidden input
-    
+
     // Send DELETE request to the server
-    fetch(`/admin/users/delete`, { 
+    fetch(`/admin/users/delete`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ _id: userId }) // Send product ID in the request body
+        body: JSON.stringify({ _id: userId }) // Send user ID in the request body
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json(); // Parse the JSON response
-        } else {
-            console.log("manage users tried delete: ",userId);
-            throw new Error('Failed to delete user');
-        }
-    })
-    .then(data => {
-        if (data.success) {
-            alert("User deleted successfully");
-            // Find the row in the table and remove it
-            const row = document.querySelector(`button[data-id="${userId}"]`).closest('tr');
-            if (row) {
-                row.remove(); // Remove the row from the table
+        .then(response => {
+            if (response.ok) {
+                return response.json(); // Parse the JSON response
+            } else {
+                console.log("manage users tried delete: ", userId);
+                throw new Error('Failed to delete user');
             }
-            // Hide the modal
-            const deleteUserModal = bootstrap.Modal.getInstance(document.getElementById('deleteUserModal'));
-            deleteUserModal.hide();
-        } else {
-            alert("Failed to delete user");
-        }
-    })
-    .catch(error => {
-        alert(error.message); // Show error message if something goes wrong
-    });
+        })
+        .then(data => {
+            if (data.success) {
+                alert("User deleted successfully");
+                // Find the row in the table and remove it
+                const row = document.querySelector(`button[data-id="${userId}"]`).closest('tr');
+                if (row) {
+                    row.remove(); // Remove the row from the table
+                }
+                // Hide the modal
+                const deleteUserModal = bootstrap.Modal.getInstance(document.getElementById('deleteUserModal'));
+                deleteUserModal.hide();
+            } else {
+                alert("Failed to delete user");
+            }
+        })
+        .catch(error => {
+            alert(error.message); // Show error message if something goes wrong
+        });
 });
 
 document.getElementById("userSearchInput").addEventListener("input", function () {
@@ -171,7 +183,7 @@ document.getElementById("userSearchInput").addEventListener("input", function ()
 
 function searchUsers(searchTerm) {
     if (searchTerm.length < 1) {
-        loadAllUsers(); // Load all users if the search term is empty
+        loadUsers(); // Load all users if the search term is empty (Fixed function call)
         return;
     }
 
@@ -185,4 +197,3 @@ function searchUsers(searchTerm) {
         })
         .catch(error => console.error('Error:', error));
 }
-
